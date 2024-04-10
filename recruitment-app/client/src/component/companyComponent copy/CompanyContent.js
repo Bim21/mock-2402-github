@@ -1,5 +1,5 @@
 import React from 'react';
-import ComSection1 from './comSection1';
+import ComSection1 from './ComSection1';
 import CompanyItems from './CompanyItems';
 
 const CompanyContent = () => {

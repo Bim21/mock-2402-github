@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../component/Header';
 import Footer from '../component/Footer';
-import CompanyContent from '../component/companyComponent/CompanyContent';
+import CompanyContent from '../component/companyComponent copy/CompanyContent';
 
 const CompanyPage = () => {
     return (

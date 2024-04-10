@@ -35,7 +35,7 @@ const Section1 = () => {
                             </div>
                         </div>
                         <div>
-                            <h2 className='font-semibold text-[22px] text-white mb-[20px] mt-[20px]'>Các Công Ty Hàng Đầu</h2>
+                            <h2 className='font-semibold text-[22px] text-white mb-[20px] mt-[20px]'>Các Công Ty Hàng Đầu 123456</h2>
                         </div>
                         <div class="flex flex-row justify-center max-w-[1200px] ">
                             <div class="basis-1/6 p-[16px] m-[6px] bg-white rounded-[6px] text-center border-solid border-1 ">

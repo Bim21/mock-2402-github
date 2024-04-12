@@ -1,7 +1,11 @@
 import React from 'react';
 import { IoIosArrowDown } from "react-icons/io";
+import CompanyCard from './CompanyCard';
+import jsonData from '../json/companyData.json';
+
 
 const CompanyItems = () => {
+
     return (
         <div className='flex flex-col gap-[20px] px-[32px] pt-[32px] pb-[16px] mt-[8px] bg-white border-solid border-[1px]'>
             <div className='flex items-center'>
@@ -17,7 +21,20 @@ const CompanyItems = () => {
                 </div>
             </div>
             <div class="flex flex-wrap w-full">
-                <div className='w-1/3 pt-[16px] px-[6px] leading-3'>
+            {jsonData.map(company => (
+            <CompanyCard
+                key={company.id}
+                name={company.name}
+                bannerUrl={company.bannerUrl}
+                link={company.link}
+                logoUrl={company.logoUrl}
+                followersCount={company.followersCount}
+                positions={company.positions}
+            />
+        ))}
+
+
+                {/* <div className='w-1/3 pt-[16px] px-[6px] leading-3'>
                     <div className='w-full mr-[16px] mb-[16px] p-[8px] rounded-[6px] border-solid border-[1px] border-slate-200'>
                         <div className=''>
                             <div className='w-full h-[90px] rounded-t-[6px] mb-[8px] '>
@@ -345,7 +362,7 @@ const CompanyItems = () => {
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> */}
               
 
 

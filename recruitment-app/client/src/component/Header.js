@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BsHandbagFill } from "react-icons/bs";
 import { HiHomeModern } from "react-icons/hi2";
 import { AiFillHeart } from "react-icons/ai";
@@ -6,11 +7,28 @@ import { AiFillSetting } from "react-icons/ai";
 import { LiaLanguageSolid } from "react-icons/lia";
 import { IoIosNotifications } from "react-icons/io";
 import { CiLogin } from "react-icons/ci";
+import { MdOutlineAccountCircle } from "react-icons/md";
+import Modal from './Modal';
 
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
+    const navigate = useNavigate();
+
+    const goToCompany = () => {
+        navigate('/company')
+    }
+
+    const openModal = () => {
+        setIsOpenModal(true);
+    };
+
+    const closeModal = () => {
+        setIsOpenModal(false);
+    };
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -84,7 +102,7 @@ const Header = () => {
                                     <div href='/' className='flex items-center gap-x-[8px] gap-y-[4px]'>
                                         <HiHomeModern className='w-21 h-22' />
                                         <div className="relative group">
-                                            <button className="flex items-start justify-start hover:text-white">
+                                            <button className="flex items-start justify-start hover:text-white" onClick={goToCompany}>
                                                 Công Ty
                                             </button>
 
@@ -216,12 +234,23 @@ const Header = () => {
                             <IoIosNotifications className='bg-blue-800 text-blue-300 hover:text-white rounded-[95px] w-[24px] h-full' />
                         </button>
                     </div>
+                    {
+                        isLogin === false ? 
                     <div className='flex justify-center items-center'>
-                        <button className='flex items-center text-blue-300 hover:text-white '>
+                        <button className='flex items-center text-blue-300 hover:text-white' onClick={openModal}>
                             <CiLogin className='bg-blue-800 rounded-[95px] w-[24px] h-full' />
                             <span className='font-bold'>Đăng Nhập</span>
                         </button>
-                    </div>
+                        <Modal isOpen={isOpenModal} onClose={closeModal} />
+                    </div> : 
+                    <div className='flex justify-center items-center'>
+                        <button className='flex items-center text-white hover:text-white' onClick={openModal}>
+                            <MdOutlineAccountCircle className='bg-blue-800 rounded-[95px] w-[24px] h-full' />
+                            <span className='font-bold'>Nguyễn Văn A</span>
+                        </button>
+                        
+                    </div> 
+                    }
                 </div>
             </div>
         </div>

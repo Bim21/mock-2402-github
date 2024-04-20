@@ -21,7 +21,7 @@ const Header = () => {
                         <div className='p-0'>
                             <ul className='flex list-none p-0 mb-0 bg-blue-800'>
                                 <li className='mr-[56px] h-full text-white'>
-                                    <a href='/' className='flex items-center gap-x-[8px] gap-y-[4px]'>
+                                    <a href='/jobPage' className='flex items-center gap-x-[8px] gap-y-[4px]'>
                                         <BsHandbagFill className='w-21 h-22' />
                                         <span className='text-sm'>Việc Làm</span>
                                     </a>

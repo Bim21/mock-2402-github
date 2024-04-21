@@ -22,6 +22,10 @@ const Header = () => {
         navigate('/company')
     }
 
+    const goToJobPage = () => {
+        navigate('/job')
+    }
+
     const openModal = () => {
         setIsOpenModal(true);
     };
@@ -64,7 +68,8 @@ const Header = () => {
                                     <div href='/' className='flex items-center gap-x-[8px] gap-y-[4px]'>
                                         <BsHandbagFill className='w-21 h-22' />
                                         <div className="relative group">
-                                            <button className="flex items-start justify-start hover:text-white">
+                                            <button className="flex items-start justify-start hover:text-white"
+                                            onClick={goToJobPage}>
                                                 Việc Làm
                                             </button>
                                             <ul className="absolute hidden w-[150px] space-y-1 bg-white border rounded-md border-gray-200 shadow-lg group-hover:block">

@@ -9,13 +9,17 @@ import { IoIosNotifications } from "react-icons/io";
 import { CiLogin } from "react-icons/ci";
 import { MdOutlineAccountCircle } from "react-icons/md";
 import Modal from './Modal';
+import { isAuthenticated } from '../services/api';
 
 
-const Header = () => {
+const Header = (props) => {
+
+    const isLogin = props.isLogin;
+
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
     const [isOpenModal, setIsOpenModal] = useState(false);
-    const [isLogin, setIsLogin] = useState(false);
+    const [loginName, setLoginName] =useState('');
     const navigate = useNavigate();
 
     const goToCompany = () => {
@@ -34,6 +38,10 @@ const Header = () => {
         setIsOpenModal(false);
     };
 
+    const handleChangeLoginName = (value) => {
+        setLoginName(value)
+    }
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -51,6 +59,8 @@ const Header = () => {
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+
+    
 
     return (
         <div className='w-full min-h-[64px] bg-blue-800 flex items-center'>
@@ -246,12 +256,12 @@ const Header = () => {
                             <CiLogin className='bg-blue-800 rounded-[95px] w-[24px] h-full' />
                             <span className='font-bold'>Đăng Nhập</span>
                         </button>
-                        <Modal isOpen={isOpenModal} onClose={closeModal} />
+                        <Modal isOpen={isOpenModal} onClose={closeModal} handleChangeLoginName={handleChangeLoginName}/>
                     </div> : 
                     <div className='flex justify-center items-center'>
-                        <button className='flex items-center text-white hover:text-white' onClick={openModal}>
+                        <button className='flex items-center text-blue-100 hover:text-white' onClick={openModal}>
                             <MdOutlineAccountCircle className='bg-blue-800 rounded-[95px] w-[24px] h-full' />
-                            <span className='font-bold'>Nguyễn Văn A</span>
+                            <span className='font-bold'>{loginName}</span>
                         </button>
                         
                     </div> 

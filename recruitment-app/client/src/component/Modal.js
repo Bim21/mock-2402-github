@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineClose } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
+import { isAuthenticated, loginRequest } from '../services/api';
 
-const Modal = ({ isOpen, onClose }) => {
+const Modal = ({ isOpen, onClose, handleChangeLoginName}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
     const goToRegister = () => {
-        navigate('/login')
+        navigate('/register')
     }
+
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -21,14 +23,38 @@ const Modal = ({ isOpen, onClose }) => {
         setPassword(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Xử lý logic đăng nhập ở đây
-        console.log('Đăng nhập với email:', email, 'và password:', password);
-        // Reset form
+        console.log("email:", email);
+        console.log("password:", password);
+        const result = await loginRequest(email, password);
+        if (result.success === 200) {
+            const token = result.data.message;
+            const user = result.data
+            console.log("user...", user)
+            handleChangeLoginName(user.userName);
+            //login(token, user);
+            onClose();
+
+        } else {
+            console.log("resultLogin:", result);
+        }
+        // navigate('/admin');
         setEmail('');
         setPassword('');
     };
+
+    useEffect(() => {
+        const checkAuthentication = async () => {
+          const authenticated = await isAuthenticated();
+          if (authenticated) {
+            navigate("/");
+          } else {
+          }
+        };
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+        checkAuthentication();
+      }, []);
 
     return (
         <>
@@ -93,7 +119,9 @@ const Modal = ({ isOpen, onClose }) => {
                                 <div className='justify-start w-[50%] items-center '>Chưa có tài khoản? <button onClick={goToRegister} className='text-blue-500'>Đăng ký</button></div>
                                 <div className='w-[50%] flex justify-end items-end'>
                                     <button className='mr-[6px] rounded-[8px] font-medium p-[8px] bg-slate-100 hover:bg-slate-200' onClick={onClose}>Hủy</button>
-                                    <button className='rounded-[8px] font-medium py-[8px] px-[10px] text-white bg-orange-500 hover:bg-orange-300'>Đăng Nhập</button>
+                                    <button className='rounded-[8px] font-medium py-[8px] px-[10px] text-white bg-orange-500 hover:bg-orange-300' >
+                                        Đăng Nhập
+                                    </button>
                                 </div>
                             </div>
 

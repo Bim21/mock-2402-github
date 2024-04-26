@@ -4,11 +4,7 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-        'feature-company': "url('./assets/feature-company-background.png')",
-      }
-    },
+    extend: {},
   },
   plugins: [],
 }

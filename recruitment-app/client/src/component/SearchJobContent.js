@@ -1,5 +1,6 @@
 import React from 'react';
 import ItemsHot from './contentComponent/ItemsHot';
+import PopularKeywords from './contentComponent/PopularKeywords';
 
 function SearchJobContent() {
     return (
@@ -172,105 +173,9 @@ function SearchJobContent() {
                         </div>
                     </div>
                 </section>
+                <PopularKeywords/>
 
-
-                <section className='pt-[30px]'>
-                    <div className='max-w-[1200px] px-[16px] mx-[auto] '>
-                        <div className='border-solid rounded-[6px] h-[auto] border-2 border-sky-200'>
-                            <div className='flex flex-col justify-center w-full'>
-                                <div className=' bg-[url(https://staging.vietnamworks.com/assets-page-container/images/featured-jobs-background.png)] bg-no-repeat rounded-t-5px flex items-center justify-between bg-blue-100 p-[10px]'>
-                                    <div className='text-[24px] font-mono font-bold'>Việc làm tốt nhất</div>
-                                    {/* <a href='/' className=' text-blue-600 font-mono'>Xem Tất Cả</a> */}
-                                </div>
-                                <div className='p-[24px] w-full'>
-                                    <div className='flex flex-col'>
-                                        <div class="flex flex-row gap-[4px]">
-                                            <ItemsHot />
-                                            <ItemsHot />
-                                            <ItemsHot />
-                                        </div>
-                                        <div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section className='pt-[30px]'>
-                    <div className='max-w-[1200px] px-[16px] mx-[auto] '>
-                        <div className='border-solid rounded-[6px] h-[auto] border-2 border-sky-200'>
-                            <div className='flex flex-col justify-center w-full'>
-                                <div className=' bg-[url(https://staging.vietnamworks.com/assets-page-container/images/featured-jobs-background.png)] bg-no-repeat rounded-t-5px flex items-center justify-between bg-blue-100 p-[10px]'>
-                                    <div className='text-[24px] font-mono font-bold'>Việc làm công ty đầu ngành</div>
-                                    {/* <a href='/' className=' text-blue-600 font-mono'>Xem Tất Cả</a> */}
-                                </div>
-                                <div className='p-[24px] w-full'>
-                                    <div className='flex flex-col'>
-                                        <div class="flex flex-row gap-[4px]">
-                                            <ItemsHot />
-                                            <ItemsHot />
-                                            <ItemsHot />
-                                        </div>
-                                        <div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section>
-                    <div className='pt-[30px]'>
-                        <div className='max-w-[1200px] px-[16px] mx-[auto]'>
-                            <div className='border-solid bg-zinc-300 rounded-[6px]'>
-                                <div className='items-center justify-between flex'>
-                                    <h2 className='mb-20px text-xl font-semibold'>Từ khóa phổ biến</h2>
-                                    <div className='flex flex-wrap box-border'>
-                                        <div className='w-full basis-2/5 mr-'>
-                                            <div>
-                                                <h5>Tìm việc theo ngành nghề</h5>
-                                                <div>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="">Kỹ thuật Ô Tô</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="">Quản lý khu vực</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="">Phát triển Dự Án/Đấu Thầu</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="">Kiểm Soát Viên Tài Chính</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="">Tín Dụng</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="">Kỹ Thuật Toán Học</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="">Kế Toán Thanh Toán</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href=""></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                
             </div>
         </div>
     );

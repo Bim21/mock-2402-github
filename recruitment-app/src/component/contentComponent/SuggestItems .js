@@ -1,7 +1,6 @@
 import React from 'react';
-import { BiSolidHot } from 'react-icons/bi';
 
-const ItemsHot = () => {
+const SuggestItems = () => {
     return (
         <div class="basis-1/3 ">
             <div class="flex flex-col gap-[4px]">
@@ -20,10 +19,7 @@ const ItemsHot = () => {
                         <div className='text-[14px] leading-[18px] font-[500] text-orange-400'>Thương lượng</div>
                         <div className='text-[14px] leading-[18px] truncate'>Địa chỉ</div>
                     </div>
-                    <div className='flex justify-center items-center text-red-500 p-[4px]'>
-                        <BiSolidHot className='' />
-                        <span>Hot</span>
-                    </div>
+                   
                 </a>
                 <a href='/'
                     className='rounded-[12px] flex items-center border-solid border-2 px-[12px] py-[15px] border-gray-200 justify-center'>
@@ -40,10 +36,7 @@ const ItemsHot = () => {
                         <div className='text-[14px] leading-[18px] font-[500] text-orange-400'>Thương lượng</div>
                         <div className='text-[14px] leading-[18px] truncate'>Địa chỉ</div>
                     </div>
-                    <div className='flex justify-center items-center text-red-500 p-[4px]'>
-                        <BiSolidHot className='' />
-                        <span>Hot</span>
-                    </div>
+                   
                 </a>
                 <a href='/'
                     className='rounded-[12px] flex items-center border-solid border-2 px-[12px] py-[15px] border-gray-200 justify-center'>
@@ -60,14 +53,11 @@ const ItemsHot = () => {
                         <div className='text-[14px] leading-[18px] font-[500] text-orange-400'>Thương lượng</div>
                         <div className='text-[14px] leading-[18px] truncate'>Địa chỉ</div>
                     </div>
-                    <div className='flex justify-center items-center text-red-500 p-[4px]'>
-                        <BiSolidHot className='' />
-                        <span>Hot</span>
-                    </div>
+                   
                 </a>
             </div>
         </div>
     );
 };
 
-export default ItemsHot;
+export default SuggestItems;

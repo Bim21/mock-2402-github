@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { isAuthenticated } from '../services/api';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -10,6 +12,8 @@ const Register = () => {
         agreementChecked: false,
     });
 
+    const navigate = useNavigate();
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -20,6 +24,18 @@ const Register = () => {
         // Đưa dữ liệu đăng ký lên server hoặc xử lý tại đây
         console.log(formData);
     };
+
+    useEffect(() => {
+        const checkAuthentication = async () => {
+          const authenticated = await isAuthenticated();
+          if (authenticated) {
+            navigate('/');
+          } else {
+          }
+        };
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+        checkAuthentication();
+      }, []);
 
     return (
         <div className="w-full flex items-center justify-center ">

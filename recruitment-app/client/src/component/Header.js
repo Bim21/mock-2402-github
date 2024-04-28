@@ -6,6 +6,60 @@ import { AiFillSetting } from "react-icons/ai";
 import { LiaLanguageSolid } from "react-icons/lia";
 import { IoIosNotifications } from "react-icons/io";
 import { CiLogin } from "react-icons/ci";
+import { MdOutlineAccountCircle } from "react-icons/md";
+import Modal from './Modal';
+import { isAuthenticated } from '../services/api';
+
+const Header = (props) => {
+
+    const isLogin = props.isLogin;
+
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [loginName, setLoginName] =useState('');
+    const navigate = useNavigate();
+
+    const goToCompany = () => {
+        navigate('/company')
+    }
+
+    const goToJobPage = () => {
+        navigate('/job')
+    }
+
+    const openModal = () => {
+        setIsOpenModal(true);
+    };
+
+    const closeModal = () => {
+        setIsOpenModal(false);
+    };
+
+    const handleChangeLoginName = (value) => {
+        setLoginName(value)
+    }
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+    const toggleMenu = () => {
+        setIsOpen(!isOpen);
+    };
+
+    
+
 
 const Header = () => {
     return (
@@ -60,6 +114,20 @@ const Header = () => {
                             <IoIosNotifications className='bg-blue-800 text-white rounded-[95px] w-[24px] h-full' />
                         </button>
                     </div>
+                    {
+                        isLogin === false ? 
+                    <div className='flex justify-center items-center'>
+                        <button className='flex items-center text-blue-300 hover:text-white' onClick={openModal}>
+                            <CiLogin className='bg-blue-800 rounded-[95px] w-[24px] h-full' />
+                            <span className='font-bold'>Đăng Nhập</span>
+                        </button>
+                        <Modal isOpen={isOpenModal} onClose={closeModal} handleChangeLoginName={handleChangeLoginName}/>
+                    </div> : 
+                    <div className='flex justify-center items-center'>
+                        <button className='flex items-center text-blue-100 hover:text-white' onClick={openModal}>
+                            <MdOutlineAccountCircle className='bg-blue-800 rounded-[95px] w-[24px] h-full' />
+                            <span className='font-bold'>{loginName}</span>
+                        </button>
                     <div className='flex justify-center items-center'>
                         <button className='flex items-center '>
                             <CiLogin className='bg-blue-800 text-white rounded-[95px] w-[24px] h-full'/>

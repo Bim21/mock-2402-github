@@ -16,7 +16,7 @@ function App() {
         <Route path='/' element={<HomePage/>} />
         <Route path='/search-job' element={<SearchJobPage/>}/>
         <Route path='/company' element={<CompanyPage/>} />
-        <Route path='/login' element={<Register/>} />
+        <Route path='/register' element={<Register/>} />
         <Route path='/job' element={<JobPage/>} />
 
       </Routes>

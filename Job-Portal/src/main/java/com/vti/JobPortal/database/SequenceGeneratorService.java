@@ -1,6 +1,7 @@
 package com.vti.JobPortal.database;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
@@ -14,12 +15,12 @@ import static org.springframework.data.mongodb.core.query.Query.query;
 
 @Service
 @Component
-public class SequenceGeneratorService {
+public class SequenceGeneratorService  {
 
     private final MongoOperations mongoOperations;
 
     @Autowired
-    public SequenceGeneratorService(MongoOperations mongoOperations) {
+    public SequenceGeneratorService(MongoOperations mongoOperations ) {
         this.mongoOperations = mongoOperations;
     }
 

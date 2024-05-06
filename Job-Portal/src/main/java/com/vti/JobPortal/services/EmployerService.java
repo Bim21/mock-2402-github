@@ -3,9 +3,11 @@ package com.vti.JobPortal.services;
 import com.vti.JobPortal.entity.Employer;
 import com.vti.JobPortal.repositories.IEmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+@Service
 
 public class EmployerService {
     @Autowired

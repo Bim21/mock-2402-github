@@ -14,7 +14,7 @@ import java.util.Optional;
 public class JobController {
 
     @Autowired
-    private JobService jobService;
+     JobService jobService;
 
     @GetMapping
     public ResponseEntity<List<Job>> getAllJobs() {

@@ -14,12 +14,14 @@ import java.util.Date;
         private String description;
         private String[] requirements;
         private String location;
+        private String position;
+        private String specialize;
         private String salary;
         private Date postedDate;
         private Date expiredDate;
         private int views;
         private String[] applicants;
-        private String status;
+        private int status;
 
         public String getId() {
             return id;
@@ -53,6 +55,14 @@ import java.util.Date;
             this.description = description;
         }
 
+        public String getSpecialize() {
+            return specialize;
+        }
+
+        public void setSpecialize(String specialize) {
+            this.specialize = specialize;
+        }
+
         public String[] getRequirements() {
             return requirements;
         }
@@ -63,6 +73,14 @@ import java.util.Date;
 
         public String getLocation() {
             return location;
+        }
+
+        public String getPosition() {
+            return position;
+        }
+
+        public void setPosition(String position) {
+            this.position = position;
         }
 
         public void setLocation(String location) {
@@ -109,11 +127,11 @@ import java.util.Date;
             this.applicants = applicants;
         }
 
-        public String getStatus() {
+        public int getStatus() {
             return status;
         }
 
-        public void setStatus(String status) {
+        public void setStatus(int status) {
             this.status = status;
         }
     }

@@ -3,7 +3,7 @@ import ItemJob from './ItemJob'
 import SectionJob3 from './SectionJob3'
 import Insurance from './Insurance'
 
-const Section1 = () => {
+const Section1 = ({jobs}) => {
     return (
         <section className='mt-[10px] flex flex-row bg-slate-50'>
             <div className='basis-8/12'>
@@ -11,7 +11,7 @@ const Section1 = () => {
                     <div className='pr-[10px] w-full'>
                         <div className='flex flex-col'>
                             <div class="flex w-full">
-                                <ItemJob />
+                                <ItemJob jobs={jobs}/>
                             </div>
                             <SectionJob3/>
                             <div className='w-full border-[1px] border-gray-200 bg-white'>

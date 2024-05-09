@@ -1,14 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BsHandbagFill } from "react-icons/bs";
 import { HiHomeModern } from "react-icons/hi2";
 import { AiFillHeart } from "react-icons/ai";
 import { AiFillSetting } from "react-icons/ai";
 import { LiaLanguageSolid } from "react-icons/lia";
-import { IoIosNotifications } from "react-icons/io";
+import { IoIosNotifications, IoMdLogOut } from "react-icons/io";
+import { IoMdArrowDropdown } from 'react-icons/io';
+import { MdAccountCircle } from "react-icons/md";
 import { CiLogin } from "react-icons/ci";
-import { MdOutlineAccountCircle } from "react-icons/md";
+// import { MdAccountCircle, MdOutlineAccountCircle } from "react-icons/md";
 import Modal from './Modal';
+import { AuthContext } from '../AuthProvider';
 
 
 
@@ -19,7 +22,7 @@ const Header = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
     const [isOpenModal, setIsOpenModal] = useState(false);
-    const [loginName, setLoginName] =useState('');
+    const [loginName, setLoginName] = useState('');
     const navigate = useNavigate();
 
     const goToCompany = () => {
@@ -29,6 +32,7 @@ const Header = (props) => {
     const goToJobPage = () => {
         navigate('/job')
     }
+
 
     const openModal = () => {
         setIsOpenModal(true);
@@ -40,6 +44,16 @@ const Header = (props) => {
 
     const handleChangeLoginName = (value) => {
         setLoginName(value)
+    }
+    const { userInfo, logout } = useContext(AuthContext);
+    console.log("userInfor:", userInfo);
+
+    const logoutRequest = () => {
+        localStorage.removeItem('token');
+        logout();
+
+        window.location.reload();
+
     }
 
     useEffect(() => {
@@ -60,7 +74,7 @@ const Header = (props) => {
         setIsOpen(!isOpen);
     };
 
-    
+
 
     return (
         <div className='w-full min-h-[64px] bg-blue-800 flex items-center'>
@@ -79,7 +93,7 @@ const Header = (props) => {
                                         <BsHandbagFill className='w-21 h-22' />
                                         <div className="relative group">
                                             <button className="flex items-start justify-start hover:text-white"
-                                            onClick={goToJobPage}>
+                                                onClick={goToJobPage}>
                                                 Việc Làm
                                             </button>
                                             <ul className="absolute hidden w-[150px] space-y-1 bg-white border rounded-md border-gray-200 shadow-lg group-hover:block">
@@ -250,21 +264,39 @@ const Header = (props) => {
                         </button>
                     </div>
                     {
-                        isLogin === false ? 
-                    <div className='flex justify-center items-center'>
-                        <button className='flex items-center text-blue-300 hover:text-white' onClick={openModal}>
-                            <CiLogin className='bg-blue-800 rounded-[95px] w-[24px] h-full' />
-                            <span className='font-bold'>Đăng Nhập</span>
-                        </button>
-                        <Modal isOpen={isOpenModal} onClose={closeModal} handleChangeLoginName={handleChangeLoginName}/>
-                    </div> : 
-                    <div className='flex justify-center items-center'>
-                        <button className='flex items-center text-blue-100 hover:text-white' onClick={openModal}>
-                            <MdOutlineAccountCircle className='bg-blue-800 rounded-[95px] w-[24px] h-full' />
-                            <span className='font-bold'>{loginName}</span>
-                        </button>
-                        
-                    </div> 
+
+                        isLogin === false ? <a onClick={openModal} className="px-2 py-1 font-bold text-gray-900 bg-gray-200 border-2 rounded-lg hover:text-red-600" href="#">
+                            Đăng Nhập
+                        </a> :
+
+                            <div className='flex justify-center'>
+
+                                <a className="flex items-center justify-center px-2 py-2 font-bold text-gray-900 bg-gray-200 border-2 rounded-lg hover:text-red-600" href="#">
+
+                                    <MdAccountCircle className='mr-5' /> {userInfo.email},Welcome
+                                </a>
+
+                                <a onClick={logoutRequest} className="flex items-center justify-center px-2 py-2 font-bold text-gray-900 bg-gray-200 border-2 rounded-lg hover:text-red-600" href="#">
+
+                                    <IoMdLogOut className='mr-5 text-orange-500' /> Logout
+                                </a>
+                            </div>
+                        //     isLogin === false ? 
+                        // <div className='flex justify-center items-center'>
+
+                        //     <button className='flex items-center text-blue-300 hover:text-white' onClick={openModal}>
+                        //         <CiLogin className='bg-blue-800 rounded-[95px] w-[24px] h-full' />
+                        //         <span className='font-bold'>Đăng Nhập</span>
+                        //     </button>
+                        //     <Modal isOpen={isOpenModal} onClose={closeModal} handleChangeLoginName={handleChangeLoginName}/>
+                        // </div> : 
+                        // <div className='flex justify-center items-center'>
+                        //     <button className='flex items-center text-blue-100 hover:text-white' onClick={openModal}>
+                        //         <MdOutlineAccountCircle className='bg-blue-800 rounded-[95px] w-[24px] h-full' />
+                        //         <span className='font-bold'>{loginName}</span>
+                        //     </button>
+
+                        // </div> 
                     }
                 </div>
             </div>

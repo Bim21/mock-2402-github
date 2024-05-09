@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'react-native-axios';
 
 
 export const ROOT_URL = "localhost";

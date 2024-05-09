@@ -7,6 +7,9 @@ import SearchJobPage from './pages/SearchJobPage';
 import CompanyPage from './pages/CompanyPage';
 import Register from './pages/Register';
 import JobPage from './pages/JobPage';
+import Login from './pages/Login';
+import { AuthContext } from './AuthProvider';
+
 
 
 function App() {
@@ -18,6 +21,8 @@ function App() {
         <Route path='/company' element={<CompanyPage/>} />
         <Route path='/register' element={<Register/>} />
         <Route path='/job' element={<JobPage/>} />
+        <Route path='/login' element={<Login/>} />
+
 
 
       </Routes>

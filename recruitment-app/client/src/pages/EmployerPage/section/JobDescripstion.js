@@ -1,16 +1,40 @@
 import React, { useState } from 'react';
 import { BsHandbagFill } from 'react-icons/bs';
+import { FaWarehouse } from 'react-icons/fa';
 
-const JobDescripstion = ({ title, level, jobType, career, workField, location, description, requirements, salary, quantity, contactPerson, contactEmail, handleChange }) => {
+const JobDescripstion = ({
+    title,
+    level,
+    jobType,
+    career,
+    workField,
+    location,
+    description,
+    requirements,
+    salary,
+    quantity,
+    contactEmail,
+    handleChange,
+    companyName,
+    companyAddress,
+    companyInfo,
+    companyBenefits,
+    companyLogo
+
+}) => {
 
     return (
         <div className='w-full h-auto flex justify-center items-center mt-3'>
             <div className='w-[900px] rounded-lg p-4 bg-slate-200'>
                 <div className='flex items-center gap-2 text-slate-700'>
                     <BsHandbagFill className='w-21 h-22' />
-                    <h1 className='font-bold text-[16px]'>Mô tả công việc</h1>
+                    <h1 className='font-bold text-[16px]'>Đăng tin tuyển dụng</h1>
                 </div>
                 <div className="space-y-4 mt-4 p-4 bg-white rounded-lg">
+                    <div className='flex items-center gap-2 text-slate-700'>
+                        <BsHandbagFill className='w-21 h-22' />
+                        <h1 className='font-bold text-[16px]'>Mô tả công việc</h1>
+                    </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Chức danh<span className='text-red-500'>*</span></label>
                         <input
@@ -106,16 +130,7 @@ const JobDescripstion = ({ title, level, jobType, career, workField, location, d
 
                         </div>
                     </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Người liên hệ<span className='text-red-500'>*</span></label>
-                        <input
-                            type="text"
-                            name="contactPerson"
-                            value={contactPerson}
-                            onChange={handleChange}
-                            className="w-full p-2 border border-gray-300 rounded-md"
-                        />
-                    </div>
+
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Địa chỉ email nhận hồ sơ<span className='text-red-500'>*</span></label>
                         <input
@@ -126,6 +141,63 @@ const JobDescripstion = ({ title, level, jobType, career, workField, location, d
                             className="w-full p-2 border border-gray-300 rounded-md"
                         />
                     </div>
+
+                    <div className='flex items-center gap-2 text-slate-700'>
+                        <FaWarehouse className='w-21 h-22' />
+                        <h1 className='font-bold text-[16px]'>Thông tin công ty</h1>
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Tên công ty<span className='text-red-500'>*</span></label>
+                        <input
+                            type="text"
+                            name="companyName"
+                            value={companyName}
+                            onChange={handleChange}
+                            placeholder="Tên công ty"
+                            className="w-full p-2 border border-gray-300 rounded-md"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Địa chỉ công ty<span className='text-red-500'>*</span></label>
+                        <input
+                            type="text"
+                            name="companyAddress"
+                            value={companyAddress}
+                            onChange={handleChange}
+                            placeholder="Địa chỉ công ty"
+                            className="flex-1 p-2 border border-gray-300 rounded-md"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Thông tin công ty<span className='text-red-500'>*</span></label>
+                        <textarea
+                            name="companyInfo"
+                            value={companyInfo}
+                            onChange={handleChange}
+                            placeholder="Thông tin công ty"
+                            className="w-full p-2 border border-gray-300 rounded-md"
+                        ></textarea>
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Phúc lợi từ công ty<span className='text-red-500'>*</span></label>
+                        <textarea
+                            name="companyBenefits"
+                            value={companyBenefits}
+                            onChange={handleChange}
+                            placeholder="Phúc lợi từ công ty"
+                            className="w-full p-2 border border-gray-300 rounded-md"
+                        ></textarea>
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Logo công ty<span className='text-red-500'>*</span></label>
+                        <input
+                            type="file"
+                            name="companyLogo"
+                            onChange={handleChange}
+                            className="w-full p-2 border border-gray-300 rounded-md"
+                        />
+                    </div>
+
                     {/* Repeat for other fields */}
 
 

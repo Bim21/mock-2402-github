@@ -1,12 +1,12 @@
 package com.vti.JobPortal.controllers;
 
-import com.vti.JobPortal.entity.User;
-import com.vti.JobPortal.jwt.JwtTokenStore;
-import com.vti.JobPortal.requests.LoginRequest;
-import com.vti.JobPortal.responses.ResponseObject;
+import com.vti.JobPortal.entity.Applicant;
+import com.vti.JobPortal.entity.Employer;
+import com.vti.JobPortal.jwt.JWTUtility;
+import com.vti.JobPortal.repositories.IApplicantRepository;
+import com.vti.JobPortal.repositories.IEmployerRepository;
+import com.vti.JobPortal.requests.AuthRequest;
 import com.vti.JobPortal.security.PasswordEncoder;
-import com.vti.JobPortal.services.AuthService;
-import com.vti.JobPortal.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,42 +20,78 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+    private final IEmployerRepository employerRepository;
+    private final IApplicantRepository applicantRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JWTUtility jwtUtil;
 
     @Autowired
-    UserService userService;
-
-    @Autowired
-    AuthService authService;
-    @PostMapping("/signup")
-    public ResponseEntity<?> signUp(@RequestBody User user) {
-
-        boolean checkExist =
-                userService.checkExistEmailOrPassword(user.getEmail(), user.getPhone());
-
-        if(checkExist)
-            return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(201, "null", "Email or Phone already exists"));
-
-        user.setPassword(PasswordEncoder.getInstance().encodePassword(user.getPassword()));
-        User response = userService.create(user);
-
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject(200, response, "success"));
-
+    public AuthController(IEmployerRepository employerRepository, IApplicantRepository applicantRepository, PasswordEncoder passwordEncoder, JWTUtility jwtUtil) {
+        this.employerRepository = employerRepository;
+        this.applicantRepository = applicantRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
     }
 
-    @PostMapping("/signin")
-    public ResponseEntity<?> signin(@RequestBody LoginRequest loginRequest) {
 
-        Optional<User> user = userService.findByEmail((loginRequest.getEmail()));
-        if (user.isEmpty() || !PasswordEncoder.getInstance().matches(loginRequest.getPassword(), user.get().getPassword())) {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseObject(201, user, "Email or Password incorrect"));
+    @PostMapping("/employer/signup")
+    public ResponseEntity<String> employerSignUp(@RequestBody Employer employer) {
+        if (employerRepository.findByEmail(employer.getEmail()).isPresent()) {
+            return new ResponseEntity<>("Email is already registered.", HttpStatus.BAD_REQUEST);
         }
 
-        String token = authService.loginWithEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword());
-        JwtTokenStore.getInstance().storeToken(loginRequest.getEmail(), token);
-        return ResponseEntity.status(HttpStatus.OK).body
-                (new ResponseObject(200,user,token));
+        // Additional information for employers
+        employer.setCompanyName(employer.getCompanyName());
+        employer.setCompanyAddress(employer.getCompanyAddress());
+        employer.setCompanyField(employer.getCompanyField());
 
+        employer.setPassword(passwordEncoder.encodePassword(employer.getPassword()));
+        employerRepository.save(employer);
+        return new ResponseEntity<>("Employer registered successfully.", HttpStatus.OK);
     }
 
+    @PostMapping("/employer/signin")
+    public ResponseEntity<String> employerSignIn(@RequestBody AuthRequest authRequest) {
+        Optional<Employer> employerOptional = employerRepository.findByEmail(authRequest.getEmail());
+        if (employerOptional.isEmpty()) {
+            return new ResponseEntity<>("Invalid email or password.", HttpStatus.UNAUTHORIZED);
+        }
+
+        Employer employer = employerOptional.get();
+        if (!passwordEncoder.matches(authRequest.getPassword(), employer.getPassword())) {
+            return new ResponseEntity<>("Invalid email or password.", HttpStatus.UNAUTHORIZED);
+        }
+
+        // Generate JWT token
+        String token = jwtUtil.generateTokenWithEmail(employer.getEmail());
+
+        return new ResponseEntity<>(token, HttpStatus.OK);
+    }
+
+    @PostMapping("/applicant/signup")
+    public ResponseEntity<String> applicantSignUp(@RequestBody Applicant applicant) {
+        if (applicantRepository.findByEmail(applicant.getEmail()).isPresent()) {
+            return new ResponseEntity<>("Email is already registered.", HttpStatus.BAD_REQUEST);
+        }
+
+        applicant.setPassword(passwordEncoder.encodePassword(applicant.getPassword()));
+        applicantRepository.save(applicant);
+        return new ResponseEntity<>("Applicant registered successfully.", HttpStatus.OK);
+    }
+
+    @PostMapping("/applicant/signin")
+    public ResponseEntity<String> applicantSignIn(@RequestBody AuthRequest authRequest) {
+        Optional<Applicant> applicantOptional = applicantRepository.findByEmail(authRequest.getEmail());
+        if (applicantOptional.isEmpty()) {
+            return new ResponseEntity<>("Invalid email or password.", HttpStatus.UNAUTHORIZED);
+        }
+
+        Applicant applicant = applicantOptional.get();
+        if (!passwordEncoder.matches(authRequest.getPassword(), applicant.getPassword())) {
+            return new ResponseEntity<>("Invalid email or password.", HttpStatus.UNAUTHORIZED);
+        }
+
+        String token = jwtUtil.generateTokenWithEmail(applicant.getEmail());
+        return new ResponseEntity<>(token, HttpStatus.OK);
+    }
 }

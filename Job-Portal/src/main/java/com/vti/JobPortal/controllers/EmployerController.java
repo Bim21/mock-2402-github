@@ -12,9 +12,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/employers")
 public class EmployerController {
+    private final EmployerService employerService;
 
     @Autowired
-    private EmployerService employerService;
+    public EmployerController(EmployerService employerService) {
+        this.employerService = employerService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Employer>> getAllEmployers() {
@@ -23,7 +26,7 @@ public class EmployerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Employer> getEmployerById(@PathVariable String id) {
+    public ResponseEntity<Employer> getEmployerById(@PathVariable("id") Long id) {
         Optional<Employer> employer = employerService.getEmployerById(id);
         return employer.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -36,18 +39,21 @@ public class EmployerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Employer> updateEmployer(@PathVariable String id, @RequestBody Employer updatedEmployer) {
-        Employer updated = employerService.updateEmployer(id, updatedEmployer);
-        if (updated != null) {
-            return new ResponseEntity<>(updated, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Employer> updateEmployer(@PathVariable("id") Long id, @RequestBody Employer updatedEmployer) {
+        Employer employer = employerService.updateEmployer(id, updatedEmployer);
+        if (employer != null) {
+            return new ResponseEntity<>(employer, HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEmployer(@PathVariable String id) {
-        employerService.deleteEmployer(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Void> deleteEmployer(@PathVariable("id") Long id) {
+        boolean deleted = employerService.deleteEmployer(id);
+        if (deleted) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
+

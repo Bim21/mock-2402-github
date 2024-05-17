@@ -30,6 +30,10 @@ const Header = (props) => {
         navigate('/job')
     }
 
+    const goToLoginEmployer = () => {
+        navigate('/loginEmployer')
+    }
+
     const openModal = () => {
         setIsOpenModal(true);
     };
@@ -221,10 +225,10 @@ const Header = (props) => {
                         </div>
                         <div className='flex items-center mr-[0px]'>
                             <div className='w-[1px] h-[48px] my-0 mx-[32px] bg-blue-200'></div>
-                            <a href='/' className='grid gap-y-[4px] text-blue-300 hover:text-white text-center '>
+                            <div onClick={goToLoginEmployer}  className='grid gap-y-[4px] text-blue-300 hover:text-white text-center hover:cursor-pointer'>
                                 <span className='text-sm'>NHÀ TUYỂN DỤNG</span>
                                 <span className='text-xs'>Tìm kiếm nhân tài</span>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>

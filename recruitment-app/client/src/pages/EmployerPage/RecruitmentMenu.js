@@ -9,7 +9,7 @@ const RecruitmentMenu = () => {
     const navigate = useNavigate();
 
     const goToRecruimentPage = () => {
-        navigate("/RecruitmentPage")
+        navigate("/job-posting")
     }
     
 

@@ -2,7 +2,11 @@ package com.vti.JobPortal.repositories;
 
 import com.vti.JobPortal.entity.Applicant;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-public interface IApplicantRepository extends MongoRepository<Applicant, String> {
+import java.util.Optional;
 
+@Repository
+public interface IApplicantRepository extends MongoRepository<Applicant, Long> {
+    Optional<Applicant> findByEmail(String email);
 }

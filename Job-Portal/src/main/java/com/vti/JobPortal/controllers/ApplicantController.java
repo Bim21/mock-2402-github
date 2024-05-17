@@ -12,9 +12,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/applicants")
 public class ApplicantController {
+    private final ApplicantService applicantService;
 
     @Autowired
-    private ApplicantService applicantService;
+    public ApplicantController(ApplicantService applicantService) {
+        this.applicantService = applicantService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Applicant>> getAllApplicants() {
@@ -23,7 +26,7 @@ public class ApplicantController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Applicant> getApplicantById(@PathVariable String id) {
+    public ResponseEntity<Applicant> getApplicantById(@PathVariable("id") Long id) {
         Optional<Applicant> applicant = applicantService.getApplicantById(id);
         return applicant.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -36,18 +39,20 @@ public class ApplicantController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Applicant> updateApplicant(@PathVariable String id, @RequestBody Applicant updatedApplicant) {
-        Applicant updated = applicantService.updateApplicant(id, updatedApplicant);
-        if (updated != null) {
-            return new ResponseEntity<>(updated, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Applicant> updateApplicant(@PathVariable("id") Long id, @RequestBody Applicant updatedApplicant) {
+        Applicant applicant = applicantService.updateApplicant(id, updatedApplicant);
+        if (applicant != null) {
+            return new ResponseEntity<>(applicant, HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteApplicant(@PathVariable String id) {
-        applicantService.deleteApplicant(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Void> deleteApplicant(@PathVariable("id") Long id) {
+        boolean deleted = applicantService.deleteApplicant(id);
+        if (deleted) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

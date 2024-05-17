@@ -13,7 +13,7 @@ const ItemJob = ({jobs}) => {
             <JobItem key= {job.id} 
                 companyLogo= {"https://www.vietnamworks.com/_next/image?url=https%3A%2F%2Fimages.vietnamworks.com%2Fpictureofcompany%2F58%2F10395466.png&w=1920&q=75"}
                 jobTitle= {job.title}
-                companyName= {"VTI"}
+                companyName= {"FPT"}
                 salary={job.salary}
                 location={job.location}
                 tags={job.requirements}

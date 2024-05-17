@@ -3,7 +3,7 @@ import React from 'react';
 const Statistics1 = () => {
     return (
         <div className='mb-[10px] flex flex-row w-full '>
-            <div className='w-[42%] mx-2 flex-col gap-2'>
+            <div className='w-[42%] mr-2 flex-col gap-2'>
                 <div className='bg-sky-100 flex justify-between rounded-lg shadow-md w-full'>
                     <div className='p-4'>
                         <p className='text-[20px] font-semibold'>Xin chào,</p>
@@ -44,7 +44,7 @@ const Statistics1 = () => {
                     </div>
                 </div>
             </div>
-            <div className='w-[58%] mx-2 bg-white rounded-lg flex-col justify-center items-end shadow-[0_0_6px_-3px_rgba(0,0,0,0.3)]'>
+            <div className='w-[58%] ml-2 bg-white rounded-lg flex-col justify-center items-end shadow-[0_0_6px_-3px_rgba(0,0,0,0.3)]'>
                 <div className='p-[20px] w-full h-[90%]'>
                     <div className='text-[18px] font-semibold'>Tình trạng hiện tại</div>
                     <div className=' w-full flex justify-center mt-[70px]'>

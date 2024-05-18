@@ -15,11 +15,12 @@ import java.util.List;
 public class Employer {
     @Id
     private Long id;
+    private String name;
+    private String phoneNumber;
     private String email;
     private String password;
     private String companyName;
     private String companyAddress;
-    private String phoneNumber;
     private String contactPerson;
     private Integer companySize;
     private String companyInformation;

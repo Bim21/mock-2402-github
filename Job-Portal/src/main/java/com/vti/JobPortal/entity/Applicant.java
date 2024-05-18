@@ -16,14 +16,14 @@ public class Applicant {
     @Id
     private Long id;
     private String name;
+    private String email;
+    private String password;
+    private String phoneNumber;
     private String level;
     private Integer yearsOfExperience;
     private String qualifications;
     private String career;
     private Integer salary;
-    private String email;
-    private String password;
-    private String phoneNumber;
     private Date dateOfBirth;
     private String country;
     private String sex;

@@ -1,5 +1,6 @@
 package com.vti.JobPortal.controllers;
 
+import com.vti.JobPortal.dto.SignUpDTO;
 import com.vti.JobPortal.entity.Applicant;
 import com.vti.JobPortal.entity.Employer;
 import com.vti.JobPortal.jwt.JWTUtility;
@@ -35,18 +36,27 @@ public class AuthController {
 
 
     @PostMapping("/employer/signup")
-    public ResponseEntity<String> employerSignUp(@RequestBody Employer employer) {
-        if (employerRepository.findByEmail(employer.getEmail()).isPresent()) {
+    public ResponseEntity<String> employerSignUp(@RequestBody SignUpDTO employerSignUpDTO) {
+        if (employerRepository.findByEmail(employerSignUpDTO.getEmail()).isPresent()) {
             return new ResponseEntity<>("Email is already registered.", HttpStatus.BAD_REQUEST);
         }
 
-        // Additional information for employers
-        employer.setCompanyName(employer.getCompanyName());
-        employer.setCompanyAddress(employer.getCompanyAddress());
-        employer.setCompanyField(employer.getCompanyField());
+        if (employerSignUpDTO.getCompanyName() == null || employerSignUpDTO.getCompanyAddress() == null || employerSignUpDTO.getCompanyField() == null) {
+            return new ResponseEntity<>("Missing employer information.", HttpStatus.BAD_REQUEST);
+        }
+
+        Employer employer = new Employer();
+        employer.setName(employerSignUpDTO.getName());
+        employer.setEmail(employerSignUpDTO.getEmail());
+        employer.setPhoneNumber(employerSignUpDTO.getPhoneNumber());
+        employer.setPassword(employerSignUpDTO.getPassword());
+        employer.setCompanyName(employerSignUpDTO.getCompanyName());
+        employer.setCompanyAddress(employerSignUpDTO.getCompanyAddress());
+        employer.setCompanyField(employerSignUpDTO.getCompanyField());
 
         employer.setPassword(passwordEncoder.encodePassword(employer.getPassword()));
         employerRepository.save(employer);
+
         return new ResponseEntity<>("Employer registered successfully.", HttpStatus.OK);
     }
 
@@ -69,13 +79,20 @@ public class AuthController {
     }
 
     @PostMapping("/applicant/signup")
-    public ResponseEntity<String> applicantSignUp(@RequestBody Applicant applicant) {
-        if (applicantRepository.findByEmail(applicant.getEmail()).isPresent()) {
+    public ResponseEntity<String> applicantSignUp(@RequestBody SignUpDTO signUpDTO) {
+        if (applicantRepository.findByEmail(signUpDTO.getEmail()).isPresent()) {
             return new ResponseEntity<>("Email is already registered.", HttpStatus.BAD_REQUEST);
         }
 
+        Applicant applicant = new Applicant();
+        applicant.setName(signUpDTO.getName());
+        applicant.setEmail(signUpDTO.getEmail());
+        applicant.setPhoneNumber(signUpDTO.getPhoneNumber());
+        applicant.setPassword(signUpDTO.getPassword());
+
         applicant.setPassword(passwordEncoder.encodePassword(applicant.getPassword()));
         applicantRepository.save(applicant);
+
         return new ResponseEntity<>("Applicant registered successfully.", HttpStatus.OK);
     }
 

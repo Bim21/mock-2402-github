@@ -16,7 +16,7 @@ public class JobController {
     @Autowired
     private JobService jobService;
 
-    @GetMapping
+    @GetMapping("/findAll")
     public ResponseEntity<List<Job>> getAllJobs() {
         List<Job> jobs = jobService.getAllJobs();
         return new ResponseEntity<>(jobs, HttpStatus.OK);
@@ -29,13 +29,13 @@ public class JobController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Job> createJob(@RequestBody Job job) {
         Job createdJob = jobService.createJob(job);
         return new ResponseEntity<>(createdJob, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Job> updateJob(@PathVariable String id, @RequestBody Job updatedJob) {
         Job updated = jobService.updateJob(id, updatedJob);
         if (updated != null) {
@@ -45,7 +45,7 @@ public class JobController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteJob(@PathVariable String id) {
         jobService.deleteJob(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

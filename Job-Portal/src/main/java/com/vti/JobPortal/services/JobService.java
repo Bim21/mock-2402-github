@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class JobService {
     @Autowired
     private IJobRepository jobRepository;
@@ -49,32 +51,8 @@ public class JobService {
         }
     }
 
-
-    public List<Job> searchJobs(String keyword, String industry, String location, String salary) {
-        Query query = new Query();
-
-        // Xây dựng các tiêu chí tìm kiếm
-        if (keyword != null && !keyword.isEmpty()) {
-            Criteria keywordCriteria = new Criteria().orOperator(
-                    Criteria.where("title").regex(keyword, "i"),
-                    Criteria.where("description").regex(keyword, "i")
-            );
-            query.addCriteria(keywordCriteria);
-        }
-
-        if (industry != null && !industry.isEmpty()) {
-            query.addCriteria(Criteria.where("industry").regex(industry, "i"));
-        }
-
-        if (location != null && !location.isEmpty()) {
-            query.addCriteria(Criteria.where("location").regex(location, "i"));
-        }
-
-        if (salary != null && !salary.isEmpty()) {
-            query.addCriteria(Criteria.where("salary").regex(salary, "i"));
-        }
-
-        return mongoTemplate.find(query, Job.class);
+    public List<Job> searchJobs(List<String> specialize, List<String> positions, List<String> locations) {
+        return jobRepository.findBySpecializePositionAndLocation(specialize, positions, locations);
     }
 
     public void deleteJob(String id) {

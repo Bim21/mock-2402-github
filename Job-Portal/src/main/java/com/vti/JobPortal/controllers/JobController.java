@@ -49,17 +49,7 @@ public class JobController {
     public ResponseEntity<Void> deleteJob(@PathVariable String id) {
         jobService.deleteJob(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<Job>> searchJobs(
-            @RequestParam(required = false) String keyword,
-            @RequestParam(required = false) String industry,
-            @RequestParam(required = false) String location,
-            @RequestParam(required = false) String salary
-            // Thêm các tham số khác cần thiết cho tìm kiếm, như mức lương, loại hình công việc, v.v.
-    ) {
-        List<Job> foundJobs = jobService.searchJobs(keyword, industry, location, salary);
-        return new ResponseEntity<>(foundJobs, HttpStatus.OK);
     }
 }
+

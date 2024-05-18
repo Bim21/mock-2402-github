@@ -1,26 +1,37 @@
-import React from 'react';
-import JobItem from './JobItems';
-import jsonData from '../json/jobData.json';
-
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const ItemJob = () => {
-  
-    return (
-      <div className='flex w-full'>
-        <div className='flex flex-col gap-0 w-full'>
-          {jsonData.map(job => (
-            <JobItem key= {job.id} 
-                companyLogo= {job.companyLogo}
-                jobTitle= {job.jobTitle}
-                companyName= {job.companyName}
-                salary={job.salary}
-                location={job.location}
-                tags={job.tags}
-            />
+  const [jobs, setJobs] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/jobs')
+      .then(response => {
+        setJobs(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the jobs!', error);
+      });
+  }, []);
+
+  return (
+    <div className='flex w-full'>
+      <div className='flex flex-col gap-0 w-full'>
+        <ul>
+          {jobs.map(job => (
+            <li key={job.id}>
+              <h2>{job.title}</h2>
+              <p>{job.description}</p>
+              <p><strong>Location:</strong> {job.location}</p>
+              <p><strong>Salary:</strong> {job.salary}</p>
+              <p><strong>Posted Date:</strong> {new Date(job.postedDate).toLocaleDateString()}</p>
+              <p><strong>Expired Date:</strong> {new Date(job.expiredDate).toLocaleDateString()}</p>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
-    );
-  };
-  
-  export default ItemJob;
+    </div>
+  );
+};
+
+export default ItemJob;

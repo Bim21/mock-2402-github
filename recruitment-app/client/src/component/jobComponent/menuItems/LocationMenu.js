@@ -1,10 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
+import axios from "axios";
 
 const LocationMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
     const menuRef = useRef(null);
+    const [searchResults, setSearchResults] = useState([]);
+    const [specializes, setSpecializes] = useState([]);
+    const [positions, setPositions] = useState([]);
+    const [locations, setLocations] = useState([]);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -13,6 +19,33 @@ const LocationMenu = () => {
     const handleClickOutside = (event) => {
         if (menuRef.current && !menuRef.current.contains(event.target)) {
             setIsOpen(false);
+        }
+    };
+
+    const handleSpecializeChange = (e) => {
+        setSpecializes(Array.from(e.target.selectedOptions, (option) => option.value));
+    };
+    
+    const handlePositionChange = (e) => {
+        setPositions(Array.from(e.target.selectedOptions, (option) => option.value));
+    };
+    
+    const handleLocationChange = (e) => {
+        setLocations(Array.from(e.target.selectedOptions, (option) => option.value));
+    };
+    
+    const handleSearch = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/jobs/search', {
+                params: {
+                    specializes: specializes, // Thêm các tham số specialized, positions và locations ở đây
+                    positions: positions,
+                    locations: locations,
+                },
+            });
+            setSearchResults(response.data);
+        } catch (error) {
+            console.error('There was an error fetching the search results!', error);
         }
     };
 
@@ -36,7 +69,7 @@ const LocationMenu = () => {
                 <MdKeyboardArrowDown className="h-6 w-6" />
             </button>
             {isOpen && (
-                <div className="absolute z-10 mt-1 w-[250px] bg-white shadow-lg rounded-md" >
+                <div className="absolute z-10 mt-1 w-[250px] bg-white shadow-lg rounded-md">
                     <div className="p-[8px] flex flex-col ">
                         <div className="flex flex-col">
                             <label className="flex font-bold text-[16px] leading-[19px] h-[40px] items-center mb-0 "><span>Địa Điểm</span></label>
@@ -44,47 +77,57 @@ const LocationMenu = () => {
                                 <div className="absolute flex items-center justify-center w-[40px] h-[40px]">
                                     <BsSearch className="  items-center" />
                                 </div>
-                                <input className=" w-full h-full bg-slate-100 pl-[40px] rounded-[6px] border-transparent focus:outline-none focus:ring-0"
-                                    placeholder="Tìm kiếm" />
+                                <input
+                                    className=" w-full h-full bg-slate-100 pl-[40px] rounded-[6px] border-transparent focus:outline-none focus:ring-0"
+                                    placeholder="Tìm kiếm"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
                             </div>
                         </div>
                         <div className="relative min-h-[150px] mb-[8px] mt-[4px]" style={{ maxHeight: '270px', overflowY: 'auto' }}>
                             <div className="absolute w-full" >
                                 <div className="flex flex-col gap-1 h-[40px] pr-[4px] " >
-                                    <div className="py-[10px] px-[8px] inline-flex items-center rounded-md hover:bg-blue-50">
-                                        <input type="checkbox" id="option1" name="option1" value="hanoi" />
-                                        <label className="ml-[10px]">Hà Nội</label>
-                                    </div>
-                                    <div className="py-[10px] px-[8px] inline-flex items-center rounded-md hover:bg-blue-50">
-                                        <input type="checkbox" id="option2" name="option2" value="danang" />
-                                        <label className="ml-[10px]">Đà Nẵng</label>
-                                    </div>
-                                    <div className="py-[10px] px-[8px] inline-flex items-center rounded-md hover:bg-blue-50">
-                                        <input type="checkbox" id="option3" name="option3" value="hochiminh" />
-                                        <label className="ml-[10px]">Hồ Chí Minh</label>
-                                    </div>
-                                    <div className="py-[10px] px-[8px] inline-flex items-center rounded-md hover:bg-blue-50">
-                                        <input type="checkbox" id="option3" name="option3" value="hochiminh" />
-                                        <label className="ml-[10px]">Cần Thơ</label>
-                                    </div>
-                                    <div className="py-[10px] px-[8px] inline-flex items-center rounded-md hover:bg-blue-50">
-                                        <input type="checkbox" id="option3" name="option3" value="hochiminh" />
-                                        <label className="ml-[10px]">Bắc Ninh</label>
-                                    </div>
-                                    <div className="py-[10px] px-[8px] inline-flex items-center rounded-md hover:bg-blue-50">
-                                        <input type="checkbox" id="option3" name="option3" value="hochiminh" />
-                                        <label className="ml-[10px]">Hải Phòng</label>
-                                    </div>
+                                    <select
+                                        className="w-full h-full bg-slate-100 rounded-6 border-transparent focus:outline-none focus:ring-0"
+                                        multiple
+                                        value={specializes}
+                                        onChange={handleSpecializeChange}
+                                    >
+                                        {/* Options for specialized */}
+                                    </select>
+
+                                    <select
+                                        className="w-full h-full bg-slate-100 rounded-6 border-transparent focus:outline-none focus:ring-0"
+                                        multiple
+                                        value={positions}
+                                        onChange={handlePositionChange}
+                                    >
+                                        {/* Options for positions */}
+                                    </select>
+
+                                    <select
+                                        className="w-full h-full bg-slate-100 rounded-6 border-transparent focus:outline-none focus:ring-0"
+                                        multiple
+                                        value={locations}
+                                        onChange={handleLocationChange}
+                                    >
+                                        <option value="hanoi">Hà Nội</option>
+        <option value="danang">Đà Nẵng</option>
+        <option value="hochiminh">Hồ Chí Minh</option>
+        <option value="cantho">Cần Thơ</option>
+        <option value="bacninh">Bắc Ninh</option>
+        <option value="haiphong">Hải Phòng</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div className="border-t-[1px] border-gray-100 pt-[16px] px-[16px]">
                             <div className="flex justify-end">
-                                <button className="h-[40px] px-[16px] rounded-md bg-gray-100 text-[14px] font-medium hover:bg-gray-300">Hủy</button>
-                                <button className="ml-[10px] h-[40px] px-[16px] rounded-md bg-orange-400 mr-[-16px] text-[14px] font-medium text-white hover:bg-orange-300">Áp Dụng</button>
+                                <button className="h-[40px] px-[16px] rounded-md bg-gray-100 text-[14px] font-medium hover:bg-gray-300" onClick={toggleMenu}>Hủy</button>
+                                <button className="ml-[10px] h-[40px] px-[16px] rounded-md bg-orange-400 mr-[-16px] text-[14px] font-medium text-white hover:bg-orange-300" onClick={handleSearch}>Áp Dụng</button>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             )}

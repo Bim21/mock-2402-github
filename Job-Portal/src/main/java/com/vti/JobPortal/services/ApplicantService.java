@@ -10,14 +10,18 @@ import java.util.Optional;
 
 @Service
 public class ApplicantService {
+    private final IApplicantRepository applicantRepository;
+
     @Autowired
-    private IApplicantRepository applicantRepository;
+    public ApplicantService(IApplicantRepository applicantRepository) {
+        this.applicantRepository = applicantRepository;
+    }
 
     public List<Applicant> getAllApplicants() {
         return applicantRepository.findAll();
     }
 
-    public Optional<Applicant> getApplicantById(String id) {
+    public Optional<Applicant> getApplicantById(Long id) {
         return applicantRepository.findById(id);
     }
 
@@ -25,25 +29,21 @@ public class ApplicantService {
         return applicantRepository.save(applicant);
     }
 
-    public Applicant updateApplicant(String id, Applicant updatedApplicant) {
-        Optional<Applicant> existingApplicantOptional = applicantRepository.findById(id);
-        if (existingApplicantOptional.isPresent()) {
-            Applicant existingApplicant = existingApplicantOptional.get();
-            existingApplicant.setFullName(updatedApplicant.getFullName());
-            existingApplicant.setEmail(updatedApplicant.getEmail());
-            existingApplicant.setPassword(updatedApplicant.getPassword());
-            existingApplicant.setSkills(updatedApplicant.getSkills());
-            existingApplicant.setExperience(updatedApplicant.getExperience());
-            existingApplicant.setEducation(updatedApplicant.getEducation());
-            existingApplicant.setResume(updatedApplicant.getResume());
-            return applicantRepository.save(existingApplicant);
-        } else {
-            // Handle error when applicant with given id does not exist
-            return null;
+    public Applicant updateApplicant(Long id, Applicant updatedApplicant) {
+        Optional<Applicant> existingApplicant = applicantRepository.findById(id);
+        if (existingApplicant.isPresent()) {
+            updatedApplicant.setId(existingApplicant.get().getId());
+            return applicantRepository.save(updatedApplicant);
         }
+        return null;
     }
 
-    public void deleteApplicant(String id) {
-        applicantRepository.deleteById(id);
+    public boolean deleteApplicant(Long id) {
+        Optional<Applicant> applicant = applicantRepository.findById(id);
+        if (applicant.isPresent()) {
+            applicantRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

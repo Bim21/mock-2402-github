@@ -1,8 +1,11 @@
 package com.vti.JobPortal.security;
 
+import org.springframework.stereotype.Component;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+@Component
 public class PasswordEncoder {
 
     private static PasswordEncoder instance;

@@ -1,81 +1,35 @@
 package com.vti.JobPortal.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "applicant")
+import java.util.Date;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Document(collection = "applicants")
 public class Applicant {
     @Id
-    private String id;
-    private String fullName;
+    private Long id;
+    private String name;
+    private String level;
+    private Integer yearsOfExperience;
+    private String qualifications;
+    private String career;
+    private Integer salary;
     private String email;
     private String password;
-    private String[] skills;
-    private String experience;
-    private String education;
-    private String resume;
+    private String phoneNumber;
+    private Date dateOfBirth;
+    private String country;
+    private String sex;
+    private String maritalStatus;
+    private String address;
+    private String fileCV;
+    private ApplicantDetails details;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String[] getSkills() {
-        return skills;
-    }
-
-    public void setSkills(String[] skills) {
-        this.skills = skills;
-    }
-
-    public String getExperience() {
-        return experience;
-    }
-
-    public void setExperience(String experience) {
-        this.experience = experience;
-    }
-
-    public String getEducation() {
-        return education;
-    }
-
-    public void setEducation(String education) {
-        this.education = education;
-    }
-
-    public String getResume() {
-        return resume;
-    }
-
-    public void setResume(String resume) {
-        this.resume = resume;
-    }
 }

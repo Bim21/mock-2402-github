@@ -1,6 +1,8 @@
 package com.vti.JobPortal.controllers;
+import com.vti.JobPortal.dto.JobDTO;
 import com.vti.JobPortal.entity.Job;
 import com.vti.JobPortal.services.JobService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +14,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/jobs")
 public class JobController {
+    private final JobService jobService;
 
     @Autowired
-    private JobService jobService;
+    public JobController(JobService jobService) {
+        this.jobService = jobService;
+    }
 
     @GetMapping("/findAll")
     public ResponseEntity<List<Job>> getAllJobs() {
@@ -23,7 +28,7 @@ public class JobController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Job> getJobById(@PathVariable String id) {
+    public ResponseEntity<Job> getJobById(@PathVariable("id") Long id) {
         Optional<Job> job = jobService.getJobById(id);
         return job.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -35,31 +40,35 @@ public class JobController {
         return new ResponseEntity<>(createdJob, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Job> updateJob(@PathVariable String id, @RequestBody Job updatedJob) {
-        Job updated = jobService.updateJob(id, updatedJob);
-        if (updated != null) {
-            return new ResponseEntity<>(updated, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Job> updateJob(@PathVariable("id") Long id, @RequestBody Job updatedJob) {
+        Job job = jobService.updateJob(id, updatedJob);
+        if (job != null) {
+            return new ResponseEntity<>(job, HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteJob(@PathVariable String id) {
-        jobService.deleteJob(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteJob(@PathVariable("id") Long id) {
+        boolean deleted = jobService.deleteJob(id);
+        if (deleted) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<Job>> searchJobs(
-            @RequestParam(required = false) String keyword,
-            @RequestParam(required = false) String industry,
-            @RequestParam(required = false) String location,
-            @RequestParam(required = false) String salary
-            // Thêm các tham số khác cần thiết cho tìm kiếm, như mức lương, loại hình công việc, v.v.
-    ) {
-        List<Job> foundJobs = jobService.searchJobs(keyword, industry, location, salary);
-        return new ResponseEntity<>(foundJobs, HttpStatus.OK);
+    @PostMapping("/postJob")
+    public ResponseEntity<String> postJob(@RequestBody JobDTO jobDTO, @RequestParam("employerId") Long employerId) {
+        try {
+            jobService.postJob(jobDTO, employerId);
+            return ResponseEntity.ok("Job posted successfully.");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.badRequest().body("Invalid employer ID.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while posting the job.");
+        }
     }
 }

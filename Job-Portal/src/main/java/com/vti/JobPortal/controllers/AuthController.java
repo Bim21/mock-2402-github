@@ -67,21 +67,27 @@ public class AuthController {
     }
 
     @PostMapping("/employer/signin")
-    public ResponseEntity<String> employerSignIn(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<SignInResponseDTO> employerSignIn(@RequestBody AuthRequest authRequest) {
         Optional<Employer> employerOptional = employerRepository.findByEmail(authRequest.getEmail());
         if (employerOptional.isEmpty()) {
-            return new ResponseEntity<>("Invalid email or password.", HttpStatus.UNAUTHORIZED);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
 
         Employer employer = employerOptional.get();
         if (!passwordEncoder.matches(authRequest.getPassword(), employer.getPassword())) {
-            return new ResponseEntity<>("Invalid email or password.", HttpStatus.UNAUTHORIZED);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
 
         // Generate JWT token
         String token = jwtUtil.generateTokenWithEmail(employer.getEmail());
-
-        return new ResponseEntity<>(token, HttpStatus.OK);
+        SignInResponseDTO responseDTO = new SignInResponseDTO();
+        responseDTO.setName(employer.getName());
+        responseDTO.setEmail(employer.getEmail());
+        responseDTO.setPassword(employer.getPassword());
+        responseDTO.setCompanyName(employer.getCompanyName());
+        responseDTO.setCompanyAddress(employer.getCompanyAddress());
+        responseDTO.setCompanyField(employer.getCompanyField());
+        return ResponseEntity.ok(responseDTO);
     }
 
     @PostMapping("/applicant/signup")

@@ -1,6 +1,7 @@
 package com.vti.JobPortal.controllers;
 
 import com.vti.JobPortal.database.SequenceGeneratorService;
+import com.vti.JobPortal.dto.SignInResponseDTO;
 import com.vti.JobPortal.dto.SignUpDTO;
 import com.vti.JobPortal.entity.Applicant;
 import com.vti.JobPortal.entity.Employer;
@@ -104,18 +105,23 @@ public class AuthController {
     }
 
     @PostMapping("/applicant/signin")
-    public ResponseEntity<String> applicantSignIn(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<SignInResponseDTO> applicantSignIn(@RequestBody AuthRequest authRequest) {
         Optional<Applicant> applicantOptional = applicantRepository.findByEmail(authRequest.getEmail());
         if (applicantOptional.isEmpty()) {
-            return new ResponseEntity<>("Invalid email or password.", HttpStatus.UNAUTHORIZED);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
+
 
         Applicant applicant = applicantOptional.get();
         if (!passwordEncoder.matches(authRequest.getPassword(), applicant.getPassword())) {
-            return new ResponseEntity<>("Invalid email or password.", HttpStatus.UNAUTHORIZED);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
 
         String token = jwtUtil.generateTokenWithEmail(applicant.getEmail());
-        return new ResponseEntity<>(token, HttpStatus.OK);
+        SignInResponseDTO responseDTO = new SignInResponseDTO();
+        responseDTO.setName(applicant.getName());
+        responseDTO.setEmail(applicant.getEmail());
+        responseDTO.setPassword(applicant.getPassword());
+        return ResponseEntity.ok(responseDTO);
     }
 }

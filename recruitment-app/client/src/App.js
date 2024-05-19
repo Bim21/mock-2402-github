@@ -12,6 +12,7 @@ import RegisterEmployer from './pages/EmployerPage/RegisterEmployer';
 import EmployerPage from './pages/EmployerPage/EmployerPage';
 import RecruitmentPage from './pages/EmployerPage/RecruitmentPage';
 import EmployerStatistics from './pages/EmployerPage/EmployerStatistics';
+import UserPage from './pages/UserPage';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path='/registerEmployer' element={<RegisterEmployer/>} />
         <Route path='/employerPage' element={<EmployerPage/>} />
         <Route path='/job-posting' element={<RecruitmentPage/>} />
+        <Route path='/user-overview' element={<UserPage/>} />
       </Routes>
     </BrowserRouter>
   );

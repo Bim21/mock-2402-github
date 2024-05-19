@@ -1,5 +1,6 @@
 package com.vti.JobPortal.controllers;
 
+import com.vti.JobPortal.database.SequenceGeneratorService;
 import com.vti.JobPortal.dto.SignUpDTO;
 import com.vti.JobPortal.entity.Applicant;
 import com.vti.JobPortal.entity.Employer;
@@ -27,6 +28,9 @@ public class AuthController {
     private final JWTUtility jwtUtil;
 
     @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
+
+    @Autowired
     public AuthController(IEmployerRepository employerRepository, IApplicantRepository applicantRepository, PasswordEncoder passwordEncoder, JWTUtility jwtUtil) {
         this.employerRepository = employerRepository;
         this.applicantRepository = applicantRepository;
@@ -44,8 +48,9 @@ public class AuthController {
         if (employerSignUpDTO.getCompanyName() == null || employerSignUpDTO.getCompanyAddress() == null || employerSignUpDTO.getCompanyField() == null) {
             return new ResponseEntity<>("Missing employer information.", HttpStatus.BAD_REQUEST);
         }
-
+        long nextId = sequenceGeneratorService.generateSequence("employer_sequence");
         Employer employer = new Employer();
+        employer.setId(nextId);
         employer.setName(employerSignUpDTO.getName());
         employer.setEmail(employerSignUpDTO.getEmail());
         employer.setPhoneNumber(employerSignUpDTO.getPhoneNumber());
@@ -83,8 +88,10 @@ public class AuthController {
         if (applicantRepository.findByEmail(signUpDTO.getEmail()).isPresent()) {
             return new ResponseEntity<>("Email is already registered.", HttpStatus.BAD_REQUEST);
         }
+        long nextId = sequenceGeneratorService.generateSequence("applicant_sequence");
 
         Applicant applicant = new Applicant();
+        applicant.setId(nextId);
         applicant.setName(signUpDTO.getName());
         applicant.setEmail(signUpDTO.getEmail());
         applicant.setPhoneNumber(signUpDTO.getPhoneNumber());

@@ -87,6 +87,7 @@ public class AuthController {
         responseDTO.setCompanyName(employer.getCompanyName());
         responseDTO.setCompanyAddress(employer.getCompanyAddress());
         responseDTO.setCompanyField(employer.getCompanyField());
+        responseDTO.setToken(token);
         return ResponseEntity.ok(responseDTO);
     }
 
@@ -128,6 +129,7 @@ public class AuthController {
         responseDTO.setName(applicant.getName());
         responseDTO.setEmail(applicant.getEmail());
         responseDTO.setPassword(applicant.getPassword());
+        responseDTO.setToken(token);
         return ResponseEntity.ok(responseDTO);
     }
 }

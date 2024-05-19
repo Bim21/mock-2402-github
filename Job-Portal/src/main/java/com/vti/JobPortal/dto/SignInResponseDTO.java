@@ -14,4 +14,5 @@ public class SignInResponseDTO {
     private String companyName;
     private String companyAddress;
     private String companyField;
+    private String token;
 }

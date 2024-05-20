@@ -1,5 +1,6 @@
 package com.vti.JobPortal.entity;
 
+import com.vti.JobPortal.repositories.IJobRepository;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.AllArgsConstructor;
@@ -36,3 +37,4 @@ public class Applicant {
     private ApplicantDetails details;
 
 }
+

@@ -71,4 +71,10 @@ public class JobController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while posting the job.");
         }
     }
+
+    @PostMapping("/{jobId}/applicants/{applicantId}")
+    public ResponseEntity<String> applyForJob(@PathVariable Long jobId, @PathVariable Long applicantId) {
+        jobService.applyForJob(jobId, applicantId);
+        return ResponseEntity.ok("Job application successful.");
+    }
 }

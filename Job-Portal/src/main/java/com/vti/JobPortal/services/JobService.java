@@ -2,15 +2,14 @@ package com.vti.JobPortal.services;
 
 import com.vti.JobPortal.database.SequenceGeneratorService;
 import com.vti.JobPortal.dto.JobDTO;
+import com.vti.JobPortal.entity.Applicant;
 import com.vti.JobPortal.entity.Employer;
 import com.vti.JobPortal.entity.Job;
+import com.vti.JobPortal.repositories.IApplicantRepository;
 import com.vti.JobPortal.repositories.IEmployerRepository;
 import com.vti.JobPortal.repositories.IJobRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +23,14 @@ public class JobService {
     private final IJobRepository jobRepository;
     private final IEmployerRepository employerRepository;
     private final MongoOperations mongoOperations;
+    private final IApplicantRepository applicantRepository;
 
     @Autowired
-    public JobService(IJobRepository jobRepository, IEmployerRepository employerRepository, MongoOperations mongoOperations) {
+    public JobService(IJobRepository jobRepository, IEmployerRepository employerRepository, MongoOperations mongoOperations, IApplicantRepository applicantRepository) {
         this.jobRepository = jobRepository;
         this.employerRepository = employerRepository;
         this.mongoOperations = mongoOperations;
+        this.applicantRepository = applicantRepository;
     }
 
     public List<Job> getAllJobs() {
@@ -91,14 +92,22 @@ public class JobService {
         job.setApplicants(new ArrayList<>());
         job.setStatus("Active");
 
-        employer.getJobs().add(job);
         employerRepository.save(employer);
+        job.setEmployer(employer);
         jobRepository.save(job);
     }
 
     private Long generateJobId() {
         SequenceGeneratorService sequenceGeneratorService = new SequenceGeneratorService(mongoOperations);
         return sequenceGeneratorService.generateSequence("job_sequence");
+    }
+
+    public void applyForJob(Long jobId, Long applicantId) {
+        Job job = jobRepository.findById(jobId).orElseThrow(() -> new EntityNotFoundException("Job not found."));
+        Applicant applicant = applicantRepository.findById(applicantId).orElseThrow(() -> new EntityNotFoundException("Applicant not found."));
+
+        job.applyForJob(applicant);
+        jobRepository.save(job);
     }
 
 }

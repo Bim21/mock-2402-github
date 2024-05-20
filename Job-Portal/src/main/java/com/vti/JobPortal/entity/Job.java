@@ -38,4 +38,7 @@ public class Job {
     private List<Applicant> applicants;
     private String status;
 
+    public void applyForJob(Applicant applicant){
+        applicants.add(applicant);
+    }
 }

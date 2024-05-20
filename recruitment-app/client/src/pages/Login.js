@@ -31,7 +31,7 @@ const Login = () => {
 
 
       //login(token, user);
-      navigate('/company');
+      navigate('/home');
       
     }else {
       console.log("resultLogin:", result);

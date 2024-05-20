@@ -31,15 +31,15 @@ const Header = (props) => {
         navigate('/company')
     }
 
-    const { logout } = useContext(AuthContext);
-    // console.log("userInfor:", userInfo);
+    // const { logout } = useContext(AuthContext);
+    // // console.log("userInfor:", userInfo);
 
-    const logoutRequest = () => {
-        localStorage.removeItem('token');
-        logout();
-        window.location.reload();
+    // const logoutRequest = () => {
+    //     localStorage.removeItem('token');
+    //     logout();
+    //     window.location.reload();
 
-    }
+    // }
 
     const goToJobPage = () => {
         navigate('/job')
@@ -133,6 +133,7 @@ const Header = (props) => {
                                         </div>
                                     </div>
                                 </li>
+                                
 
                                 <li className='mr-[46px] h-full text-blue-300'>
                                     <div href='/' className='flex items-center gap-x-[8px] gap-y-[4px]'>
@@ -283,10 +284,10 @@ const Header = (props) => {
                                     <MdAccountCircle className='mr-5' /> ,Welcome
                                 </a>
 
-                                <a onClick={logoutRequest}  className="flex items-center justify-center px-2 py-2 font-bold text-gray-900 bg-gray-200 border-2 rounded-lg hover:text-red-600" href="#">
+                                {/* <a onClick={logoutRequest}  className="flex items-center justify-center px-2 py-2 font-bold text-gray-900 bg-gray-200 border-2 rounded-lg hover:text-red-600" href="#">
 
                                     <IoMdLogOut className='mr-5 text-orange-500' /> Logout
-                                </a>
+                                </a> */}
                             </div>
                         //     isLogin === false ? 
                         // <div className='flex justify-center items-center'>

@@ -9,6 +9,7 @@ import Register from './pages/Register';
 import JobPage from './pages/JobPage';
 import Login from './pages/Login';
 import { AuthContext } from './AuthProvider';
+import JobDetail from './pages/JobDetail';
 
 
 
@@ -22,6 +23,8 @@ function App() {
         <Route path='/register' element={<Register/>} />
         <Route path='/job' element={<JobPage/>} />
         <Route path='/login' element={<Login/>} />
+        <Route path='/job-detail' element={<JobDetail/>} />
+
 
 
 

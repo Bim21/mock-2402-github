@@ -52,7 +52,8 @@ public class AuthController {
         long nextId = sequenceGeneratorService.generateSequence("employer_sequence");
         Employer employer = new Employer();
         employer.setId(nextId);
-        employer.setName(employerSignUpDTO.getName());
+        employer.setFirstName(employerSignUpDTO.getFirstName());
+        employer.setLastName(employerSignUpDTO.getLastName());
         employer.setEmail(employerSignUpDTO.getEmail());
         employer.setPhoneNumber(employerSignUpDTO.getPhoneNumber());
         employer.setPassword(employerSignUpDTO.getPassword());
@@ -81,7 +82,8 @@ public class AuthController {
         // Generate JWT token
         String token = jwtUtil.generateTokenWithEmail(employer.getEmail());
         SignInResponseDTO responseDTO = new SignInResponseDTO();
-        responseDTO.setName(employer.getName());
+        responseDTO.setFirstName(employer.getFirstName());
+        responseDTO.setLastName(employer.getLastName());
         responseDTO.setEmail(employer.getEmail());
         responseDTO.setPassword(employer.getPassword());
         responseDTO.setCompanyName(employer.getCompanyName());
@@ -100,7 +102,8 @@ public class AuthController {
 
         Applicant applicant = new Applicant();
         applicant.setId(nextId);
-        applicant.setName(signUpDTO.getName());
+        applicant.setFirstName(signUpDTO.getFirstName());
+        applicant.setLastName(signUpDTO.getLastName());
         applicant.setEmail(signUpDTO.getEmail());
         applicant.setPhoneNumber(signUpDTO.getPhoneNumber());
         applicant.setPassword(signUpDTO.getPassword());
@@ -126,7 +129,8 @@ public class AuthController {
 
         String token = jwtUtil.generateTokenWithEmail(applicant.getEmail());
         SignInResponseDTO responseDTO = new SignInResponseDTO();
-        responseDTO.setName(applicant.getName());
+        responseDTO.setFirstName(applicant.getFirstName());
+        responseDTO.setLastName(applicant.getLastName());
         responseDTO.setEmail(applicant.getEmail());
         responseDTO.setPassword(applicant.getPassword());
         responseDTO.setToken(token);

@@ -1,8 +1,8 @@
 import api from "./axiosClient";
 
-const END_POINT = '/jobs'
+const END_POINT = '/company'
 
-const jobService = {
+const companyService = {
     getAll() {
         return api.get(`${END_POINT}/findAll`);
     },
@@ -17,4 +17,4 @@ const jobService = {
     }
 };
 
-export default jobService;
+export default companyService;

@@ -77,4 +77,6 @@ public class JobController {
         jobService.applyForJob(jobId, applicantId);
         return ResponseEntity.ok("Job application successful.");
     }
+
+
 }

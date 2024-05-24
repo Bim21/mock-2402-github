@@ -63,8 +63,28 @@ public class JobService {
         return false;
     }
 
+//    public JobDTO showJobDetails(Long jobId) {
+//        Optional<Job> jobOptional = jobRepository.findById(jobId);
+//        if (jobOptional.isEmpty()) {
+//            throw new EntityNotFoundException("Job not found.");
+//        }
+//
+//        Job job = jobOptional.get();
+//
+//        JobDTO jobDTO = new JobDTO();
+//        jobDTO.setLevel(job.getLevel());
+//        jobDTO.setTitle(job.getTitle());
+//        jobDTO.setSalary(job.getSalary());
+//        jobDTO.setFieldJob(job.getJobField());
+//        jobDTO.setAddressJob(job.getJobAddress());
+//        jobDTO.setDescriptionJob(job.getDescription());
+//        jobDTO.setRequirementJob(job.getRequirementJob());
+//        jobDTO.setViews(jobDTO.getViews());
+//
+//        return jobDTO;
+//    }
+
     public void postJob(JobDTO jobDTO, Long employerId) {
-        // Check if the employer exists
         Optional<Employer> employerOptional = employerRepository.findById(employerId);
         if (employerOptional.isEmpty()) {
             throw new EntityNotFoundException("Employer not found.");
@@ -109,5 +129,9 @@ public class JobService {
         job.applyForJob(applicant);
         jobRepository.save(job);
     }
+    public List<Job> searchJobs(List<String> jobField, List<String> level, List<String> jobAddress){
+        return jobRepository.findByFieldLevelAndAddress(jobField,level,jobAddress);
+    }
+
 
 }

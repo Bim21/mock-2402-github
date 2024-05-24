@@ -15,7 +15,10 @@ public class JobDTO {
     private String fieldJob;
     private String addressJob;
     private String descriptionJob;
+    private String requirementJob;
     private Integer salary;
+    private Integer views;
+    private Date expiredDate;
     private Integer numberOfRecruitment;
     private String contactPerson;
     private String email;
@@ -26,5 +29,4 @@ public class JobDTO {
     private String companyLogo;
     private String companyImage;
 
-    // Add other necessary fields, getters, and setters
 }

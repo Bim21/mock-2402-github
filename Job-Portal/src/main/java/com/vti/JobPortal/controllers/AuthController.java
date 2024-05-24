@@ -82,6 +82,7 @@ public class AuthController {
         // Generate JWT token
         String token = jwtUtil.generateTokenWithEmail(employer.getEmail());
         SignInResponseDTO responseDTO = new SignInResponseDTO();
+        responseDTO.setId(employer.getId());
         responseDTO.setFirstName(employer.getFirstName());
         responseDTO.setLastName(employer.getLastName());
         responseDTO.setEmail(employer.getEmail());
@@ -129,6 +130,7 @@ public class AuthController {
 
         String token = jwtUtil.generateTokenWithEmail(applicant.getEmail());
         SignInResponseDTO responseDTO = new SignInResponseDTO();
+        responseDTO.setId(applicant.getId());
         responseDTO.setFirstName(applicant.getFirstName());
         responseDTO.setLastName(applicant.getLastName());
         responseDTO.setEmail(applicant.getEmail());

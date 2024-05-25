@@ -150,18 +150,29 @@ const RegisterEmployer = () => {
             <option value="">Dịch vụ ăn uống</option>
             {/* Add specific options here */}
         {/* </select> */}
-        {/* </div> */} */
+        {/* </div> */}
         <div>
           <label className="block text-sm font-medium text-gray-700">
             Ngành nghề<span className="text-red-500">*</span>
           </label>
-          <input
-            type="text"
+          <select
             name="companyField"
             value={formData.companyField}
             onChange={handleChange}
             className="w-full p-2 border rounded mb-4"
-          />
+          >
+            <option value="">Vui lòng chọn</option>
+            <option value="Bán lẻ/ Tiêu dùng">Bán lẻ/ Tiêu dùng</option>
+            <option value="CEO & General Manangement">
+              CEO & General Manangement
+            </option>
+            <option value="Công Nghệ thông tin/ Viễn thông">
+              Công Nghệ thông tin/ Viễn thông
+            </option>
+            <option value="Dệt may/ Da giày">Dệt may/ Da giày</option>
+            <option value="Dịch vụ ăn uống">Dịch vụ ăn uống</option>
+            {/* Add specific options here */}
+          </select>
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">

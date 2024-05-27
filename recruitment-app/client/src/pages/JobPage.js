@@ -3,10 +3,10 @@ import JobContent from "../component/jobComponent/JobContent";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
 import jobService from "../services/jobService";
+import JobProvider from "../contexts/JobProvider";
 
 const JobPage = () => {
   const [dataJobs, setDataJobs] = useState([]);
-  console.log(dataJobs);
 
   const getJobs = async () => {
     try {
@@ -25,7 +25,9 @@ const JobPage = () => {
     <div>
       <div className="flex flex-col items-center justify-center box-border bg-slate-50">
         <Header />
-        <JobContent jobs={dataJobs} />
+        <JobProvider>
+          <JobContent />
+        </JobProvider>
         <Footer />
       </div>
     </div>

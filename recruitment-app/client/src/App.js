@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AuthEmployerLayout from "./layouts/AuthEmployerLayout";
 import AuthUserLayout from "./layouts/AuthUserLayout ";
+import AppliedJobs from "./pages/AppliedJobs";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
           }
         />
         <Route path="/job-posting" element={<RecruitmentPage />} />
+        <Route path="/job-applied/:type" element={<AppliedJobs />} />
       </Routes>
       <ToastContainer theme="colored" />
     </BrowserRouter>

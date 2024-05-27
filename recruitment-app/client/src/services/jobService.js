@@ -15,6 +15,15 @@ const jobService = {
   delete(id) {
     return api.delete(`${END_POINT}/delete/${id}`);
   },
+  getAppliedJobs(jobId, applicantId) {
+    return api.get(`${END_POINT}/${jobId}/applicants/${applicantId}}`);
+  },
+  getSavedJobs() {
+    return api.get(`${END_POINT}/saved-jobs}`);
+  },
+  getViewedJobs() {
+    return api.get(`${END_POINT}/viewed-jobs}`);
+  },
 };
 
 export default jobService;

@@ -1,10 +1,9 @@
 import React from "react";
 import JobItem from "./JobItems";
-import jsonData from "../json/jobData.json";
+import { useJobContext } from "../../contexts/JobProvider";
 
-const ItemJob = (props) => {
-  const jobs = props.jobs;
-  console.log("jobs...", jobs);
+const ItemJob = () => {
+  const jobs = useJobContext();
 
   return (
     <div className="flex w-full">
@@ -12,6 +11,7 @@ const ItemJob = (props) => {
         {jobs.map((job) => (
           <JobItem
             key={job.id}
+            jobId={job.id}
             companyLogo={job.employer.companyLogoPath}
             jobTitle={job.title}
             companyName={job.employer.companyName}

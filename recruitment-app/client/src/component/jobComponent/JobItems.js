@@ -1,6 +1,6 @@
 import React from "react";
 import { AiOutlineHeart } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const JobItem = ({
   companyLogo,
@@ -29,7 +29,14 @@ const JobItem = ({
         className="bg-white rounded-lg w-24 h-24 flex items-center justify-center mr-4"
         onClick={() => navigate(`/job-applied/view`)}
       >
-        <img src={companyLogo} alt="Company Logo" className="rounded-lg" />
+        <img
+          src={
+            companyLogo ??
+            "https://cdn.vectorstock.com/i/500p/13/65/page-not-found-error-404-system-updates-vector-45961365.jpg"
+          }
+          alt="Company Logo"
+          className="rounded-lg"
+        />
       </div>
       <div className="flex flex-col flex-1 p-1">
         <div className="flex items-center">
@@ -37,7 +44,7 @@ const JobItem = ({
             Mới
           </span>
           <span className="text-[16px] font-medium  hover:text-orange-400">
-            {jobTitle}
+            <Link to={`/jobs/${jobId}`}>{jobTitle}</Link>
           </span>
         </div>
         <div className="text-sm hover:text-orange-400">{companyName}</div>

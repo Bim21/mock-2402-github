@@ -252,6 +252,7 @@ const Header = (props) => {
             </div>
           </div>
         </div>
+        
         <div className=" flex justify-center items-center p-[7px] rounded-[95px] border-solid border-2 gap-x-[8px] border-blue-500">
           <div
             className="flex justify-center items-center relative group"

@@ -17,6 +17,10 @@ import { GiGraduateCap } from "react-icons/gi";
 import { VscFiles } from "react-icons/vsc";
 import { MdPreview } from "react-icons/md";
 import { IoDownloadSharp } from "react-icons/io5";
+import TabSection from './section/TabSection';
+import Section2 from './section/Section2';
+import Section3 from './section/Section3';
+import { LayoutFilled } from '@ant-design/icons';
 
 
 
@@ -116,7 +120,7 @@ const ApplicantContent = (props) => {
 
                 </Menu>
             </Sider>
-            <Layout>
+            <Layout className='w-[80vh]'>
                 {/* <div className='flex flex-col justify-evenly h-full w-full mt-0'>
                     <div className='w-[full] h-44 bg-slate-500 mt-0'>aaaa
                     </div>
@@ -132,7 +136,7 @@ const ApplicantContent = (props) => {
 
                 {/* <Header style={{ background: '#fff', padding: 0 }} /> */}
                 <Content style={{ margin: '24px 16px 0' }}>
-                    <div style={{ padding: 24, background: '#f1f2f4', minHeight: 360 }}>
+                    <div style={{ padding: 24, background: '#f1f2f4', minHeight: 720 }}>
                         <div className='flex flex-col justify-evenly h-full w-full mt-0'>
 
                             <div onClick={openModal} className='w-[full] h-44 bg-white rounded-[9px] mt-0 hover:cursor-pointer'>
@@ -187,17 +191,8 @@ const ApplicantContent = (props) => {
                             </div>
 
                             <div>
-                                <div className='flex flex-row mt-3 ml-3 text-xl gap-10 hover:cursor-pointer'>
-                                    <div>
-                                        Hồ sơ Vietnamworks
-                                    </div>
-                                    <div>
-                                        Hồ sơ đính kèm
-                                    </div>
-                                    <div>
-                                        Thiết lập hồ sơ
-                                    </div>
-
+                                <div className='flex flex-row mt-3 ml-3 text-xl gap-10 hover:cursor-pointer'>                               
+                                    <TabSection/>
                                 </div>
 
                                 <div className='w-[full] h-44 bg-white rounded-[9px] mt-4 pt-5 flex flex-row text-2xl'>
@@ -222,6 +217,21 @@ const ApplicantContent = (props) => {
 
                                     </div>
                                 </div>
+
+
+                                <div className='w-[full] h-52 bg-white rounded-[9px] mt-4 pt-5 flex flex-row'>
+                                    <Section2/>
+
+                                </div>
+
+
+                                <div className='w-[full] h-full flex flex-col'>
+                                    <Section3/>
+
+                                </div>
+
+
+
 
                             </div>
 

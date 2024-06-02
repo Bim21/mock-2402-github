@@ -52,12 +52,12 @@ const ApplicantHeader = () => {
 
 
 
-            <div className=" flex justify-center items-center p-[7px] rounded-[95px] border-solid border-2 gap-x-[8px] border-blue-500 text-white ml-3">
+            <div className="w-48  text-[16px] flex justify-center items-center  rounded-[95px] border-solid border-2 gap-x-[8px] border-blue-500 text-white ml-3">
                 <IoMenuOutline className="text-white h-7 w-7" />
                 Tất cả danh mục
             </div>
 
-            <div className=" flex justify-center items-center p-[7px] rounded-[95px] border-solid border-2 gap-x-[8px] border-blue-500 text-white ml-3 mr-3"> 
+            <div className=" w-36 h-8 text-[16px] flex justify-center items-center  rounded-[95px] border-solid border-2 gap-x-[8px] border-blue-500 text-white ml-3 mr-3"> 
                 Nhà tuyển dụng
             </div>
 

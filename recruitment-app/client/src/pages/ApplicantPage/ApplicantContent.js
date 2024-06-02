@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Layout, Menu } from 'antd';
 // import 'antd/dist/antd.css';
 import { IoSpeedometerOutline } from "react-icons/io5";
@@ -9,6 +9,17 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoMdSettings } from "react-icons/io";
 import { VscAccount } from "react-icons/vsc";
 import { BiExit } from "react-icons/bi";
+import ModalApplicant from './ModalApplicant';
+import { BsFillPersonFill } from "react-icons/bs";
+import { IoIosMail } from "react-icons/io";
+import { IoHomeSharp } from "react-icons/io5";
+import { GiGraduateCap } from "react-icons/gi";
+import { VscFiles } from "react-icons/vsc";
+import { MdPreview } from "react-icons/md";
+import { IoDownloadSharp } from "react-icons/io5";
+
+
+
 
 
 
@@ -17,7 +28,22 @@ import { BiExit } from "react-icons/bi";
 const { Header, Sider, Content } = Layout;
 
 
-const ApplicantContent = () => {
+const ApplicantContent = (props) => {
+
+    const [isOpenModal, setIsOpenModal] = useState(false);
+
+
+
+    const openModal = () => {
+        setIsOpenModal(true);
+    };
+
+    const closeModal = () => {
+        setIsOpenModal(false);
+    };
+
+
+
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Sider width={320} theme="light">
@@ -26,15 +52,15 @@ const ApplicantContent = () => {
 
                     <div className='h-20 flex flex-row items-center text-white'>
 
-                        <VscAccount className='w-16 h-16 mt-2 ml-2'/>
+                        <VscAccount className='w-16 h-16 mt-2 ml-2' />
 
                         <div className='pl-5'>
                             <div className='text-[16px] font-bold'>Nguyen Chien</div>
                             <div className='text-[16px] font-medium'>Nhan Vien</div>
                         </div>
 
-                        <BiExit className='text-[30px] ml-16 mb-8'/>
-                        
+                        <BiExit className='text-[30px] ml-16 mb-8' />
+
                     </div>
 
 
@@ -46,7 +72,7 @@ const ApplicantContent = () => {
                         <div className='text-slate-600 text-[13px] mt-2 ml-5'>Ho so chua du dieu kien cho phep tim kiem</div>
 
                         <button className='text-blue-800 mt-2 text-[14px]  ml-5' type='button'>Thiet lap ho so</button>
-                        
+
                     </div>
 
 
@@ -91,10 +117,119 @@ const ApplicantContent = () => {
                 </Menu>
             </Sider>
             <Layout>
+                {/* <div className='flex flex-col justify-evenly h-full w-full mt-0'>
+                    <div className='w-[full] h-44 bg-slate-500 mt-0'>aaaa
+                    </div>
+
+
+                    <div className='w-[full] h-44 bg-blue-500'>aaaa
+                    </div>
+
+                    
+
+                </div> */}
+
+
                 {/* <Header style={{ background: '#fff', padding: 0 }} /> */}
                 <Content style={{ margin: '24px 16px 0' }}>
-                    <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                        Content goes here
+                    <div style={{ padding: 24, background: '#f1f2f4', minHeight: 360 }}>
+                        <div className='flex flex-col justify-evenly h-full w-full mt-0'>
+
+                            <div onClick={openModal} className='w-[full] h-44 bg-white rounded-[9px] mt-0 hover:cursor-pointer'>
+                                <ModalApplicant isOpen={isOpenModal} onClose={closeModal} />
+
+                                <div className='flex flex-row '>
+                                    <BsFillPersonFill className='text-slate-300 text-9xl ml-2' />
+
+                                    <div className='flex flex-col ml-5'>
+                                        <div className='text-4xl font-bold'>Trinh Trinh</div>
+                                        <div className='text-lg'>Thêm Chức Danh - Thêm Số năm kinh nghiệm</div>
+
+                                        <div className='text-xl'>
+                                            <div className='flex flex-row gap-2 items-center'>
+                                                <MdOutlineWork />
+                                                Thêm Cấp Bậc Hiện Tại</div>
+
+                                            <div className='flex flex-row gap-2 items-center'>
+                                                <IoIosMail />
+                                                trinhlee297@gmail.com</div>
+
+                                            <div className='flex flex-row gap-2 items-center'>
+                                                <IoHomeSharp />
+                                                Thêm Địa Chỉ</div>
+
+                                        </div>
+                                    </div>
+                                    <div className='flex flex-row pl-96 items-center text-xl gap-2'>
+                                        <GiGraduateCap />
+                                        Thêm Bằng Cấp Cao Nhất</div>
+
+                                </div>
+                            </div>
+
+
+                            <div className='w-[full] h-44 bg-white rounded-[9px] mt-4 pt-5 flex flex-row'>
+                                <div className='flex flex-col ml-4 '>
+                                    <div className='text-3xl font-bold'>Công Việc Mong Muốn</div>
+
+                                    <div className='text-[20px] text-slate-500'>
+                                        <div className='mt-8'>Nơi làm việc</div>
+
+                                        <div>Mức lương mong muốn (USD / tháng)</div>
+
+                                    </div>
+                                </div>
+
+                                <div className='flex flex-col mt-16 text-[20px] text-black pl-12 font-medium'>
+                                    <div>Thêm nơi làm việc</div>
+                                    <div>Thêm mức lương mong muốn</div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className='flex flex-row mt-3 ml-3 text-xl gap-10 hover:cursor-pointer'>
+                                    <div>
+                                        Hồ sơ Vietnamworks
+                                    </div>
+                                    <div>
+                                        Hồ sơ đính kèm
+                                    </div>
+                                    <div>
+                                        Thiết lập hồ sơ
+                                    </div>
+
+                                </div>
+
+                                <div className='w-[full] h-44 bg-white rounded-[9px] mt-4 pt-5 flex flex-row text-2xl'>
+                                    <div className="flex ml-2">
+                                         <img
+                                                src="https://www.vietnamworks.com/_next/image?url=https%3A%2F%2Fwww.vietnamworks.com%2Fassets-wowcv%2Fimages%2Flist_templates%2Fcv_template_5.jpg&w=96&q=75"
+                                                alt=""
+                                                className="w-[75px] h-[auto]"
+                                            />
+                                    </div>
+
+                                    <div className='text-xl ml-10 flex flex-col gap-4'>
+                                        <div className='flex flex-row items-center gap-2 text-blue-700'>
+                                            <VscFiles/>
+                                            Thay đổi mẫu hồ sơ</div>
+                                        <div className='flex flex-row items-center gap-2 text-blue-700'>
+                                            <MdPreview/>
+                                            Xem như nhà tuyển dụng</div>
+                                        <div className='flex flex-row items-center gap-2 text-blue-700'>
+                                            <IoDownloadSharp/>
+                                            Tải xuống</div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+
+                        </div>
                     </div>
                 </Content>
             </Layout>

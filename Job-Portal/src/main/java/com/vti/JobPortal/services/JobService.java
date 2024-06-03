@@ -111,6 +111,10 @@ public class JobService {
         job.setEmployer(null);
         job.setApplicants(new ArrayList<>());
         job.setStatus("Active");
+        job.setRequirementJob(jobDTO.getRequirementJob());
+        job.setSalary(jobDTO.getSalary());
+        job.setEmail(jobDTO.getEmail());
+        job.setContactPerson(jobDTO.getContactPerson());
 
         employerRepository.save(employer);
         job.setEmployer(employer);

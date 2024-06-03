@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -15,7 +16,7 @@ public class JobDTO {
     private String fieldJob;
     private String addressJob;
     private String descriptionJob;
-    private String requirementJob;
+    private List<String> requirementJob;
     private Integer salary;
     private Integer views;
     private Date expiredDate;
@@ -26,7 +27,7 @@ public class JobDTO {
     private String companyAddress;
     private String companyInformation;
     private String companySize;
-    private String companyLogo;
-    private String companyImage;
+    private String companyLogoPath;
+    private String companyImagePath;
 
 }

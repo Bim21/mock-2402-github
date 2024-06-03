@@ -12,6 +12,8 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { getEmployerInfo } from "../../utils/funcHelpers";
 
+const employerInfo = getEmployerInfo();
+
 const RecruitmentPage = () => {
   const [formData, setFormData] = useState({
     title: "",
@@ -22,16 +24,15 @@ const RecruitmentPage = () => {
     requirementJob: "",
     salary: "",
     numberOfRecruitment: "",
-    email: "",
-    companyName: "",
-    companyAddress: "",
+    email: employerInfo.email,
+    companyName: employerInfo.companyName,
+    companyAddress: employerInfo.companyAddress,
     companySize: "",
     companyInformation: "",
     companyBenefits: "",
     companyLogoPath: "",
     companyImagePath: "",
   });
-  const employerInfo = getEmployerInfo();
 
   const [file, setFile] = useState(noImage);
   const navigate = useNavigate();

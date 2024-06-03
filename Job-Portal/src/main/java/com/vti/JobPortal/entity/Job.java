@@ -22,7 +22,7 @@ public class Job {
     private String title;
     private Long employerId;
     private String description;
-    private String requirementJob;
+    private List<String> requirementJob;
     private String skills;
     private String level;
     private Integer salary;

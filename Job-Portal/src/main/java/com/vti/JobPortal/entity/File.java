@@ -10,14 +10,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "images")
-public class Image {
+@Document(collection = "files")
+public class File {
     @Id
     private Long id;
     private byte[] data;
-
+    private String fileType;
     @Transient
-    public static final String SEQUENCE_NAME = "image_sequence";
-
+    public static final String SEQUENCE_NAME = "file_sequence";
 
 }

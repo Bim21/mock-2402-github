@@ -24,6 +24,9 @@ const jobService = {
   getViewedJobs() {
     return api.get(`${END_POINT}/viewed-jobs}`);
   },
+  getJobById(id) {
+    return api.get(`${END_POINT}/${id}`);
+  },
 };
 
 export default jobService;

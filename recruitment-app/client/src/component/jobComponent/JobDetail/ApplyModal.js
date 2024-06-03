@@ -1,41 +1,16 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Upload } from "antd";
-import React, { useState } from "react";
+import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { getUserInfo } from "../../../utils/funcHelpers";
 
-const userInfo = getUserInfo();
-
-const ApplyModal = ({ isOpen, onClose, setIsApply }) => {
-  const [formData, setFormData] = useState({
-    firstName: userInfo.firstName,
-    lastName: userInfo.lastName,
-    gender: "",
-    title: "",
-    dob: "",
-    degree: "",
-    fieldJob: "",
-    level: "",
-    minimumYearsOfExperience: "",
-    career: "",
-    salary: "",
-    phoneNumber: "",
-    address: "",
-  });
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    onClose();
-    setIsApply(false);
-  };
+const ApplyModal = ({
+  isOpen,
+  onClose,
+  data,
+  handleSubmit,
+  handleChange,
+  title,
+}) => {
   return (
     <>
       {isOpen && (
@@ -78,7 +53,7 @@ const ApplyModal = ({ isOpen, onClose, setIsApply }) => {
                           <input
                             type="text"
                             name="lastName"
-                            value={formData.lastName}
+                            value={data.lastName}
                             onChange={handleChange}
                             className="mt-1 p-1 w-full border rounded"
                             required
@@ -91,7 +66,7 @@ const ApplyModal = ({ isOpen, onClose, setIsApply }) => {
                           <input
                             type="text"
                             name="title"
-                            value={formData.title}
+                            value={data.title}
                             onChange={handleChange}
                             className="mt-1 p-1 w-full border rounded"
                             required
@@ -104,7 +79,7 @@ const ApplyModal = ({ isOpen, onClose, setIsApply }) => {
                           </label>
                           <select
                             name="degree"
-                            value={formData.degree}
+                            value={data.degree}
                             onChange={handleChange}
                             className="mt-1 p-1 w-full border rounded"
                             required
@@ -119,39 +94,7 @@ const ApplyModal = ({ isOpen, onClose, setIsApply }) => {
                             <option value="Tiến sĩ">Tiến sĩ</option>
                           </select>
                         </div>
-                        <div className="">
-                          <label className="block text-gray-700">
-                            Lĩnh vực hiện tại
-                            <span className="text-red-600">*</span>
-                          </label>
-                          <select
-                            name="fieldJob"
-                            value={formData.fieldJob}
-                            onChange={handleChange}
-                            className="mt-1 p-1 w-full border rounded"
-                            required
-                          >
-                            <option value="" disabled>
-                              Select position
-                            </option>
 
-                            <option value="Bán lẻ/ Tiêu dùng">
-                              Bán lẻ/ Tiêu dùng
-                            </option>
-                            <option value="CEO & General Manangement">
-                              CEO & General Manangement
-                            </option>
-                            <option value="Công Nghệ thông tin/ Viễn thông">
-                              Công Nghệ thông tin/ Viễn thông
-                            </option>
-                            <option value="Dệt may/ Da giày">
-                              Dệt may/ Da giày
-                            </option>
-                            <option value="Dịch vụ ăn uống">
-                              Dịch vụ ăn uống
-                            </option>
-                          </select>
-                        </div>
                         <div className="">
                           <label className="block text-gray-700">
                             Cấp bậc hiện tại
@@ -159,7 +102,7 @@ const ApplyModal = ({ isOpen, onClose, setIsApply }) => {
                           </label>
                           <select
                             name="level"
-                            value={formData.level}
+                            value={data.level}
                             onChange={handleChange}
                             className="mt-1 p-1 w-full border rounded"
                             required
@@ -187,7 +130,7 @@ const ApplyModal = ({ isOpen, onClose, setIsApply }) => {
                           <input
                             type="date"
                             name="dob"
-                            value={formData.dob}
+                            value={data.dob}
                             onChange={handleChange}
                             className="mt-1 p-1 w-full border rounded"
                             required
@@ -232,7 +175,7 @@ const ApplyModal = ({ isOpen, onClose, setIsApply }) => {
                           <input
                             type="text"
                             name="firstName"
-                            value={formData.firstName}
+                            value={data.firstName}
                             onChange={handleChange}
                             className="mt-1 p-1 w-full border rounded"
                             required
@@ -246,7 +189,7 @@ const ApplyModal = ({ isOpen, onClose, setIsApply }) => {
                           <input
                             type="number"
                             name="minimumYearsOfExperience"
-                            value={formData.minimumYearsOfExperience}
+                            value={data.minimumYearsOfExperience}
                             onChange={handleChange}
                             className="mt-1 p-1 w-full border rounded"
                             required
@@ -259,7 +202,7 @@ const ApplyModal = ({ isOpen, onClose, setIsApply }) => {
                           </label>
                           <select
                             name="career"
-                            value={formData.career}
+                            value={data.career}
                             onChange={handleChange}
                             className="mt-1 p-1 w-full border rounded"
                             required
@@ -284,7 +227,7 @@ const ApplyModal = ({ isOpen, onClose, setIsApply }) => {
                           <input
                             type="text"
                             name="salary"
-                            value={formData.salary}
+                            value={data.salary}
                             onChange={handleChange}
                             className="mt-1 p-1 w-full border rounded"
                             required
@@ -297,7 +240,7 @@ const ApplyModal = ({ isOpen, onClose, setIsApply }) => {
                           <input
                             type="text"
                             name="phoneNumber"
-                            value={formData.phoneNumber}
+                            value={data.phoneNumber}
                             onChange={handleChange}
                             className="mt-1 p-1 w-full border rounded"
                             required
@@ -310,7 +253,7 @@ const ApplyModal = ({ isOpen, onClose, setIsApply }) => {
                           <input
                             type="text"
                             name="address"
-                            value={formData.address}
+                            value={data.address}
                             onChange={handleChange}
                             className="mt-1 p-1 w-full border rounded"
                             required
@@ -323,7 +266,7 @@ const ApplyModal = ({ isOpen, onClose, setIsApply }) => {
               </div>
               <div className="m-4 flex justify-end">
                 <button className="bg-orange-400 text-white p-2 rounded-lg hover:bg-orange-300">
-                  Ứng tuyển
+                  {title}
                 </button>
               </div>
             </div>

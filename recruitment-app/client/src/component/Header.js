@@ -32,6 +32,10 @@ const Header = (props) => {
     navigate("/loginEmployer");
   };
 
+  const gotoApplicantPage = () => {
+    navigate("/applicant-page");
+  };
+
   const openModal = () => {
     setIsOpenModal(true);
   };
@@ -254,77 +258,81 @@ const Header = (props) => {
             </div>
           </div>
         </div>
-        <div className=" flex justify-center items-center p-[7px] rounded-[95px] border-solid border-2 gap-x-[8px] border-blue-500">
-        <div className=" flex justify-start md:justify-center items-start md:items-center md:rounded-full p-2 md:border-solid md:border-2 gap-x-[8px] border-blue-500">
-          <div
-            className="flex justify-center items-center relative group"
-            ref={dropdownRef}
-          >
-            <button onClick={toggleMenu} className=" focus:outline-none">
-              <LiaLanguageSolid className="bg-blue-800 text-blue-300 hover:text-white rounded-[95px] w-[24px] h-full" />
-            </button>
-            {isOpen && (
-              <div className="absolute top-8 left-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-md z-10 ">
-                <ul>
-                  <li className="py-2 px-4 text-[14px] text-blue-600 hover:bg-gray-100 cursor-pointer">
-                    Tiếng Việt
-                  </li>
-                  <li className="py-2 px-4 text-[14px] text-blue-600 hover:bg-gray-100 cursor-pointer">
-                    Tiếng Anh
-                  </li>
-                  <li className="py-2 px-4 text-[14px] text-blue-600 hover:bg-gray-100 cursor-pointer">
-                    Tiếng Nhật
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
-          <div className="flex justify-center items-center">
-            <button>
-              <IoIosNotifications className="bg-blue-800 text-blue-300 hover:text-white rounded-[95px] w-[24px] h-full" />
-            </button>
-          </div>
-          {userInfo ? (
+        <div className=" flex justify-center items-center p-[7px] gap-x-[8px]">
+          <div className=" flex justify-start md:justify-center items-start md:items-center md:rounded-full p-2 md:border-solid md:border-2 gap-x-[8px] border-blue-500">
             <div
               className="flex justify-center items-center relative group"
               ref={dropdownRef}
             >
-              <button
-                className="flex items-center text-blue-100 hover:text-white focus:outline-none"
-                onClick={toggleMenu2}
-              >
-                <MdOutlineAccountCircle className="bg-blue-800 rounded-[95px] w-[24px] h-full" />
+              <button onClick={toggleMenu} className=" focus:outline-none">
+                <LiaLanguageSolid className="bg-blue-800 text-blue-300 hover:text-white rounded-[95px] w-[24px] h-full" />
               </button>
-              {isOpenMenuUser && (
-                <div className="absolute top-8 right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-md z-10 ">
+              {isOpen && (
+                <div className="absolute top-8 left-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-md z-10 ">
                   <ul>
                     <li className="py-2 px-4 text-[14px] text-blue-600 hover:bg-gray-100 cursor-pointer">
-                      <span className="font-bold">
-                        Xin Chào, {userInfo?.firstName}
-                      </span>
+                      Tiếng Việt
                     </li>
                     <li className="py-2 px-4 text-[14px] text-blue-600 hover:bg-gray-100 cursor-pointer">
-                      Hồ sơ tổng quan
+                      Tiếng Anh
                     </li>
                     <li className="py-2 px-4 text-[14px] text-blue-600 hover:bg-gray-100 cursor-pointer">
-                      <div onClick={logout}>Đăng xuất</div>
+                      Tiếng Nhật
                     </li>
                   </ul>
                 </div>
               )}
             </div>
-          ) : (
             <div className="flex justify-center items-center">
-              <button
-                className="flex items-center text-blue-300 hover:text-white"
-                onClick={openModal}
-              >
-                <CiLogin className="bg-blue-800 rounded-[95px] w-[24px] h-full" />
-                <span className="font-bold">Đăng Nhập</span>
+              <button>
+                <IoIosNotifications className="bg-blue-800 text-blue-300 hover:text-white rounded-[95px] w-[24px] h-full" />
               </button>
-              <Modal isOpen={isOpenModal} onClose={closeModal} />
             </div>
-          )}
+            {userInfo ? (
+              <div
+                className="flex justify-center items-center relative group"
+                ref={dropdownRef}
+              >
+                <button
+                  className="flex items-center text-blue-100 hover:text-white focus:outline-none"
+                  onClick={toggleMenu2}
+                >
+                  <MdOutlineAccountCircle className="bg-blue-800 rounded-[95px] w-[24px] h-full" />
+                </button>
+                {isOpenMenuUser && (
+                  <div className="absolute top-8 right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-md z-10 ">
+                    <ul>
+                      <li className="py-2 px-4 text-[14px] text-blue-600 hover:bg-gray-100 cursor-pointer">
+                        <span className="font-bold">
+                          Xin Chào, {userInfo?.firstName}
+                        </span>
+                      </li>
+                      <li
+                        className="py-2 px-4 text-[14px] text-blue-600 hover:bg-gray-100 cursor-pointer"
+                        onClick={gotoApplicantPage}
+                      >
+                        Hồ sơ tổng quan
+                      </li>
+                      <li className="py-2 px-4 text-[14px] text-blue-600 hover:bg-gray-100 cursor-pointer">
+                        <div onClick={logout}>Đăng xuất</div>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="flex justify-center items-center">
+                <button
+                  className="flex items-center text-blue-300 hover:text-white"
+                  onClick={openModal}
+                >
+                  <CiLogin className="bg-blue-800 rounded-[95px] w-[24px] h-full" />
+                  <span className="font-bold">Đăng Nhập</span>
+                </button>
+                <Modal isOpen={isOpenModal} onClose={closeModal} />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

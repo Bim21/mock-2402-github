@@ -24,6 +24,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/search-job" element={<SearchJobPage />} />
         <Route path="/company" element={<CompanyPage />} />
+        <Route path="/applicant-page" element={<ApplicantPage />} />
+
         <Route
           path="/login-user"
           element={

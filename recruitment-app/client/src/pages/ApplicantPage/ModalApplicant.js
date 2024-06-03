@@ -5,6 +5,10 @@ import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { BsFillPersonFill } from "react-icons/bs";
+import { Input, Select } from "antd";
+import { TfiPencil } from "react-icons/tfi";
+
 
 const ModalApplicant = ({ isOpen, onClose }) => {
 
@@ -48,96 +52,148 @@ const ModalApplicant = ({ isOpen, onClose }) => {
                 >
                     <div className="fixed inset-0 bg-black opacity-50"></div>
                     <div className="bg-white rounded-[12px] shadow-md z-50">
-                        <div className="w-[700px] h-auto ">
+                        <div className="w-[800px] h-auto ">
                             <div className="flex items-center justify-between border-b-[1px] py-[20px] pl-[24px] pr-[14px]">
-                                <h2 className="text-[18px] font-semibold leading-[22px] ">
-                                    Đăng nhập để tiếp tục
-                                </h2>
+                                <h1 className="text-[24px] font-bold leading-[22px] ">
+                                    Thông tin cơ bản
+                                </h1>
                                 <AiOutlineClose
                                     onClick={onClose}
-                                    className="hover:cursor-pointer"
+                                    className="hover:cursor-pointer text-2xl"
                                 />
                             </div>
-                            <div className="h-auto p-[24px]">
-                                <div className="flex justify-center mb-[24px] ">
-                                    <button className="mr-[8px] px-[8px] font-medium rounded-[8px] inline-flex items-center justify-center h-[40px] leading-[20px] bg-slate-100">
-                                        <FcGoogle />
-                                        <span className="ml-[8px] text-[14px] ">
-                                            với tài khoản Google
-                                        </span>
-                                    </button>
-                                    <button className="mr-[8px] px-[8px] font-medium rounded-[8px] inline-flex items-center justify-center h-[40px] leading-[20px] bg-slate-100">
-                                        <BsFacebook className="text-blue-600" />
-                                        <span className="ml-[8px] text-[14px] ">
-                                            với tài khoản Facebook
-                                        </span>
-                                    </button>
-                                </div>
-                                <p className="mx-auto mb-[16px] leading-[20px] text-[16px] font-semibold text-center">
-                                    hoặc đăng nhập bằng Email
-                                </p>
 
-                                <div className="mb-[16px]">
-                                    <label
-                                        className="block text-gray-700 text-[14px] font-medium mb-2"
-                                        htmlFor="email"
-                                    >
-                                        Email <span className="text-red-600">*</span>
-                                    </label>
-                                    <input
-                                        className="w-full h-[40px] rounded-[4px] text-[13px] border-[1px] hover:border-blue-400 px-[10px] focus:outline-none focus:ring-0"
-                                        id="email"
-                                        type="email"
-                                        value={email}
-                                        onChange={handleEmailChange}
-                                        required
-                                    />
+                            <div className='flex flex-row mt-5'>
+                                <div className="flex flex-col gap-4">
+                                    <BsFillPersonFill className='text-slate-200 text-9xl ml-2' />
+                                    <TfiPencil className="text-2xl ml-14 mt-0" />
                                 </div>
-                                <div className="mb-[16px]">
-                                    <label
-                                        className="block text-gray-700 text-[14px] font-medium mb-2"
-                                        htmlFor="password"
-                                    >
-                                        Password <span className="text-red-600">*</span>
-                                    </label>
-                                    <input
-                                        className="w-full h-[40px] rounded-[4px] text-[13px] border-[1px] hover:border-blue-400 px-[10px] focus:outline-none focus:ring-0"
-                                        id="password"
-                                        type="password"
-                                        value={password}
-                                        onChange={handlePasswordChange}
-                                        required
-                                    />
-                                    {/* <p className="text-red-500 text-xs italic">Please choose a password.</p> */}
+
+                                <div className="flex flex-col">
+                                    <div className="flex flex-row">
+
+                                        <div className='flex flex-col ml-5'>
+                                            <div className='text-lg font-medium'> <span className="text-red-800 font-bold">*</span> Ho</div>
+                                            <Input className="mt-2 h-12 w-72" />
+
+                                        </div>
+
+                                        <div className='flex flex-col ml-5'>
+                                            <div className='text-lg font-medium'> <span className="text-red-800 font-bold">*</span> Ten</div>
+                                            <Input className="mt-2 h-12 w-72" />
+                                        </div>
+
+
+                                    </div>
+
+                                    <div className='flex flex-col ml-5 mt-7'>
+                                        <div className='text-lg font-medium'> <span className="text-red-800 font-bold">*</span> Chuc danh</div>
+                                        <Input className="mt-0 h-12 w-144" />
+                                    </div>
                                 </div>
                             </div>
-                            <div className="w-full pb-[16px] mt-[-24px] flex justify-end border-b-[1px]">
-                                <a
-                                    href="/"
-                                    className="text-sm text-blue-500 hover:text-orange-400 px-6"
-                                >
-                                    Quên mật khẩu?{" "}
-                                </a>
-                            </div>
-                            <div className="flex items-center p-[24px] rounded-b[12px] ">
-                                <div className="justify-start w-[50%] items-center ">
-                                    Chưa có tài khoản?{" "}
-                                    <button onClick={goToRegister} className="text-blue-500">
-                                        Đăng ký
-                                    </button>
+
+
+                            <div className="flex flex-row ml-4 mt-10">
+
+                                <div className='flex flex-col ml-5'>
+                                    <div className='text-lg font-medium'> <span className="text-red-800 font-bold">*</span> So nam kinh nhiem</div>
+                                    <Input className="mt-2 h-12 w-80" />
+
                                 </div>
-                                <div className="w-[50%] flex justify-end items-end">
-                                    <button
-                                        className="mr-[6px] rounded-[8px] font-medium p-[8px] bg-slate-100 hover:bg-slate-200"
-                                        onClick={onClose}
-                                    >
-                                        Hủy
-                                    </button>
-                                    <button className="rounded-[8px] font-medium py-[8px] px-[10px] text-white bg-orange-500 hover:bg-orange-300">
-                                        Đăng Nhập
-                                    </button>
+
+                                <div className='flex flex-col ml-5 '>
+                                    <div className='text-lg font-medium'> <span className="text-red-800 font-bold">*</span> Bang cap cao nhat</div>
+                                    <Input className="mt-2 h-12 w-[395px]" />
                                 </div>
                             </div>
+
+
+                            <div className="flex flex-row ml-4 mt-10">
+
+                                <div className='flex flex-col ml-5'>
+                                    <div className='text-lg font-medium'> <span className="text-red-800 font-bold">*</span> Nganh nghe hien tai</div>
+                                    <Input className="mt-2 h-12 w-80" />
+
+                                </div>
+
+                                <div className='flex flex-col ml-5 '>
+                                    <div className='text-lg font-medium'> <span className="text-red-800 font-bold">*</span>Linh Vuc hien tai</div>
+                                    <Input className="mt-2 h-12 w-[395px]" />
+                                </div>
+                            </div>
+
+
+                            <div className="flex flex-row ml-4 mt-10">
+
+                                <div className='flex flex-col ml-5'>
+                                    <div className='text-lg font-medium'> <span className="text-red-800 font-bold">*</span> Muc luong hien tai</div>
+                                    <Input className="mt-2 h-12 w-80" />
+
+                                </div>
+
+                                <div className='flex flex-col ml-5 '>
+                                    <div className='text-lg font-medium'> <span className="text-red-800 font-bold">*</span>Cap bac hien tai</div>
+                                    <Input className="mt-2 h-12 w-[395px]" />
+                                </div>
+                            </div>
+
+
+                            <div className="flex flex-row ml-4 mt-10">
+
+                                <div className='flex flex-col ml-5'>
+                                    <div className='text-lg font-medium'> <span className="text-red-800 font-bold">*</span>Email</div>
+                                    <Input className="mt-2 h-12 w-80" />
+
+                                </div>
+
+                                <div className="flex flex-row">
+                                    <div className='flex flex-col ml-5 '>
+                                        <div className='text-lg font-medium'> <span className="text-red-800 font-bold">*</span>Dien thoai</div>
+                                        <Select className="mt-2 h-12 w-[100px]" />
+
+                                    </div>
+                                    <div className='flex flex-col ml-5 '>
+                                        <div className='text-lg font-medium'></div>
+                                        <Input className="mt-9 h-12 w-[275px]" />
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div className="flex flex-row ml-4 mt-10">
+
+                                <div className='flex flex-col ml-5'>
+                                    <div className='text-lg font-medium'> <span className="text-red-800 font-bold">*</span>Ngay sinh</div>
+                                    <Input className="mt-2 h-12 w-80" />
+
+                                </div>
+
+                                <div className='flex flex-col ml-5 '>
+                                    <div className='text-lg font-medium'> <span className="text-red-800 font-bold">*</span>Quoc tich</div>
+                                    <Input className="mt-2 h-12 w-[395px]" />
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         </div>
                     </div>
                 </form>

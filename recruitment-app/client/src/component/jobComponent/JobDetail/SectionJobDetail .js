@@ -2,10 +2,42 @@ import { Button } from "antd/es/radio";
 import React, { useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import ApplyModal from "./ApplyModal";
+import { getUserInfo } from "../../../utils/funcHelpers";
+
+const userInfo = getUserInfo();
 
 const SectionJobDetail = ({ jobs }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isApply, setIsApply] = useState(true);
+  const [formData, setFormData] = useState({
+    firstName: userInfo.firstName,
+    lastName: userInfo.lastName,
+    gender: "",
+    title: "",
+    dob: "",
+    degree: "",
+    fieldJob: "",
+    level: "",
+    minimumYearsOfExperience: "",
+    career: "",
+    salary: "",
+    phoneNumber: "",
+    address: "",
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    closeModal();
+    setIsApply(false);
+  };
 
   const openModal = () => {
     setIsOpenModal(true);
@@ -42,9 +74,12 @@ const SectionJobDetail = ({ jobs }) => {
               <span className="font-bold">Nộp đơn</span>
             </button>
             <ApplyModal
+              data={formData}
               isOpen={isOpenModal}
+              handleChange={handleChange}
               onClose={closeModal}
-              setIsApply={setIsApply}
+              handleSubmit={handleSubmit}
+              title={"Ứng tuyển"}
             />
           </div>
         ) : (

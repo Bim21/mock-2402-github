@@ -23,17 +23,6 @@ public class Applicant {
     private String email;
     private String password;
     private String phoneNumber;
-    private String level;
-    private Integer yearsOfExperience;
-    private String qualifications;
-    private String career;
-    private Integer salary;
-    private Date dateOfBirth;
-    private String country;
-    private String sex;
-    private String maritalStatus;
-    private String address;
-    private String fileCV;
     private ApplicantDetails details;
 
 }

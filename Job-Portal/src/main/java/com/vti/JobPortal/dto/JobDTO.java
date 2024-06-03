@@ -26,7 +26,7 @@ public class JobDTO {
     private String companyAddress;
     private String companyInformation;
     private String companySize;
-    private String companyLogo;
-    private String companyImage;
+    private String companyLogoPath;
+    private String companyImagePath;
 
 }

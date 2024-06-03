@@ -1,6 +1,8 @@
 package com.vti.JobPortal.services;
 
+import com.vti.JobPortal.dto.ApplicantDetailsDTO;
 import com.vti.JobPortal.entity.Applicant;
+import com.vti.JobPortal.entity.ApplicantDetails;
 import com.vti.JobPortal.repositories.IApplicantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,5 +47,15 @@ public class ApplicantService {
             return true;
         }
         return false;
+    }
+
+    public void updateApplicantDetails(Long applicantId, ApplicantDetails details) {
+        Applicant applicant = applicantRepository.findById(applicantId).orElse(null);
+        if (applicant != null) {
+            applicant.setDetails(details);
+            applicantRepository.save(applicant);
+        } else {
+            throw new IllegalArgumentException("Applicant not found.");
+        }
     }
 }

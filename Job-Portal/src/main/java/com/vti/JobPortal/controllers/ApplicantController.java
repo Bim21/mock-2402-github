@@ -1,5 +1,6 @@
 package com.vti.JobPortal.controllers;
 import com.vti.JobPortal.entity.Applicant;
+import com.vti.JobPortal.entity.ApplicantDetails;
 import com.vti.JobPortal.services.ApplicantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,5 +55,18 @@ public class ApplicantController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/applicant/details/{applicantId}")
+    public ResponseEntity<String> updateApplicantDetails(@PathVariable Long applicantId, @RequestBody ApplicantDetails details) {
+        try {
+            applicantService.updateApplicantDetails(applicantId, details);
+
+            return ResponseEntity.ok("Applicant details updated successfully.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Applicant not found.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update applicant details.");
+        }
     }
 }

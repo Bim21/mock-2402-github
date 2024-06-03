@@ -35,8 +35,9 @@ const ApplicantContent = (props) => {
 
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: userInfo.firstName,
-    lastName: userInfo.lastName,
+    // firstName: userInfo.firstName,
+    // lastName: userInfo.lastName,
+    name: "",
     gender: "",
     title: "",
     dob: "",

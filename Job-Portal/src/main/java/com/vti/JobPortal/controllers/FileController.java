@@ -20,12 +20,17 @@ public class FileController {
 
     @PostMapping("/upload")
     public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
+
         try {
-            com.vti.JobPortal.entity.File savedFile = fileService.savePDF(file);
-            return ResponseEntity.ok(savedFile);
-        } catch (IOException e) {
-            // Handle the exception appropriately
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            // Validate file type
+            if (!file.getContentType().equals("application/pdf")) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Only PDF files are allowed.");
+            }
+
+            File savedFile = fileService.savePDF(file);
+            return ResponseEntity.ok("File uploaded successfully. File ID: " + savedFile.getId());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file.");
         }
     }
 

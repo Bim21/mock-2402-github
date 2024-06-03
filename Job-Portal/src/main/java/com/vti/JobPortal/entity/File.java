@@ -14,8 +14,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class File {
     @Id
     private Long id;
+    private String fileName;
+    private String contentType;
     private byte[] data;
-    private String fileType;
     @Transient
     public static final String SEQUENCE_NAME = "file_sequence";
 

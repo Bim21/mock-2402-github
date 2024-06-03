@@ -29,10 +29,14 @@ public class FileService {
 
         Long id = sequenceGeneratorService.generateSequence(File.SEQUENCE_NAME);
         pdfFile.setId(id);
+
+        // Set other properties of the File object if applicable
+        pdfFile.setFileName(file.getOriginalFilename());
+        pdfFile.setContentType(file.getContentType());
         pdfFile.setData(data);
-        pdfFile.setFileType("pdf");
         return fileRepository.save(pdfFile);
     }
+
 
 
     public Optional<File> getFile(Long id) {

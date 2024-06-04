@@ -232,7 +232,7 @@ const ApplicantContent = (props) => {
 
                             <div>
                                 <div className=" mt-3 ml-3 text-xl gap-10 hover:cursor-pointer">
-                                    <TabSection />
+                                    <TabSection/>
                                 </div>
 
                                 {/* <div className="w-[full] h-52 bg-white rounded-[9px] mt-4 pt-5 flex flex-row">

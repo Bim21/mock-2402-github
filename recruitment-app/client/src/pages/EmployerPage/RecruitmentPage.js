@@ -12,9 +12,8 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { getEmployerInfo } from "../../utils/funcHelpers";
 
-const employerInfo = getEmployerInfo();
-
 const RecruitmentPage = () => {
+  const employerInfo = getEmployerInfo();
   const [formData, setFormData] = useState({
     title: "",
     level: "",
@@ -64,6 +63,9 @@ const RecruitmentPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      delete formData.companyAddress;
+      delete formData.companyBenefits;
+      delete formData.requirementJob;
       const data = await jobService.post(formData, employerInfo.id);
       console.log("data: ", data);
       setFormData((prev) => [...prev, data]);

@@ -25,8 +25,8 @@ const items = [
   {
     key: "4",
     label: " Tổng quan",
-    children:<OverviewTab />,
+    children: <OverviewTab />,
   },
 ];
-const TabSection = () => <Tabs items={items} />;
+const TabSection = () => <Tabs items={items} className="tab-section" />;
 export default TabSection;

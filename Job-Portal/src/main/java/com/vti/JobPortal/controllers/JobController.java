@@ -77,4 +77,14 @@ public class JobController {
         jobService.applyForJob(jobId, applicantId);
         return ResponseEntity.ok("Job application successful.");
     }
+
+    @GetMapping("/jobs/search")
+    public List<Job> searchJobs(
+            @RequestParam("jobField") List<String> jobField,
+            @RequestParam("level") List<String> level,
+            @RequestParam("jobAddress") List<String> jobAddress) {
+
+        return jobService.searchJobs(jobField, level, jobAddress);
+    }
+
 }

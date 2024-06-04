@@ -3,6 +3,7 @@ import { Tabs } from "antd";
 import ContentTab1 from "./ContentTab1";
 import { Content } from "antd/es/layout/layout";
 import ApplicantAttach from "./../ApplicantAttach";
+import OverviewTab from "./OverviewTab";
 
 const items = [
   {
@@ -19,6 +20,11 @@ const items = [
     key: "3",
     label: " Thiết lập hồ sơ",
     children: "hồ sơ",
+  },
+  {
+    key: "4",
+    label: " Tổng quan",
+    children:<OverviewTab />,
   },
 ];
 const TabSection = () => <Tabs items={items} />;

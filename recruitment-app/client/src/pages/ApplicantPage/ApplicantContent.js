@@ -26,6 +26,7 @@ import ApplyModal from "../../component/jobComponent/JobDetail/ApplyModal";
 import { toast } from "react-toastify";
 import { Button, Flex } from 'antd';
 import { LiaLinkedin } from "react-icons/lia";
+import Bottom from "./Bottom";
 
 
 const userInfo = getUserInfo();
@@ -160,14 +161,14 @@ const ApplicantContent = (props) => {
             <Layout className="w-[80vh]">
                
                 {/* <Header style={{ background: '#fff', padding: 0 }} /> */}
-                <Content style={{ margin: "24px 16px 0" }}>
-                    <div style={{ padding: 24, background: "#f1f2f4", minHeight: 720 }}>
+                <Content style={{ margin: " 0" }}>
+                    <div style={{ padding: 15, background: "#f1f2f4", minHeight: 720 }}>
                         <div className="flex flex-col justify-evenly h-full w-full mt-0">
                             <div className="w-[full] h-44 bg-white rounded-[9px] mt-0">
                                 <div className="flex flex-row ">
-                                    <BsFillPersonFill className="text-slate-300 text-9xl ml-2" />
+                                    <BsFillPersonFill className="text-slate-300 text-9xl ml-2 opacity-35" />
 
-                                    <div className="flex flex-col ml-5">
+                                    <div className="flex flex-col ml-5 mt-3 gap-1">
                                         <div className="text-4xl font-bold">Trinh Trinh</div>
                                         <div className="text-lg">
                                             Thêm Chức Danh - Thêm Số năm kinh nghiệm
@@ -192,7 +193,7 @@ const ApplicantContent = (props) => {
                                     </div>
                                     <div className="flex flex-col justify-between">
                                         <button className="" onClick={openModal}>
-                                            <IoPencil className="text-2xl ml-72"/>
+                                            <IoPencil className="text-2xl ml-72 mt-5 opacity-30 hover:opacity-100"/>
                                         </button>
 
                                         <ApplyModal
@@ -276,9 +277,13 @@ const ApplicantContent = (props) => {
 
                             </div>
 
+                            
+
 
                         </div>
+                        
                     </div>
+                    
                 </Content>
             </Layout>
         </Layout>

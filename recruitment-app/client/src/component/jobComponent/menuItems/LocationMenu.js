@@ -4,7 +4,7 @@ import { BsSearch } from "react-icons/bs";
 
 const LocationMenu = () => {
   const [value, setValue] = useState({
-    option1: "hanoi",
+    option1: "",
     option2: "",
     option3: "",
   });
@@ -97,7 +97,7 @@ const LocationMenu = () => {
                       type="checkbox"
                       id="option3"
                       name="option3"
-                      value="hochiminh"
+                      value="Hồ Chí Minh"
                       onChange={handeCheckboxChange}
                     />
                     <label className="ml-[10px]">Hồ Chí Minh</label>
@@ -105,9 +105,9 @@ const LocationMenu = () => {
                   <div className="py-[10px] px-[8px] inline-flex items-center rounded-md hover:bg-blue-50">
                     <input
                       type="checkbox"
-                      id="option3"
-                      name="option3"
-                      value="hochiminh"
+                      id="option4"
+                      name="option4"
+                      value="Cần Thơ"
                       onChange={handeCheckboxChange}
                     />
                     <label className="ml-[10px]">Cần Thơ</label>
@@ -115,9 +115,9 @@ const LocationMenu = () => {
                   <div className="py-[10px] px-[8px] inline-flex items-center rounded-md hover:bg-blue-50">
                     <input
                       type="checkbox"
-                      id="option3"
-                      name="option3"
-                      value="hochiminh"
+                      id="option5"
+                      name="option5"
+                      value="Bắc Ninh"
                       onChange={handeCheckboxChange}
                     />
                     <label className="ml-[10px]">Bắc Ninh</label>
@@ -125,9 +125,9 @@ const LocationMenu = () => {
                   <div className="py-[10px] px-[8px] inline-flex items-center rounded-md hover:bg-blue-50">
                     <input
                       type="checkbox"
-                      id="option3"
-                      name="option3"
-                      value="hochiminh"
+                      id="option6"
+                      name="option6"
+                      value="Hải Phòng"
                       onChange={handeCheckboxChange}
                     />
                     <label className="ml-[10px]">Hải Phòng</label>

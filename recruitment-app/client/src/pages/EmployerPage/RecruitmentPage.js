@@ -11,6 +11,7 @@ import jobService from "../../services/jobService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { getEmployerInfo } from "../../utils/funcHelpers";
+import Career from "./../../component/jobComponent/menuItems/Career";
 
 const RecruitmentPage = () => {
   const employerInfo = getEmployerInfo();
@@ -19,6 +20,7 @@ const RecruitmentPage = () => {
     level: "",
     fieldJob: "",
     addressJob: "",
+    career: "",
     descriptionJob: "",
     requirementJob: "",
     salary: "",
@@ -154,22 +156,48 @@ const RecruitmentPage = () => {
                 </div>
               </div>
               {/* Repeat for other selects */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Địa điểm làm việc<span className="text-red-500">*</span>
-                </label>
-                <select
-                  name="addressJob"
-                  value={formData.addressJob}
-                  onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                >
-                  <option value="">Vui lòng chọn</option>
-                  <option value="Hà Nội">Hà Nội</option>
-                  <option value="Đà Nẵng">Đà Nẵng</option>
-                  <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                  {/* Add specific options here */}
-                </select>
+              <div className="flex space-x-4 justify-center w-full">
+                <div className="w-full">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Địa điểm làm việc<span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    name="addressJob"
+                    value={formData.addressJob}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 rounded-md"
+                  >
+                    <option value="">Vui lòng chọn</option>
+                    <option value="Hà Nội">Hà Nội</option>
+                    <option value="Đà Nẵng">Đà Nẵng</option>
+                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                    <option value="Cần Thơ">Cần Thơ</option>
+                    <option value="Hải Phòng">Hải Phòng</option>
+                    <option value="Bắc Ninh">Bắc Ninh</option>
+                    {/* Add specific options here */}
+                  </select>
+                </div>
+                <div className="w-full">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Ngành nghề<span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    name="career"
+                    value={formData.career}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 rounded-md"
+                  >
+                    <option value="">Vui lòng chọn</option>
+                    <option value="Bao bì/ In ấn/ Dán nhãn">
+                      Bao bì/ In ấn/ Dán nhãn
+                    </option>
+                    <option value="Bán lẻ/ bán sỉ">Bán lẻ/ bán sỉ</option>
+                    <option value="Bảo hiểm">Bảo hiểm</option>
+                    <option value="Chuỗi cung ứng">Chuỗi cung ứng</option>
+
+                    {/* Add specific options here */}
+                  </select>
+                </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">

@@ -4,9 +4,8 @@ import { AiOutlineHeart } from "react-icons/ai";
 import ApplyModal from "./ApplyModal";
 import { getUserInfo } from "../../../utils/funcHelpers";
 
-const userInfo = getUserInfo();
-
 const SectionJobDetail = ({ jobs }) => {
+  const userInfo = getUserInfo();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isApply, setIsApply] = useState(true);
   const [formData, setFormData] = useState({

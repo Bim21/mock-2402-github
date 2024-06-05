@@ -5,13 +5,13 @@ import Section3 from "./Section3";
 import Section4 from "./Section4";
 import Section5 from "./Section5";
 import Section6 from "./Section6";
-import Section7 from "./Section7";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import jobService from "../../../services/jobService";
 
 const JobDetail = () => {
   const { jobId } = useParams();
   const [jobs, setJobs] = useState({});
+  console.log(jobId);
   console.log("jobs::::...", jobs);
 
   const getJob = async () => {

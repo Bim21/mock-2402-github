@@ -78,13 +78,23 @@ public class JobController {
         return ResponseEntity.ok("Job application successful.");
     }
 
-    @GetMapping("/jobs/search")
+    @GetMapping("/search")
     public List<Job> searchJobs(
-            @RequestParam("jobField") List<String> jobField,
-            @RequestParam("level") List<String> level,
-            @RequestParam("jobAddress") List<String> jobAddress) {
-
-        return jobService.searchJobs(jobField, level, jobAddress);
+            @RequestParam(value = "jobField", required = false) String jobField,
+            @RequestParam(value = "jobAddress", required = false) String jobAddress) {
+        if (jobField == null && jobAddress == null) {
+            // Handle case when both jobField and jobAddress are missing
+            return jobService.getAllJobs();
+        } else if (jobField != null && jobAddress == null) {
+            // Handle case when only jobField is provided
+            return jobService.getJobsByField(jobField);
+        } else if (jobField == null && jobAddress != null) {
+            // Handle case when only jobAddress is provided
+            return jobService.getJobsByAddress(jobAddress);
+        } else {
+            // Handle case when both jobField and jobAddress are provided
+            return jobService.getJobsByFieldAndAddress(jobField, jobAddress);
+        }
     }
 
 }

@@ -133,9 +133,17 @@ public class JobService {
         job.applyForJob(applicant);
         jobRepository.save(job);
     }
-    public List<Job> searchJobs(List<String> jobField, List<String> level, List<String> jobAddress){
-        return jobRepository.findByFieldLevelAndAddress(jobField,level,jobAddress);
+
+
+    public List<Job> getJobsByField(String jobField) {
+        return jobRepository.findByJobField(jobField);
     }
 
+    public List<Job> getJobsByAddress(String jobAddress) {
+        return jobRepository.findByJobAddress(jobAddress);
+    }
+    public List<Job> getJobsByFieldAndAddress(String jobField, String jobAddress) {
+        return jobRepository.findByJobFieldAndJobAddress(jobField, jobAddress);
+    }
 
 }

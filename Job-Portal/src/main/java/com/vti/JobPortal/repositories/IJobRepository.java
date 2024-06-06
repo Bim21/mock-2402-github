@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface IJobRepository extends MongoRepository<Job, Long> {
-    @Query("{ 'jobField' : { $in: ?0 }, 'level' : { $in: ?1 }, 'jobAddress' : { $in: ?2 } }")
-    List<Job> findByFieldLevelAndAddress(List<String> jobField, List<String> level, List<String> jobAddress);
+    List<Job> findByJobFieldAndJobAddress(String jobField, String jobAddress);
+    List<Job> findByJobField(String jobField);
+    List<Job> findByJobAddress(String jobAddress);
 }

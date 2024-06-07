@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = {
+        "http://150.95.108.21/"
+})
 @RequestMapping("/api/files")
 public class FileController {
     private final FileService fileService;

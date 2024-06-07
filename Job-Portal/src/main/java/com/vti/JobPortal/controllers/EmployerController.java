@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = {
+        "http://150.95.108.21/"
+})
 @RequestMapping("/api/employers")
 public class EmployerController {
     private final EmployerService employerService;

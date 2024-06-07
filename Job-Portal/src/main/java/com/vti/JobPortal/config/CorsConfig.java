@@ -17,6 +17,7 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowedOriginPatterns(
                         "*",
                         "localhost:80",
+                        "150.95.108.21:80",
                         "localhost:81",
                         "163.44.206.118:80",
                         "163.44.206.118:81",

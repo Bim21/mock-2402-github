@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = {
+        "http://150.95.108.21/"
+})
 @RequestMapping("/api/jobs")
 public class JobController {
     private final JobService jobService;

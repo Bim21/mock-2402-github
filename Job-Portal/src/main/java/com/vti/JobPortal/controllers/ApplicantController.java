@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = {
+        "http://150.95.108.21/"
+})
 @RequestMapping("/api/applicants")
 public class ApplicantController {
     private final ApplicantService applicantService;

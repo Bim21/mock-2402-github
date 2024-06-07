@@ -72,28 +72,41 @@ public class JobController {
         }
     }
 
+    //oki , b nên tạ 2 API riêg bệt
+    // API applyForJob đú b à, theo nhu b noi, FE dang hieu
     @PostMapping("/{jobId}/applicants/{applicantId}")
     public ResponseEntity<String> applyForJob(@PathVariable Long jobId, @PathVariable Long applicantId) {
         jobService.applyForJob(jobId, applicantId);
         return ResponseEntity.ok("Job application successful.");
     }
 
+    // API get list applyForJob
+    // b tạ thêm cái này, trả ra data làjob đã apply
+
     @GetMapping("/search")
     public List<Job> searchJobs(
-            @RequestParam(value = "jobField", required = false) String jobField,
-            @RequestParam(value = "jobAddress", required = false) String jobAddress) {
-        if (jobField == null && jobAddress == null) {
+            @RequestParam(value = "jobField", required = false) List<String> jobField,
+            @RequestParam(value = "jobAddress", required = false) List<String> jobAddress,
+            @RequestParam(value = "level", required = false) String level,
+            @RequestParam(value = "career", required = false) List<String> careerJob)
+
+    {
+        if (jobField == null && jobAddress == null && level == null && careerJob == null ) {
             // Handle case when both jobField and jobAddress are missing
             return jobService.getAllJobs();
-        } else if (jobField != null && jobAddress == null) {
+        } else if (jobField != null && jobAddress == null && level == null && careerJob == null ) {
             // Handle case when only jobField is provided
             return jobService.getJobsByField(jobField);
-        } else if (jobField == null && jobAddress != null) {
+        } else if (jobField == null && jobAddress != null && level == null && careerJob == null) {
             // Handle case when only jobAddress is provided
             return jobService.getJobsByAddress(jobAddress);
+        } else if (jobField == null && jobAddress == null && level != null && careerJob == null) {
+            return jobService.getJobsByLevel(level);
+        } else if (jobField == null && jobAddress == null && level == null && careerJob != null) {
+            return jobService.getJobsByCareerJob(careerJob);
         } else {
             // Handle case when both jobField and jobAddress are provided
-            return jobService.getJobsByFieldAndAddress(jobField, jobAddress);
+            return jobService.getJobsByFieldAndAddressAndLevelAndCareerJob(jobField,jobAddress,level,careerJob);
         }
     }
 

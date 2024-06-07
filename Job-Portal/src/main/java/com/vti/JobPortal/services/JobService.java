@@ -135,15 +135,22 @@ public class JobService {
     }
 
 
-    public List<Job> getJobsByField(String jobField) {
-        return jobRepository.findByJobField(jobField);
+    public List<Job> getJobsByField(List<String> jobField) {
+        return jobRepository.findByJobFieldIn(jobField);
     }
 
-    public List<Job> getJobsByAddress(String jobAddress) {
-        return jobRepository.findByJobAddress(jobAddress);
+    public List<Job> getJobsByAddress(List<String> jobAddress) {
+        return jobRepository.findByJobAddressIn(jobAddress);
     }
-    public List<Job> getJobsByFieldAndAddress(String jobField, String jobAddress) {
-        return jobRepository.findByJobFieldAndJobAddress(jobField, jobAddress);
+    public List<Job> getJobsByLevel(String level){
+        return jobRepository.findByLevel(level);
+    }
+
+    public List<Job> getJobsByCareerJob(List<String> careerJob){
+        return jobRepository.findByCareerJobIn(careerJob);
+    }
+    public List<Job> getJobsByFieldAndAddressAndLevelAndCareerJob(List<String> jobField, List<String> jobAddress, String level, List<String> careerJob) {
+        return jobRepository.findByJobFieldAndJobAddressAndLevelAndCareerJob(jobField,jobAddress,level, careerJob);
     }
 
 }

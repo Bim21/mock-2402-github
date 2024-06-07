@@ -102,6 +102,7 @@ public class JobService {
         job.setWorkingTime("");
         job.setJobField(jobDTO.getFieldJob());
         job.setJobAddress(jobDTO.getAddressJob());
+        job.setCareerJob(jobDTO.getCareerJob());
         job.setMinimumYearsOfExperience(jobDTO.getNumberOfRecruitment());
         job.setMinimumQualifications("");
         job.setMaritalStatus("");

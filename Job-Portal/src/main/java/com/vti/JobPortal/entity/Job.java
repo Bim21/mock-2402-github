@@ -19,25 +19,26 @@ import java.util.List;
 public class Job {
     @Id
     private Long id;
-    private String title;
+    private String title;                       // nội dung công việc
     private Long employerId;
-    private String description;
-    private List<String> requirementJob;
-    private String skills;
-    private String level;
-    private Integer salary;
-    private String workingTime;
-    private String jobField;
-    private String jobAddress;
-    private Integer minimumYearsOfExperience;
-    private String minimumQualifications;
-    private String maritalStatus;
+    private String description;                 // mô tả công việc
+    private List<String> requirementJob;        // Yêu cầu công việc
+    private String skills;                      // kỹ năng
+    private String level;                       // cấp độ
+    private Integer salary;                     // mức lương
+    private String workingTime;                 // thời gian làm việc (part,full,free-lance)
+    private List<String> jobField;              // lĩnh vực công việc
+    private String careerJob;                   // Ngành nghề
+    private List<String> jobAddress;            // địa chỉ job
+    private Integer minimumYearsOfExperience;   // số năm kinh nghiệm tối thiểu
+    private String minimumQualifications;       // bằng cấp tối thiểu
+    private String maritalStatus;               // tình trạng hôn nhân
     private String minimumEducationalQualification;
-    private Integer views;
-    private String contactPerson;
+    private Integer views;                      // số lượng ng xem job
+    private String contactPerson;               // người liên hệ
     private String email;
-    private Date postedDate;
-    private Date expiredDate;
+    private Date postedDate;                    // ngày đăng
+    private Date expiredDate;                   // ngày hết hạn
     private Employer employer;
     private List<Applicant> applicants;
     private String status;

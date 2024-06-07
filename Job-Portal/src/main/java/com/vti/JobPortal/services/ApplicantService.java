@@ -58,4 +58,7 @@ public class ApplicantService {
             throw new IllegalArgumentException("Applicant not found.");
         }
     }
+    public List<Applicant> getApplicantsByAppliedJobId(String jobId) {
+        return applicantRepository.findByAppliedJobIdsContains(jobId);
+    }
 }

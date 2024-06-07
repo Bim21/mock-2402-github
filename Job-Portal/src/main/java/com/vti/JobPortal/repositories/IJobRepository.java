@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface IJobRepository extends MongoRepository<Job, Long> {
+    Job findByIdAndApplicantsIsNotNull(String jobId);
     List<Job> findByJobFieldAndJobAddressAndLevelAndCareerJob(List<String> jobField, List<String> jobAddress,String level, List<String> careerJob);
     List<Job> findByJobFieldIn(List<String> jobField);
     List<Job> findByJobAddressIn(List<String> jobAddress);

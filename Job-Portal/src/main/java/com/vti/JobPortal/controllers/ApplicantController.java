@@ -69,4 +69,9 @@ public class ApplicantController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update applicant details.");
         }
     }
+
+    @GetMapping("/{applicantId}/applied-jobs")
+    public List<Applicant> getApplicantsByAppliedJobId(@PathVariable String applicantId) {
+        return applicantService.getApplicantsByAppliedJobId(applicantId);
+    }
 }

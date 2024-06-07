@@ -17,6 +17,7 @@ public class JobDTO {
     private List<String> addressJob;
     private String descriptionJob;
     private List<String> requirementJob;
+    private List<String> careerJob;
     private Integer salary;
     private Integer views;
     private Date expiredDate;

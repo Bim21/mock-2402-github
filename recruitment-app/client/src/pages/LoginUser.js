@@ -4,8 +4,63 @@ import { BsFacebook } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import authService from "../services/authService";
 import { toast } from "react-toastify";
+import Validator from "../utils/Validator";
 
-const LoginUser = () => {
+const LoginUser = (props) => {
+  // super(props);
+  this.state = {
+    name: "",
+    email: "",
+    address: "",
+    subject: "",
+    message: "",
+    errors: {},
+  };
+
+  const requiredWith = (value, field, state) =>
+    (!state[field] && !value) || !!value;
+  const rules = [
+    {
+      field: "password",
+      method: "isEmpty",
+      validWhen: false,
+      message: "The name field is required.",
+    },
+    {
+      field: "password",
+      method: "isLength",
+      args: [{ min: 5 }],
+      validWhen: true,
+      message: "The name must be at least 5 characters.",
+    },
+    {
+      field: "email",
+      method: "isEmpty",
+      validWhen: false,
+      message: "The email field is required.",
+    },
+    {
+      field: "email",
+      method: "isEmail",
+      validWhen: true,
+      message: "The email must be a valid email address.",
+    },
+    {
+      field: "address",
+      method: "isEmpty",
+      validWhen: false,
+      message: "The address field is required.",
+    },
+    {
+      field: "message",
+      method: requiredWith,
+      args: ["subject"],
+      validWhen: true,
+      message: "The message field is required when subject is present.",
+    },
+  ];
+  this.validator = new Validator(rules);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -18,6 +73,12 @@ const LoginUser = () => {
     setEmail(e.target.value);
   };
 
+  const handleInput = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
@@ -25,6 +86,13 @@ const LoginUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      handleSubmit = (e) => {
+        this.setState({
+          errors: this.validator.validate(this.state),
+        });
+        console.log(this.state);
+      };
+
       const data = await authService.loginByUser({ email, password });
       localStorage.setItem("userToken", data.token);
       localStorage.setItem("userInfo", JSON.stringify(data));
@@ -80,10 +148,16 @@ const LoginUser = () => {
                   className="w-full h-[40px] rounded-[4px] text-[13px] border-[1px] hover:border-blue-400 px-[10px] focus:outline-none focus:ring-0"
                   id="email"
                   type="email"
-                  value={email}
-                  onChange={handleEmailChange}
+                  value={this.state.email}
+                  onChange={handleInput}
                   required
+                  checked
                 />
+                {props.errors.email && (
+                  <div className="validation" style={{ display: "block" }}>
+                    {props.errors.email}
+                  </div>
+                )}
               </div>
               <div className="mb-[16px]">
                 <label
@@ -96,10 +170,16 @@ const LoginUser = () => {
                   className="w-full h-[40px] rounded-[4px] text-[13px] border-[1px] hover:border-blue-400 px-[10px] focus:outline-none focus:ring-0"
                   id="password"
                   type="password"
-                  value={password}
-                  onChange={handlePasswordChange}
+                  value={this.state.password}
+                  onChange={handleInput}
                   required
                 />
+                {props.errors.password && (
+                  <div className="validation" style={{ display: "block" }}>
+                    {props.errors.password}
+                  </div>
+                )}
+
                 {/* <p className="text-red-500 text-xs italic">Please choose a password.</p> */}
               </div>
             </div>

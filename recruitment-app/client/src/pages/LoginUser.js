@@ -4,62 +4,28 @@ import { BsFacebook } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import authService from "../services/authService";
 import { toast } from "react-toastify";
-import Validator from "../utils/Validator";
+import validator from "validator";
 
-const LoginUser = (props) => {
-  // super(props);
-  this.state = {
-    name: "",
-    email: "",
-    address: "",
-    subject: "",
-    message: "",
-    errors: {},
+const LoginUser = () => {
+  const validateEmail = (email) => {
+    if (!email) {
+      return "Please enter your email";
+    } else if (!validator.isEmail(email)) {
+      return "Please enter a valid email";
+    }
+    return "";
   };
 
-  const requiredWith = (value, field, state) =>
-    (!state[field] && !value) || !!value;
-  const rules = [
-    {
-      field: "password",
-      method: "isEmpty",
-      validWhen: false,
-      message: "The name field is required.",
-    },
-    {
-      field: "password",
-      method: "isLength",
-      args: [{ min: 5 }],
-      validWhen: true,
-      message: "The name must be at least 5 characters.",
-    },
-    {
-      field: "email",
-      method: "isEmpty",
-      validWhen: false,
-      message: "The email field is required.",
-    },
-    {
-      field: "email",
-      method: "isEmail",
-      validWhen: true,
-      message: "The email must be a valid email address.",
-    },
-    {
-      field: "address",
-      method: "isEmpty",
-      validWhen: false,
-      message: "The address field is required.",
-    },
-    {
-      field: "message",
-      method: requiredWith,
-      args: ["subject"],
-      validWhen: true,
-      message: "The message field is required when subject is present.",
-    },
-  ];
-  this.validator = new Validator(rules);
+  const validatePassword = (password) => {
+    if (!password) {
+      return "Please enter your password";
+    } else if (password.length < 8) {
+      return "Password should be at least 8 characters long";
+    } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+      return "Password should contain at least one special character";
+    }
+    return "";
+  };
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -73,26 +39,22 @@ const LoginUser = (props) => {
     setEmail(e.target.value);
   };
 
-  const handleInput = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      handleSubmit = (e) => {
-        this.setState({
-          errors: this.validator.validate(this.state),
-        });
-        console.log(this.state);
-      };
 
+    const emailError = validateEmail(email);
+    const passwordError = validatePassword(password);
+
+    if (emailError || passwordError) {
+      toast.error(emailError || passwordError);
+      return;
+    }
+
+    try {
       const data = await authService.loginByUser({ email, password });
       localStorage.setItem("userToken", data.token);
       localStorage.setItem("userInfo", JSON.stringify(data));
@@ -148,15 +110,14 @@ const LoginUser = (props) => {
                   className="w-full h-[40px] rounded-[4px] text-[13px] border-[1px] hover:border-blue-400 px-[10px] focus:outline-none focus:ring-0"
                   id="email"
                   type="email"
-                  value={this.state.email}
-                  onChange={handleInput}
+                  value={email}
+                  onChange={handleEmailChange}
                   required
-                  checked
                 />
-                {props.errors.email && (
-                  <div className="validation" style={{ display: "block" }}>
-                    {props.errors.email}
-                  </div>
+                {validateEmail(email) && (
+                  <p className="text-red-500 text-xs italic">
+                    {validateEmail(email)}
+                  </p>
                 )}
               </div>
               <div className="mb-[16px]">
@@ -170,17 +131,15 @@ const LoginUser = (props) => {
                   className="w-full h-[40px] rounded-[4px] text-[13px] border-[1px] hover:border-blue-400 px-[10px] focus:outline-none focus:ring-0"
                   id="password"
                   type="password"
-                  value={this.state.password}
-                  onChange={handleInput}
+                  value={password}
+                  onChange={handlePasswordChange}
                   required
                 />
-                {props.errors.password && (
-                  <div className="validation" style={{ display: "block" }}>
-                    {props.errors.password}
-                  </div>
+                {validatePassword(password) && (
+                  <p className="text-red-500 text-xs italic">
+                    {validatePassword(password)}
+                  </p>
                 )}
-
-                {/* <p className="text-red-500 text-xs italic">Please choose a password.</p> */}
               </div>
             </div>
             <div className="w-full pb-[16px] mt-[-24px] flex justify-end border-b-[1px]">

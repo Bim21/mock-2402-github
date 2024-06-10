@@ -27,9 +27,9 @@ const jobService = {
   getJobById(id) {
     return api.get(`${END_POINT}/${id}`);
   },
-  // testSearch(params) {
-  //   return api.get(END_POINT, { params });
-  // },
+  search(params) {
+    return api.get(`${END_POINT}/search`, { params });
+  },
 };
 
 export default jobService;

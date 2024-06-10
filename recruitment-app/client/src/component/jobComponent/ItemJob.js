@@ -3,12 +3,12 @@ import JobItem from "./JobItems";
 import { useJobContext } from "../../contexts/JobProvider";
 
 const ItemJob = () => {
-  const jobs = useJobContext();
-
+  const { dataJobs } = useJobContext();
+  console.log(dataJobs);
   return (
     <div className="flex w-full">
       <div className="flex flex-col gap-0 w-full">
-        {jobs.map((job) => (
+        {dataJobs.map((job) => (
           <JobItem
             key={job.id}
             jobId={job.id}

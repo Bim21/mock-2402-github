@@ -11,18 +11,37 @@ import jobService from "../../services/jobService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { getEmployerInfo } from "../../utils/funcHelpers";
-import Career from "./../../component/jobComponent/menuItems/Career";
 
 const RecruitmentPage = () => {
+  const addressOptions = [
+    "Hà Nội",
+    "Đà Nẵng",
+    "Hồ Chí Minh",
+    "Bắc Giang",
+    "Cần Thơ",
+    "Hải Phòng",
+  ];
+
+  const careerOptions = [
+    "Bán lẻ/ Tiêu dùng",
+    "CEO & General Manangement",
+    "Công Nghệ thông tin/ Viễn thông",
+    "Chính Phủ/ Phi lợi nhuận",
+    "Bất động sản",
+    "Bảo Hiểm",
+    "Hành chính văn phòng",
+    "Khoa học kỹ thuật",
+    "Kinh doanh",
+  ];
   const employerInfo = getEmployerInfo();
   const [formData, setFormData] = useState({
     title: "",
     level: "",
-    fieldJob: "",
-    addressJob: "",
-    career: "",
+    fieldJob: "", //Tất cả lĩnh vực công ty
+    addressJob: [""],
+    careerJob: [""], //Ngành nghề
     descriptionJob: "",
-    requirementJob: "",
+    requirementJob: [""],
     salary: "",
     numberOfRecruitment: "",
     email: employerInfo.email,
@@ -62,12 +81,42 @@ const RecruitmentPage = () => {
     }));
   };
 
+  const handleAddressJobChange = (index, value) => {
+    setFormData((prevFormData) => {
+      const updatedAddressJob = [...prevFormData.addressJob];
+      updatedAddressJob[index] = value;
+      return {
+        ...prevFormData,
+        addressJob: updatedAddressJob,
+      };
+    });
+  };
+
+  const handleCareerJobChange = (index, value) => {
+    setFormData((prevFormData) => {
+      const updatedCareerJob = [...prevFormData.careerJob];
+      updatedCareerJob[index] = value;
+      return {
+        ...prevFormData,
+        careerJob: updatedCareerJob,
+      };
+    });
+  };
+
+  const handleRequirementJobChange = (index, value) => {
+    setFormData((prevFormData) => {
+      const updatedRequirementJob = [...prevFormData.requirementJob];
+      updatedRequirementJob[index] = value;
+      return {
+        ...prevFormData,
+        requirementJob: updatedRequirementJob,
+      };
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      delete formData.companyAddress;
-      delete formData.companyBenefits;
-      delete formData.requirementJob;
       const data = await jobService.post(formData, employerInfo.id);
       console.log("data: ", data);
       setFormData((prev) => [...prev, data]);
@@ -75,6 +124,7 @@ const RecruitmentPage = () => {
       toast.success("Đăng tin thành công");
     } catch (error) {
       toast.error("Đăng tin thất bại");
+      console.log(error);
     }
   };
 
@@ -142,15 +192,22 @@ const RecruitmentPage = () => {
                     className="w-full p-2 border border-gray-300 rounded-md"
                   >
                     <option value="">Vui lòng chọn</option>
-                    <option value="Bán lẻ/ Tiêu dùng">Bán lẻ/ Tiêu dùng</option>
-                    <option value="CEO & General Manangement">
-                      CEO & General Manangement
+                    <option value="Cơ khí/Máy móc/Thiết bị công nghiệp">
+                      Cơ khí/Máy móc/Thiết bị công nghiệp
                     </option>
-                    <option value="Công Nghệ thông tin/ Viễn thông">
-                      Công Nghệ thông tin/ Viễn thông
+                    <option value="Bán lẻ/Bán sỉ">Bán lẻ/Bán sỉ</option>
+                    <option value="Bảo hiểm">Bảo hiểm</option>
+                    <option value="Chuỗi cung ứng">Chuỗi cung ứng</option>
+                    <option value="Bất Động Sản/Cho thuê">
+                      Bất Động Sản/Cho thuê
                     </option>
-                    <option value="Dệt may/ Da giày">Dệt may/ Da giày</option>
-                    <option value="Dịch vụ ăn uống">Dịch vụ ăn uống</option>
+                    <option value="Chính phủ & NGO">Chính phủ & NGO</option>
+                    <option value="Bao bì/ In ấn/ Dán nhãn">
+                      Bao bì/ In ấn/ Dán nhãn
+                    </option>
+                    <option value="Hành chính văn phòng">
+                      Hành chính văn phòng
+                    </option>
                     {/* Add specific options here */}
                   </select>
                 </div>
@@ -161,42 +218,45 @@ const RecruitmentPage = () => {
                   <label className="block text-sm font-medium text-gray-700">
                     Địa điểm làm việc<span className="text-red-500">*</span>
                   </label>
-                  <select
-                    name="addressJob"
-                    value={formData.addressJob}
-                    onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-md"
-                  >
-                    <option value="">Vui lòng chọn</option>
-                    <option value="Hà Nội">Hà Nội</option>
-                    <option value="Đà Nẵng">Đà Nẵng</option>
-                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                    <option value="Cần Thơ">Cần Thơ</option>
-                    <option value="Hải Phòng">Hải Phòng</option>
-                    <option value="Bắc Ninh">Bắc Ninh</option>
-                    {/* Add specific options here */}
-                  </select>
+                  {formData.addressJob.map((address, index) => (
+                    <select
+                      key={index}
+                      value={address}
+                      onChange={(e) =>
+                        handleAddressJobChange(index, e.target.value)
+                      }
+                      className="w-full p-2 border border-gray-300 rounded-md"
+                    >
+                      <option value="">Chọn địa chỉ</option>
+                      {addressOptions.map((option, i) => (
+                        <option key={i} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  ))}
                 </div>
                 <div className="w-full">
                   <label className="block text-sm font-medium text-gray-700">
                     Ngành nghề<span className="text-red-500">*</span>
                   </label>
-                  <select
-                    name="career"
-                    value={formData.career}
-                    onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-md"
-                  >
-                    <option value="">Vui lòng chọn</option>
-                    <option value="Bao bì/ In ấn/ Dán nhãn">
-                      Bao bì/ In ấn/ Dán nhãn
-                    </option>
-                    <option value="Bán lẻ/ bán sỉ">Bán lẻ/ bán sỉ</option>
-                    <option value="Bảo hiểm">Bảo hiểm</option>
-                    <option value="Chuỗi cung ứng">Chuỗi cung ứng</option>
-
-                    {/* Add specific options here */}
-                  </select>
+                  {formData.careerJob.map((career, index) => (
+                    <select
+                      key={index}
+                      value={career}
+                      onChange={(e) =>
+                        handleCareerJobChange(index, e.target.value)
+                      }
+                      className="w-full p-2 border border-gray-300 rounded-md"
+                    >
+                      <option value="">Chọn nghề nghiệp</option>
+                      {careerOptions.map((option, i) => (
+                        <option key={i} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  ))}
                 </div>
               </div>
               <div>
@@ -215,13 +275,17 @@ const RecruitmentPage = () => {
                 <label className="block text-sm font-medium text-gray-700">
                   Yêu cầu công việc<span className="text-red-500">*</span>
                 </label>
-                <textarea
-                  name="requirementJob"
-                  value={formData.requirementJob}
-                  onChange={handleChange}
-                  placeholder="Nhập yêu cầu"
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                ></textarea>
+                {formData.requirementJob.map((requirement, index) => (
+                  <textarea
+                    key={index}
+                    value={requirement}
+                    onChange={(e) =>
+                      handleRequirementJobChange(index, e.target.value)
+                    }
+                    placeholder="ví dụ: ReactJs, NodeJs"
+                    className="w-full p-2 border border-gray-300 rounded-md"
+                  />
+                ))}
               </div>
               <div className="flex space-x-6 justify-start w-full">
                 <div className="">

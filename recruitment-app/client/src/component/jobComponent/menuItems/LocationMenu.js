@@ -1,13 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
+import { useJobContext } from "../../../contexts/JobProvider";
 
 const LocationMenu = () => {
-  const [value, setValue] = useState({
-    option1: "",
-    option2: "",
-    option3: "",
-  });
+  const { valueLocation, handeLocationChange } = useJobContext();
+
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -28,17 +26,6 @@ const LocationMenu = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  console.log(Object.values(value).filter((item) => item !== ""));
-
-  const handeCheckboxChange = (event) => {
-    const { name, checked } = event.target;
-
-    setValue({
-      ...value,
-      [name]: checked ? event.target.value : "",
-    });
-  };
 
   return (
     <div className="relative " ref={menuRef}>
@@ -78,7 +65,8 @@ const LocationMenu = () => {
                       id="option1"
                       name="option1"
                       value="Hà Nội"
-                      onChange={handeCheckboxChange}
+                      checked={valueLocation["option1"] === "Hà Nội"}
+                      onChange={handeLocationChange}
                     />
                     <label className="ml-[10px]">Hà Nội</label>
                   </div>
@@ -88,7 +76,8 @@ const LocationMenu = () => {
                       id="option2"
                       name="option2"
                       value="Đà Nẵng"
-                      onChange={handeCheckboxChange}
+                      checked={valueLocation["option2"] === "Đà Nẵng"}
+                      onChange={handeLocationChange}
                     />
                     <label className="ml-[10px]">Đà Nẵng</label>
                   </div>
@@ -98,7 +87,8 @@ const LocationMenu = () => {
                       id="option3"
                       name="option3"
                       value="Hồ Chí Minh"
-                      onChange={handeCheckboxChange}
+                      checked={valueLocation["option3"] === "Hồ Chí Minh"}
+                      onChange={handeLocationChange}
                     />
                     <label className="ml-[10px]">Hồ Chí Minh</label>
                   </div>
@@ -108,7 +98,8 @@ const LocationMenu = () => {
                       id="option4"
                       name="option4"
                       value="Cần Thơ"
-                      onChange={handeCheckboxChange}
+                      checked={valueLocation["option4"] === "Cần Thơ"}
+                      onChange={handeLocationChange}
                     />
                     <label className="ml-[10px]">Cần Thơ</label>
                   </div>
@@ -117,10 +108,11 @@ const LocationMenu = () => {
                       type="checkbox"
                       id="option5"
                       name="option5"
-                      value="Bắc Ninh"
-                      onChange={handeCheckboxChange}
+                      value="Bắc Giang"
+                      checked={valueLocation["option5"] === "Bắc Giang"}
+                      onChange={handeLocationChange}
                     />
-                    <label className="ml-[10px]">Bắc Ninh</label>
+                    <label className="ml-[10px]">Bắc Giang</label>
                   </div>
                   <div className="py-[10px] px-[8px] inline-flex items-center rounded-md hover:bg-blue-50">
                     <input
@@ -128,7 +120,8 @@ const LocationMenu = () => {
                       id="option6"
                       name="option6"
                       value="Hải Phòng"
-                      onChange={handeCheckboxChange}
+                      checked={valueLocation["option6"] === "Hải Phòng"}
+                      onChange={handeLocationChange}
                     />
                     <label className="ml-[10px]">Hải Phòng</label>
                   </div>

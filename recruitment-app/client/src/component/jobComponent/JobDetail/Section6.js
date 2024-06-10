@@ -28,7 +28,7 @@ const Section6 = ({ jobs }) => {
             </div>
             <div className="flex flex-col w-full p-[4px]">
               <div className="text-gray-500">NGÀNH NGHỀ</div>
-              <div>jobs.employer.companyField</div>
+              <div>{jobs.careerJob}</div>
             </div>
           </div>
 

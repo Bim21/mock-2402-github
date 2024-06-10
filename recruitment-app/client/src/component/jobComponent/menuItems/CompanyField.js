@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
+import { useJobContext } from "../../../contexts/JobProvider";
 
+//Lĩnh vực công ty
 const CompanyField = () => {
-  const [value, setValue] = useState("");
+  const { valueJobField, handeJobFieldChange } = useJobContext();
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -25,17 +27,6 @@ const CompanyField = () => {
     };
   }, []);
 
-  const handeCheckboxChange = (event) => {
-    const { name, checked } = event.target;
-
-    setValue({
-      ...value,
-      [name]: checked ? event.target.value : "",
-    });
-  };
-
-  console.log(Object.values(value).filter((item) => item !== ""));
-
   return (
     <div className="relative " ref={menuRef}>
       <button
@@ -46,7 +37,7 @@ const CompanyField = () => {
         <MdKeyboardArrowDown className="h-6 w-6" />
       </button>
       {isOpen && (
-        <div className="absolute z-10 mt-1 w-[300px] bg-white shadow-lg rounded-md ">
+        <div className="absolute z-10 mt-1 w-[330px] bg-white shadow-lg rounded-md ">
           <div className="p-[8px] flex flex-col ">
             <div className="flex flex-col">
               <div className="rounded-[6px] relative h-[40px] ">
@@ -66,7 +57,14 @@ const CompanyField = () => {
               <div className="absolute w-full">
                 <div className="flex flex-col gap-1 h-[40px] pr-[4px] ">
                   <div className="flex">
-                    <input type="radio" id="all" name="company" value="all" />
+                    <input
+                      type="radio"
+                      id="all"
+                      name="company"
+                      value={""}
+                      checked={valueJobField === ""}
+                      onChange={handeJobFieldChange}
+                    />
                     <label for="all" className="ml-[10px]">
                       Tất cả lĩnh vực công ty
                     </label>
@@ -78,8 +76,26 @@ const CompanyField = () => {
                       type="radio"
                       id="1"
                       name="company"
+                      value="Cơ khí/Máy móc/Thiết bị công nghiệp"
+                      checked={
+                        valueJobField === "Cơ khí/Máy móc/Thiết bị công nghiệp"
+                      }
+                      onChange={handeJobFieldChange}
+                    />
+                    <label for="all" className="ml-[10px]">
+                      Cơ khí/Máy móc/Thiết bị công nghiệp
+                    </label>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1 h-[40px] pr-[4px] ">
+                  <div className="flex">
+                    <input
+                      type="radio"
+                      id="2"
+                      name="company"
                       value="Bao bì/ In ấn/ Dán nhãn"
-                      onChange={handeCheckboxChange}
+                      checked={valueJobField === "Bao bì/ In ấn/ Dán nhãn"}
+                      onChange={handeJobFieldChange}
                     />
                     <label for="all" className="ml-[10px]">
                       Bao bì/ In ấn/ Dán nhãn
@@ -90,10 +106,11 @@ const CompanyField = () => {
                   <div className="flex">
                     <input
                       type="radio"
-                      id="2"
+                      id="3"
                       name="company"
                       value="Bán lẻ/ bán sỉ"
-                      onChange={handeCheckboxChange}
+                      checked={valueJobField === "Bán lẻ/ bán sỉ"}
+                      onChange={handeJobFieldChange}
                     />
                     <label for="all" className="ml-[10px]">
                       Bán lẻ/ bán sỉ
@@ -104,10 +121,11 @@ const CompanyField = () => {
                   <div className="flex">
                     <input
                       type="radio"
-                      id="3"
+                      id="4"
                       name="company"
                       value="Bảo hiểm"
-                      onChange={handeCheckboxChange}
+                      checked={valueJobField === "Bảo hiểm"}
+                      onChange={handeJobFieldChange}
                     />
                     <label for="all" className="ml-[10px]">
                       Bảo hiểm
@@ -118,13 +136,44 @@ const CompanyField = () => {
                   <div className="flex">
                     <input
                       type="radio"
-                      id="4"
+                      id="5"
                       name="company"
                       value="Chuỗi cung ứng"
-                      onChange={handeCheckboxChange}
+                      checked={valueJobField === "Chuỗi cung ứng"}
+                      onChange={handeJobFieldChange}
                     />
                     <label for="all" className="ml-[10px]">
                       Chuỗi cung ứng
+                    </label>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1 h-[40px] pr-[4px] ">
+                  <div className="flex">
+                    <input
+                      type="radio"
+                      id="6"
+                      name="company"
+                      value="Chính phủ & NGO"
+                      checked={valueJobField === "Chính phủ & NGO"}
+                      onChange={handeJobFieldChange}
+                    />
+                    <label for="all" className="ml-[10px]">
+                      Chính phủ & NGO
+                    </label>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1 h-[40px] pr-[4px] ">
+                  <div className="flex">
+                    <input
+                      type="radio"
+                      id="7"
+                      name="company"
+                      value="Hành chính văn phòng"
+                      checked={valueJobField === "Hành chính văn phòng"}
+                      onChange={handeJobFieldChange}
+                    />
+                    <label for="all" className="ml-[10px]">
+                      Hành chính văn phòng
                     </label>
                   </div>
                 </div>

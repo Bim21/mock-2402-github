@@ -4,8 +4,29 @@ import { BsFacebook } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import authService from "../services/authService";
 import { toast } from "react-toastify";
+import validator from "validator";
 
 const LoginUser = () => {
+  const validateEmail = (email) => {
+    if (!email) {
+      return "Please enter your email";
+    } else if (!validator.isEmail(email)) {
+      return "Please enter a valid email";
+    }
+    return "";
+  };
+
+  const validatePassword = (password) => {
+    if (!password) {
+      return "Please enter your password";
+    } else if (password.length < 8) {
+      return "Password should be at least 8 characters long";
+    } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+      return "Password should contain at least one special character";
+    }
+    return "";
+  };
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -24,6 +45,15 @@ const LoginUser = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const emailError = validateEmail(email);
+    const passwordError = validatePassword(password);
+
+    if (emailError || passwordError) {
+      toast.error(emailError || passwordError);
+      return;
+    }
+
     try {
       const data = await authService.loginByUser({ email, password });
       localStorage.setItem("userToken", data.token);
@@ -84,6 +114,11 @@ const LoginUser = () => {
                   onChange={handleEmailChange}
                   required
                 />
+                {validateEmail(email) && (
+                  <p className="text-red-500 text-xs italic">
+                    {validateEmail(email)}
+                  </p>
+                )}
               </div>
               <div className="mb-[16px]">
                 <label
@@ -100,7 +135,11 @@ const LoginUser = () => {
                   onChange={handlePasswordChange}
                   required
                 />
-                {/* <p className="text-red-500 text-xs italic">Please choose a password.</p> */}
+                {validatePassword(password) && (
+                  <p className="text-red-500 text-xs italic">
+                    {validatePassword(password)}
+                  </p>
+                )}
               </div>
             </div>
             <div className="w-full pb-[16px] mt-[-24px] flex justify-end border-b-[1px]">

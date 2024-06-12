@@ -39,13 +39,9 @@ const JobProvider = ({ children }) => {
     try {
       const searchParams = {
         jobAddress: removeNullItems(Object.values(valueLocation)),
-        // jobAddress: "Hà Nội",
         career: removeNullItems(Object.values(valueCareer)),
-        // career: "CEO & General Manangement",
         jobField: valueJobField,
-        // jobField: "Bảo hiểm",
         level: valueLevel,
-        // level: "Thực tập sinh/ sinh viên",
       };
 
       const response = await jobService.search(removeEmptyValue(searchParams));

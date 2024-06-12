@@ -11,34 +11,15 @@ import jobService from "../../services/jobService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { getEmployerInfo } from "../../utils/funcHelpers";
+import { addressOptions, careerOptions } from "../../utils/constants";
 
 const RecruitmentPage = () => {
-  const addressOptions = [
-    "Hà Nội",
-    "Đà Nẵng",
-    "Hồ Chí Minh",
-    "Bắc Giang",
-    "Cần Thơ",
-    "Hải Phòng",
-  ];
-
-  const careerOptions = [
-    "Bán lẻ/ Tiêu dùng",
-    "CEO & General Manangement",
-    "Công Nghệ thông tin/ Viễn thông",
-    "Chính Phủ/ Phi lợi nhuận",
-    "Bất động sản",
-    "Bảo Hiểm",
-    "Hành chính văn phòng",
-    "Khoa học kỹ thuật",
-    "Kinh doanh",
-  ];
   const employerInfo = getEmployerInfo();
   const [formData, setFormData] = useState({
     title: "",
     level: "",
-    fieldJob: "", //Tất cả lĩnh vực công ty
-    addressJob: [""],
+    jobField: "", //Tất cả lĩnh vực công ty
+    jobAddress: [""],
     careerJob: [""], //Ngành nghề
     descriptionJob: "",
     requirementJob: [""],
@@ -83,11 +64,11 @@ const RecruitmentPage = () => {
 
   const handleAddressJobChange = (index, value) => {
     setFormData((prevFormData) => {
-      const updatedAddressJob = [...prevFormData.addressJob];
+      const updatedAddressJob = [...prevFormData.jobAddress];
       updatedAddressJob[index] = value;
       return {
         ...prevFormData,
-        addressJob: updatedAddressJob,
+        jobAddress: updatedAddressJob,
       };
     });
   };
@@ -186,8 +167,8 @@ const RecruitmentPage = () => {
                     Lĩnh vực công việc<span className="text-red-500">*</span>
                   </label>
                   <select
-                    name="fieldJob"
-                    value={formData.fieldJob}
+                    name="jobField"
+                    value={formData.jobField}
                     onChange={handleChange}
                     className="w-full p-2 border border-gray-300 rounded-md"
                   >
@@ -218,7 +199,7 @@ const RecruitmentPage = () => {
                   <label className="block text-sm font-medium text-gray-700">
                     Địa điểm làm việc<span className="text-red-500">*</span>
                   </label>
-                  {formData.addressJob.map((address, index) => (
+                  {formData.jobAddress.map((address, index) => (
                     <select
                       key={index}
                       value={address}

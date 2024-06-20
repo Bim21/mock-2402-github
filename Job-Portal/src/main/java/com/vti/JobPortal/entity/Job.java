@@ -31,8 +31,8 @@ public class Job {
     private List<String> careerJob;                   // Ngành nghề
     private List<String> jobAddress;            // địa chỉ job
     private Integer minimumYearsOfExperience;   // số năm kinh nghiệm tối thiểu
-    private String minimumQualifications;       // bằng cấp tối thiểu
     private String maritalStatus;               // tình trạng hôn nhân
+    private String minimumQualifications;       // bằng cấp tối thiểu
     private String minimumEducationalQualification;
     private Integer views;                      // số lượng ng xem job
     private String contactPerson;               // người liên hệ

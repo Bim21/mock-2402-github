@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Education {
+    private Long id;
     private String specialize;
     private String schoolName;
     private String qualifications;

@@ -24,6 +24,8 @@ public class Applicant {
     private Long id;
     private String firstName;
     private String lastName;
+    private Role role;
+    private String username;
     private String email;
     private String password;
     private String phoneNumber;

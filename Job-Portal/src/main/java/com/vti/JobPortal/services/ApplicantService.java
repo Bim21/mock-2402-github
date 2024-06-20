@@ -1,9 +1,12 @@
 package com.vti.JobPortal.services;
 
-import com.vti.JobPortal.dto.ApplicantDetailsDTO;
 import com.vti.JobPortal.entity.Applicant;
 import com.vti.JobPortal.entity.ApplicantDetails;
+import com.vti.JobPortal.entity.Job;
 import com.vti.JobPortal.repositories.IApplicantRepository;
+import com.vti.JobPortal.repositories.IJobRepository;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +16,11 @@ import java.util.Optional;
 @Service
 public class ApplicantService {
     private final IApplicantRepository applicantRepository;
-
+    private final IJobRepository jobRepository;
     @Autowired
-    public ApplicantService(IApplicantRepository applicantRepository) {
+    public ApplicantService(IApplicantRepository applicantRepository, IJobRepository jobRepository) {
         this.applicantRepository = applicantRepository;
+        this.jobRepository = jobRepository;
     }
 
     public List<Applicant> getAllApplicants() {
@@ -58,4 +62,24 @@ public class ApplicantService {
             throw new IllegalArgumentException("Applicant not found.");
         }
     }
+
+    public void applyJob(Long applicantId, Long jobId) {
+        Applicant applicant = applicantRepository.findById(applicantId)
+                .orElseThrow(() -> new EntityNotFoundException("Applicant not found."));
+
+        Job job = jobRepository.findById(jobId)
+                .orElseThrow(() -> new EntityNotFoundException("Job not found."));
+
+        applicant.applyJob(job);
+        applicantRepository.save(applicant);
+        jobRepository.save(job);
+    }
+
+    public List<Job> getAppliedJobsForApplicant(Long applicantId) {
+        Applicant applicant = applicantRepository.findById(applicantId)
+                .orElseThrow(() -> new EntityNotFoundException("Applicant not found."));
+
+        return applicant.getAppliedJobs();
+    }
+
 }

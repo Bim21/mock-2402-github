@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Language {
+    private Long id;
     private String languageName;
     private String levelLanguage;
 

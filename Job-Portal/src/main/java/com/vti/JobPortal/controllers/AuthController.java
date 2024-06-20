@@ -5,6 +5,7 @@ import com.vti.JobPortal.dto.SignInResponseDTO;
 import com.vti.JobPortal.dto.SignUpDTO;
 import com.vti.JobPortal.entity.Applicant;
 import com.vti.JobPortal.entity.Employer;
+import com.vti.JobPortal.entity.Role;
 import com.vti.JobPortal.jwt.JWTUtility;
 import com.vti.JobPortal.repositories.IApplicantRepository;
 import com.vti.JobPortal.repositories.IEmployerRepository;
@@ -52,6 +53,7 @@ public class AuthController {
         long nextId = sequenceGeneratorService.generateSequence("employer_sequence");
         Employer employer = new Employer();
         employer.setId(nextId);
+        employer.setRole(Role.EMPLOYER);
         employer.setFirstName(employerSignUpDTO.getFirstName());
         employer.setLastName(employerSignUpDTO.getLastName());
         employer.setEmail(employerSignUpDTO.getEmail());
@@ -103,6 +105,7 @@ public class AuthController {
 
         Applicant applicant = new Applicant();
         applicant.setId(nextId);
+        applicant.setRole(Role.APPLICANT);
         applicant.setFirstName(signUpDTO.getFirstName());
         applicant.setLastName(signUpDTO.getLastName());
         applicant.setEmail(signUpDTO.getEmail());

@@ -17,8 +17,10 @@ import java.util.List;
 public class Employer {
     @Id
     private Long id;
+    private Role role;
     private String firstName;
     private String lastName;
+    private String username;
     private String phoneNumber;
     private String email;
     private String password;

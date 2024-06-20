@@ -77,11 +77,11 @@ public class JobController {
 
     //oki , b nên tạ 2 API riêg bệt
     // API applyForJob đú b à, theo nhu b noi, FE dang hieu
-    @PostMapping("/{jobId}/applicants/{applicantId}")
-    public ResponseEntity<String> applyForJob(@PathVariable Long jobId, @PathVariable Long applicantId) {
-        jobService.applyForJob(jobId, applicantId);
-        return ResponseEntity.ok("Job application successful.");
-    }
+//    @PostMapping("/{jobId}/applicants/{applicantId}")
+//    public ResponseEntity<String> applyForJob(@PathVariable Long jobId, @PathVariable Long applicantId) {
+//        jobService.applyForJob(jobId, applicantId);
+//        return ResponseEntity.ok("Job application successful.");
+//    }
 
     // API get list applyForJob
     // b tạ thêm cái này, trả ra data làjob đã apply

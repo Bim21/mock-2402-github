@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -26,4 +27,5 @@ public interface IJobRepository extends MongoRepository<Job, Long> {
     List<Job> findByLevelAndCareerJobIn(String level, List<String> careerJob);
 
     List<Job> findByJobAddressAndLevelAndCareerJobIn(List<String> jobAddress, String level, List<String> careerJob);
+
 }

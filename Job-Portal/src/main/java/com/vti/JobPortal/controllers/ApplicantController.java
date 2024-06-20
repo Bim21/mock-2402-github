@@ -1,7 +1,9 @@
 package com.vti.JobPortal.controllers;
 import com.vti.JobPortal.entity.Applicant;
 import com.vti.JobPortal.entity.ApplicantDetails;
+import com.vti.JobPortal.entity.Job;
 import com.vti.JobPortal.services.ApplicantService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -72,4 +74,25 @@ public class ApplicantController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update applicant details.");
         }
     }
+
+    @PostMapping("/{applicantId}/apply/{jobId}")
+    public ResponseEntity<String> applyJob(@PathVariable Long applicantId, @PathVariable Long jobId) {
+        try {
+            applicantService.applyJob(applicantId, jobId);
+            return ResponseEntity.ok("Job applied successfully.");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/{applicantId}/applied-jobs")
+    public ResponseEntity<List<Job>> getAppliedJobs(@PathVariable Long applicantId) {
+        try {
+            List<Job> appliedJobs = applicantService.getAppliedJobsForApplicant(applicantId);
+            return ResponseEntity.ok(appliedJobs);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

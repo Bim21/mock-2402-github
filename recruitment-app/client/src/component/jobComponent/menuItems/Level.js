@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
+import { useJobContext } from "../../../contexts/JobProvider";
 
 const Level = () => {
-  const [value, setValue] = useState("");
+  const { valueLevel, handeLevelChange } = useJobContext();
 
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
@@ -25,17 +26,6 @@ const Level = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  const handeCheckboxChange = (event) => {
-    const { name, checked } = event.target;
-
-    setValue({
-      ...value,
-      [name]: checked ? event.target.value : "",
-    });
-  };
-
-  console.log(Object.values(value).filter((item) => item !== ""));
 
   return (
     <div className="relative " ref={menuRef}>
@@ -67,7 +57,14 @@ const Level = () => {
               <div className="absolute w-full">
                 <div className="flex flex-col gap-1 h-[40px] pr-[4px] ">
                   <div className="flex">
-                    <input type="radio" id="all" name="company" value="all" />
+                    <input
+                      type="radio"
+                      id="all"
+                      name="level"
+                      value={""}
+                      checked={valueLevel === ""}
+                      onChange={handeLevelChange}
+                    />
                     <label for="all" className="ml-[10px]">
                       Tất cả cấp bậc
                     </label>
@@ -78,9 +75,10 @@ const Level = () => {
                     <input
                       type="radio"
                       id="1"
-                      name="company"
-                      value="Thực tập sinh/ Sinh viên"
-                      onChange={handeCheckboxChange}
+                      name="level"
+                      value="Thực tập sinh/ sinh viên"
+                      checked={valueLevel === "Thực tập sinh/ sinh viên"}
+                      onChange={handeLevelChange}
                     />
                     <label for="all" className="ml-[10px]">
                       Thực tập sinh/ Sinh viên
@@ -92,9 +90,10 @@ const Level = () => {
                     <input
                       type="radio"
                       id="2"
-                      name="company"
+                      name="level"
                       value="Mới tốt nghiệp"
-                      onChange={handeCheckboxChange}
+                      checked={valueLevel === "Mới tốt nghiệp"}
+                      onChange={handeLevelChange}
                     />
                     <label for="all" className="ml-[10px]">
                       Mới tốt nghiệp
@@ -106,9 +105,10 @@ const Level = () => {
                     <input
                       type="radio"
                       id="3"
-                      name="company"
+                      name="level"
                       value="Nhân viên"
-                      onChange={handeCheckboxChange}
+                      checked={valueLevel === "Nhân viên"}
+                      onChange={handeLevelChange}
                     />
                     <label for="all" className="ml-[10px]">
                       Nhân viên
@@ -120,9 +120,10 @@ const Level = () => {
                     <input
                       type="radio"
                       id="4"
-                      name="company"
+                      name="level"
                       value="Trưởng phòng"
-                      onChange={handeCheckboxChange}
+                      checked={valueLevel === "Trưởng phòng"}
+                      onChange={handeLevelChange}
                     />
                     <label for="all" className="ml-[10px]">
                       Trưởng phòng
@@ -134,9 +135,10 @@ const Level = () => {
                     <input
                       type="radio"
                       id="4"
-                      name="company"
+                      name="level"
                       value="Giám đốc và cấp cao hơn"
-                      onChange={handeCheckboxChange}
+                      checked={valueLevel === "Giám đốc và cấp cao hơn"}
+                      onChange={handeLevelChange}
                     />
                     <label for="all" className="ml-[10px]">
                       Giám đốc và cấp cao hơn

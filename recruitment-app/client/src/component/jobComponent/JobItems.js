@@ -49,7 +49,7 @@ const JobItem = ({
         </div>
         <div className="text-sm hover:text-orange-400">{companyName}</div>
         <div className="text-sm text-orange-400">
-          {salary} <span className="text-black"> | {location}</span>
+          ${salary} <span className="text-black"> | {location}</span>
         </div>
         <div className="flex gap-1 text-[12px] text-slate-500">
           {tags.map((tag, index) => (
@@ -64,12 +64,6 @@ const JobItem = ({
           className="w-[24px] h-[24px] rounded-full hover:bg-blue-50 hover:cursor-pointer"
           onClick={handleClickSave}
         />
-        <button
-          className="bg-orange-400 p-1 rounded-md text-white hover:bg-orange-300"
-          onClick={handleClickApply}
-        >
-          + Ứng tuyển
-        </button>
       </div>
     </div>
   );

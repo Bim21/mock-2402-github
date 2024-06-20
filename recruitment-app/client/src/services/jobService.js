@@ -10,10 +10,10 @@ const jobService = {
     return api.post(`${END_POINT}/postJob?employerId=${id}`, body);
   },
   update(id, body) {
-    return api.put(`${END_POINT}/update/${id}`, body);
+    return api.put(`${END_POINT}/${id}`, body);
   },
   delete(id) {
-    return api.delete(`${END_POINT}/delete/${id}`);
+    return api.delete(`${END_POINT}/${id}`);
   },
   getAppliedJobs(jobId, applicantId) {
     return api.get(`${END_POINT}/${jobId}/applicants/${applicantId}}`);
@@ -27,9 +27,9 @@ const jobService = {
   getJobById(id) {
     return api.get(`${END_POINT}/${id}`);
   },
-  // testSearch(params) {
-  //   return api.get(END_POINT, { params });
-  // },
+  search(params) {
+    return api.get(`${END_POINT}/search`, { params });
+  },
 };
 
 export default jobService;

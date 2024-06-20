@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
+import { useJobContext } from "../../../contexts/JobProvider";
 
+//Ngành nghề
 const Career = () => {
-  const [value, setValue] = useState({
-    option1: "",
-    option2: "",
-    option3: "",
-  });
+  const { valueCareer, handeCareerChange } = useJobContext();
+
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -28,17 +27,6 @@ const Career = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  console.log(Object.values(value).filter((item) => item !== ""));
-
-  const handeCheckboxChange = (event) => {
-    const { name, checked } = event.target;
-
-    setValue({
-      ...value,
-      [name]: checked ? event.target.value : "",
-    });
-  };
 
   return (
     <div className="relative " ref={menuRef}>
@@ -78,7 +66,8 @@ const Career = () => {
                       id="option1"
                       name="option1"
                       value="Bán lẻ/ Tiêu dùng"
-                      onChange={handeCheckboxChange}
+                      checked={valueCareer["option1"] === "Bán lẻ/ Tiêu dùng"}
+                      onChange={handeCareerChange}
                       className=""
                     />
                     <label className="ml-[10px]">Bán lẻ/ Tiêu dùng</label>
@@ -89,7 +78,8 @@ const Career = () => {
                       id="option2"
                       name="option2"
                       value="Bảo Hiểm"
-                      onChange={handeCheckboxChange}
+                      checked={valueCareer["option2"] === "Bảo Hiểm"}
+                      onChange={handeCareerChange}
                     />
                     <label className="ml-[10px]">Bảo Hiểm</label>
                   </div>
@@ -99,7 +89,8 @@ const Career = () => {
                       id="option3"
                       name="option3"
                       value="Bất động sản"
-                      onChange={handeCheckboxChange}
+                      checked={valueCareer["option3"] === "Bất động sản"}
+                      onChange={handeCareerChange}
                     />
                     <label className="ml-[10px]">Bất động sản</label>
                   </div>
@@ -108,11 +99,14 @@ const Career = () => {
                       type="checkbox"
                       id="option4"
                       name="option4"
-                      value="CEO & General Management"
-                      onChange={handeCheckboxChange}
+                      value="CEO & General Manangement"
+                      checked={
+                        valueCareer["option4"] === "CEO & General Manangement"
+                      }
+                      onChange={handeCareerChange}
                     />
                     <label className="ml-[10px]">
-                      CEO & General Management
+                      CEO & General Manangement
                     </label>
                   </div>
                   <div className="py-[10px] px-[8px] inline-flex items-center rounded-md hover:bg-blue-50">
@@ -121,7 +115,10 @@ const Career = () => {
                       id="option5"
                       name="option5"
                       value="Chính Phủ/ Phi lợi nhuận"
-                      onChange={handeCheckboxChange}
+                      checked={
+                        valueCareer["option5"] === "Chính Phủ/ Phi lợi nhuận"
+                      }
+                      onChange={handeCareerChange}
                     />
                     <label className="ml-[10px]">
                       Chính Phủ/ Phi lợi nhuận
@@ -133,11 +130,50 @@ const Career = () => {
                       id="option6"
                       name="option6"
                       value="Công nghệ thông tin/ Viễn thông"
-                      onChange={handeCheckboxChange}
+                      checked={
+                        valueCareer["option6"] ===
+                        "Công nghệ thông tin/ Viễn thông"
+                      }
+                      onChange={handeCareerChange}
                     />
                     <label className="ml-[10px]">
                       Công nghệ thông tin/ Viễn thông
                     </label>
+                  </div>
+                  <div className="py-[10px] px-[8px] inline-flex items-center rounded-md hover:bg-blue-50">
+                    <input
+                      type="checkbox"
+                      id="option6"
+                      name="option6"
+                      value="Hành chính văn phòng"
+                      checked={
+                        valueCareer["option6"] === "Hành chính văn phòng"
+                      }
+                      onChange={handeCareerChange}
+                    />
+                    <label className="ml-[10px]">Hành chính văn phòng</label>
+                  </div>
+                  <div className="py-[10px] px-[8px] inline-flex items-center rounded-md hover:bg-blue-50">
+                    <input
+                      type="checkbox"
+                      id="option6"
+                      name="option6"
+                      value="Khoa học kỹ thuật"
+                      checked={valueCareer["option6"] === "Khoa học kỹ thuật"}
+                      onChange={handeCareerChange}
+                    />
+                    <label className="ml-[10px]">Khoa học kỹ thuật</label>
+                  </div>{" "}
+                  <div className="py-[10px] px-[8px] inline-flex items-center rounded-md hover:bg-blue-50">
+                    <input
+                      type="checkbox"
+                      id="option6"
+                      name="option6"
+                      value="Kinh doanh"
+                      checked={valueCareer["option6"] === "Kinh doanh"}
+                      onChange={handeCareerChange}
+                    />
+                    <label className="ml-[10px]">Kinh doanh</label>
                   </div>
                 </div>
               </div>

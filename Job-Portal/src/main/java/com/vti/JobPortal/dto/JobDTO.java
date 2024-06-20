@@ -13,7 +13,7 @@ import java.util.List;
 public class JobDTO {
     private String level;
     private String title;
-    private List<String> fieldJob;
+    private String fieldJob;
     private List<String> addressJob;
     private String descriptionJob;
     private List<String> requirementJob;

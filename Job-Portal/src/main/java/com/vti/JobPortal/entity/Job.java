@@ -27,7 +27,7 @@ public class Job {
     private String level;                       // cấp độ
     private Integer salary;                     // mức lương
     private String workingTime;                 // thời gian làm việc (part,full,free-lance)
-    private List<String> jobField;              // lĩnh vực công việc
+    private String jobField;              // lĩnh vực công việc
     private List<String> careerJob;                   // Ngành nghề
     private List<String> jobAddress;            // địa chỉ job
     private Integer minimumYearsOfExperience;   // số năm kinh nghiệm tối thiểu

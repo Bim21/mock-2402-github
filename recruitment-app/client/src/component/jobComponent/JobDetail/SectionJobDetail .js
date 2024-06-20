@@ -55,7 +55,7 @@ const SectionJobDetail = ({ jobs }) => {
       </div>
       <div className="w-full flex-grow">
         <div className="font-semibold text-[13px] text-orange-400">
-          {jobs.salary}
+          ${jobs.salary}
         </div>
         <div className="mt-[12px] leading-[16px] flex">
           <span className="text-[16px] text-slate-600">

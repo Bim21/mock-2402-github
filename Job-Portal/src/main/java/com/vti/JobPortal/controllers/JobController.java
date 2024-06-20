@@ -88,7 +88,7 @@ public class JobController {
 
     @GetMapping("/search")
     public List<Job> searchJobs(
-            @RequestParam(value = "jobField", required = false) List<String> jobField,
+            @RequestParam(value = "jobField", required = false) String jobField,
             @RequestParam(value = "jobAddress", required = false) List<String> jobAddress,
             @RequestParam(value = "level", required = false) String level,
             @RequestParam(value = "career", required = false) List<String> careerJob)
@@ -107,6 +107,22 @@ public class JobController {
             return jobService.getJobsByLevel(level);
         } else if (jobField == null && jobAddress == null && level == null && careerJob != null) {
             return jobService.getJobsByCareerJob(careerJob);
+        } else if (jobField != null && jobAddress != null && level == null && careerJob == null) {
+            return jobService.getJobsByFieldAndAddress(jobField,jobAddress);
+        } else if (jobField != null && jobAddress != null && level != null && careerJob == null) {
+            return jobService.getJobsByFieldAndAddressAndLevel(jobField,jobAddress,level);
+        } else if (jobField == null && jobAddress != null && level != null && careerJob != null) {
+            return jobService.getJobsByAddressAndLevelAndCareer(jobAddress, level, careerJob);
+        } else if (jobField != null && jobAddress == null && level != null && careerJob != null) {
+            return jobService.getJobsByFieldAndLevelAndCareer(jobField, level, careerJob);
+        } else if (jobField != null && jobAddress != null && level == null && careerJob != null) {
+            return jobService.getJobsByFieldAndAddressAndCareer(jobField, jobAddress, careerJob);
+        } else if (jobField == null && jobAddress != null && level != null && careerJob == null) {
+            return jobService.getJobsByAddressAndLevel(jobAddress, level);
+        } else if (jobField == null && jobAddress != null && level == null && careerJob != null) {
+            return jobService.getJobsByAddressAndCareer(jobAddress, careerJob);
+        } else if (jobField == null && jobAddress == null && level != null && careerJob != null) {
+            return jobService.getJobsByLevelAndCareer(level, careerJob);
         } else {
             // Handle case when both jobField and jobAddress are provided
             return jobService.getJobsByFieldAndAddressAndLevelAndCareerJob(jobField,jobAddress,level,careerJob);

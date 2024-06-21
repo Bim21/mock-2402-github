@@ -13,11 +13,8 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { IoIosMail } from "react-icons/io";
 import { IoHomeSharp } from "react-icons/io5";
 import { GiGraduateCap } from "react-icons/gi";
-import { VscFiles } from "react-icons/vsc";
-import { MdPreview } from "react-icons/md";
-import { IoDownloadSharp } from "react-icons/io5";
+
 import TabSection from "./section/TabSection";
-import Section2 from "./section/Section2";
 import Section3 from "./section/Section3";
 import { IoPencil } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
@@ -26,8 +23,6 @@ import ApplyModal from "../../component/jobComponent/JobDetail/ApplyModal";
 import { toast } from "react-toastify";
 import { Button, Flex } from "antd";
 import { LiaLinkedin } from "react-icons/lia";
-import Bottom from "./Bottom";
-import jobService from "../../services/jobService";
 
 const { Header, Sider, Content } = Layout;
 
@@ -51,6 +46,10 @@ const ApplicantContent = (props) => {
     phoneNumber: "",
     address: "",
   });
+
+  const goToMyJob = () => {
+    navigate("/job-applied/:type");
+  };
 
   const onChange = (checked) => {
     console.log(`switch to ${checked}`);
@@ -117,11 +116,6 @@ const ApplicantContent = (props) => {
         </div>
         <Menu theme="" mode="inline" className="mt-2 bg-slate-100 h-auto">
           <div className="flex justify-center items-center pl-5 bg-slate-200 text-[16px] gap-3 h-16 rounded-[5px] mt-2">
-            <IoSpeedometerOutline className="w-auto h-auto" />
-            <Menu.Item className="">Tổng Quan</Menu.Item>
-          </div>
-
-          <div className="flex justify-center items-center pl-5 bg-slate-200 text-[16px] gap-3 h-16 rounded-[5px] mt-2">
             <ImProfile className="w-auto h-auto" />
             <Menu.Item className="">Hồ Sơ Của Tôi</Menu.Item>
           </div>
@@ -131,7 +125,10 @@ const ApplicantContent = (props) => {
             <Menu.Item className="">Công Ty Của Tôi</Menu.Item>
           </div>
 
-          <div className="flex justify-center items-center pl-5 bg-slate-200 text-[16px] gap-3 h-16 rounded-[5px] mt-2">
+          <div
+            className="flex justify-center items-center pl-5 bg-slate-200 text-[16px] gap-3 h-16 rounded-[5px] mt-2"
+            onClick={goToMyJob}
+          >
             <MdOutlineWork className="w-auto h-auto" />
             <Menu.Item className="">Việc Làm Của Tôi</Menu.Item>
           </div>
@@ -267,10 +264,10 @@ const ApplicantContent = (props) => {
                     </div>
                   </div>
 
-                  <Button className="flex items-center" type="primary">
+                  <button className="flex items-center">
                     <LiaLinkedin />
                     <div className="w-36 text-xl font-bold ">Nhap ho so</div>
-                  </Button>
+                  </button>
                 </div>
               </div>
             </div>

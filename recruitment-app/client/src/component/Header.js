@@ -100,32 +100,6 @@ const Header = (props) => {
                         >
                           Việc Làm
                         </button>
-                        <ul className="absolute hidden w-[150px] space-y-1 bg-white border rounded-md border-gray-200 shadow-lg group-hover:block">
-                          <li>
-                            <a
-                              className="block text-[12px] px-4 py-2 text-blue-600 hover:bg-gray-200"
-                              href="/"
-                            >
-                              Việc Làm Mới Nhất
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="block text-[12px] px-4 py-2 text-blue-600 hover:bg-gray-200"
-                              href="/"
-                            >
-                              Quản Lí Việc Làm
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="block text-[12px] px-4 py-2 text-blue-600 hover:bg-gray-200"
-                              href="/"
-                            >
-                              Tìm Việc Làm
-                            </a>
-                          </li>
-                        </ul>
                       </div>
                     </div>
                   </li>

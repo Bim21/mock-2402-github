@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class JwtInterceptor implements HandlerInterceptor {
@@ -36,16 +37,48 @@ public class JwtInterceptor implements HandlerInterceptor {
             return false;
         }
         try {
-            Claims claims =  JWTUtility.getInstance().parseToken(token);
+            Claims claims = JWTUtility.getInstance().parseToken(token);
             // You can perform additional validation or processing with the claims here
+
+            // Check if the user has the required permission
+            if (!hasPermission(claims, request)) {
+                response.sendError(HttpStatus.FORBIDDEN.value(), "Insufficient permission");
+                return false;
+            }
+
             // Add the claims to the request attributes to make them accessible to other components
             request.setAttribute("claims", claims);
-            return  true;
+            return true;
         } catch (Exception e) {
             response.sendError(HttpStatus.UNAUTHORIZED.value(), "Invalid token");
             return false;
         }
 
+    }
+    private boolean hasPermission(Claims claims, HttpServletRequest request) {
+        // Retrieve the required permission for the requested endpoint
+        String requiredPermission = getRequiredPermission(request);
+
+        // Check if the user's authorities contain the required permission
+        List<String> authorities = (List<String>) claims.get("authorities");
+        return authorities != null && authorities.contains(requiredPermission);
+    }
+    private String getRequiredPermission(HttpServletRequest request) {
+        String url = request.getRequestURI();
+
+        if (url.startsWith("/api/auth")) {
+            return null; // No permission required for authentication
+        } else if (url.startsWith("/api/applicants")) {
+            return "APPLICANT"; // Applicants require "APPLICANT" permission
+        } else if (url.startsWith("/api/educations")) {
+            return null; // No permission required for educations
+        } else if (url.startsWith("/api/employers")) {
+            return "EMPLOYER"; // Employers require "EMPLOYER" permission
+        } else if (url.startsWith("/api/jobs")) {
+            return null; // No permission required for jobs
+        } else {
+            return "ADMIN"; // Default to "ADMIN" permission for other endpoints
+        }
     }
 
     public String extractTokenFromRequest(HttpServletRequest request) {

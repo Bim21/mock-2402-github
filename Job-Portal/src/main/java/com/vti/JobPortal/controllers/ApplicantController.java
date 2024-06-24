@@ -1,7 +1,8 @@
 package com.vti.JobPortal.controllers;
 import com.vti.JobPortal.entity.Applicant;
-import com.vti.JobPortal.entity.ApplicantDetails;
+import com.vti.JobPortal.entity.Job;
 import com.vti.JobPortal.services.ApplicantService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,16 +61,39 @@ public class ApplicantController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/applicant/details/{applicantId}")
-    public ResponseEntity<String> updateApplicantDetails(@PathVariable Long applicantId, @RequestBody ApplicantDetails details) {
-        try {
-            applicantService.updateApplicantDetails(applicantId, details);
+//    @PostMapping("/applicant/details/{applicantId}")
+//    public Applicant updateApplicantDetails(@PathVariable Long applicantId, @RequestBody ApplicantDetails details) {
+////        try {
+////            applicantService.updateApplicantDetails(applicantId, details);
+////
+////            return ResponseEntity.ok("Applicant details updated successfully.");
+////
+////        } catch (IllegalArgumentException e) {
+////            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Applicant not found.");
+////        } catch (Exception e) {
+////            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update applicant details.");
+////        }
+//        return applicantService.updateApplicantDetails(applicantId, details);
+//    }
 
-            return ResponseEntity.ok("Applicant details updated successfully.");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Applicant not found.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update applicant details.");
+    @PostMapping("/{applicantId}/apply/{jobId}")
+    public ResponseEntity<String> applyJob(@PathVariable Long jobId,@PathVariable Long applicantId) {
+        try {
+            applicantService.applyJob(jobId, applicantId);
+            return ResponseEntity.ok("Job applied successfully.");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/{applicantId}/applied-jobs")
+    public ResponseEntity<List<Job>> getAppliedJobs(@PathVariable Long applicantId) {
+        try {
+            List<Job> appliedJobs = applicantService.getAppliedJobsForApplicant(applicantId);
+            return ResponseEntity.ok(appliedJobs);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

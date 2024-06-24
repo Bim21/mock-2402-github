@@ -10,7 +10,7 @@ const ApplyModal = ({
   handleSubmit,
   handleChange,
   title,
-}) => {
+}) => { 
   return (
     <>
       {isOpen && (
@@ -72,14 +72,27 @@ const ApplyModal = ({
                             required
                           />
                         </div>
+                        <div className="block text-gray-700">
+                          <label className="block text-gray-700">
+                            Email<span className="text-red-600">*</span>
+                          </label>
+                          <input
+                            type="email"
+                            name="email"
+                            value={data.email}
+                            onChange={handleChange}
+                            className="mt-1 p-1 w-full border rounded"
+                            required
+                          />
+                        </div>
                         <div className="">
                           <label className="block text-gray-700">
                             Bằng cấp cao nhất
                             <span className="text-red-600">*</span>
                           </label>
                           <select
-                            name="degree"
-                            value={data.degree}
+                            name="qualifications"
+                            value={data.qualifications}
                             onChange={handleChange}
                             className="mt-1 p-1 w-full border rounded"
                             required
@@ -111,7 +124,7 @@ const ApplyModal = ({
                               Select position
                             </option>
                             <option value="Thực tập sinh">
-                              Quản lí/Bán hàng
+                            Thực tập sinh
                             </option>
                             <option value="Mới tốt nghiệp">
                               Mới tốt nghiệp
@@ -129,8 +142,8 @@ const ApplyModal = ({
                           </label>
                           <input
                             type="date"
-                            name="dob"
-                            value={data.dob}
+                            name="dateOfBirth"
+                            value={data.dateOfBirth}
                             onChange={handleChange}
                             className="mt-1 p-1 w-full border rounded"
                             required
@@ -145,8 +158,8 @@ const ApplyModal = ({
                             <label className="inline-flex items-center">
                               <input
                                 type="radio"
-                                name="gender"
-                                value="male"
+                                name="sex"
+                                value={data.sex}
                                 onChange={handleChange}
                                 className="form-radio"
                                 required
@@ -156,8 +169,8 @@ const ApplyModal = ({
                             <label className="inline-flex items-center ml-6">
                               <input
                                 type="radio"
-                                name="gender"
-                                value="female"
+                                name="sex"
+                                value={data.sex}
                                 onChange={handleChange}
                                 className="form-radio"
                                 required
@@ -188,8 +201,8 @@ const ApplyModal = ({
                           </label>
                           <input
                             type="number"
-                            name="minimumYearsOfExperience"
-                            value={data.minimumYearsOfExperience}
+                            name="yearsOfExperience"
+                            value={data.yearsOfExperience}
                             onChange={handleChange}
                             className="mt-1 p-1 w-full border rounded"
                             required

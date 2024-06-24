@@ -97,14 +97,15 @@ public class JobService {
         job.setTitle(jobDTO.getTitle());
         job.setEmployerId(employer.getId());
         job.setDescription(jobDTO.getDescriptionJob());
-        job.setSkills("");
+        job.setSkills(jobDTO.getSkills());
         job.setLevel(jobDTO.getLevel());
-        job.setWorkingTime("");
+        job.setWorkingTime(jobDTO.getWorkingTime());
         job.setJobField(jobDTO.getFieldJob());
         job.setJobAddress(jobDTO.getAddressJob());
         job.setCareerJob(jobDTO.getCareerJob());
-        job.setMinimumYearsOfExperience(jobDTO.getNumberOfRecruitment());
-        job.setMinimumQualifications("");
+        job.setMinimumYearsOfExperience(jobDTO.getMinimumYearsOfExperience());
+        job.setMinimumQualifications(jobDTO.getMinimumQualifications());
+        job.setNumberOfRecruitment(jobDTO.getNumberOfRecruitment());
         job.setMaritalStatus("");
         job.setMinimumEducationalQualification("");
         job.setViews(0);
@@ -126,14 +127,14 @@ public class JobService {
         SequenceGeneratorService sequenceGeneratorService = new SequenceGeneratorService(mongoOperations);
         return sequenceGeneratorService.generateSequence("job_sequence");
     }
-
-    public void applyForJob(Long jobId, Long applicantId) {
-        Job job = jobRepository.findById(jobId).orElseThrow(() -> new EntityNotFoundException("Job not found."));
-        Applicant applicant = applicantRepository.findById(applicantId).orElseThrow(() -> new EntityNotFoundException("Applicant not found."));
-
-        job.applyForJob(applicant);
-        jobRepository.save(job);
-    }
+//
+//    public void applyForJob(Long jobId, Long applicantId) {
+//        Job job = jobRepository.findById(jobId).orElseThrow(() -> new EntityNotFoundException("Job not found."));
+//        Applicant applicant = applicantRepository.findById(applicantId).orElseThrow(() -> new EntityNotFoundException("Applicant not found."));
+//
+//        job.applyForJob(applicant);
+//        jobRepository.save(job);
+//    }
 
 
     public List<Job> getJobsByField(String jobField) {

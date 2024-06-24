@@ -18,10 +18,15 @@ public class JobDTO {
     private String descriptionJob;
     private List<String> requirementJob;
     private List<String> careerJob;
+    private List<String> skills;
     private Integer salary;
     private Integer views;
     private Date expiredDate;
     private Integer numberOfRecruitment;
+    private Integer minimumYearsOfExperience;   // số năm kinh nghiệm tối thiểu
+    private String maritalStatus;               // tình trạng hôn nhân
+    private String minimumQualifications;       // bằng cấp tối thiểu
+    private String workingTime;
     private String contactPerson;
     private String email;
     private String companyName;

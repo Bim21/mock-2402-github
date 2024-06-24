@@ -10,6 +10,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class JWTUtility {
@@ -35,14 +36,21 @@ public class JWTUtility {
     }
 
     public String generateTokenWithEmail(String email) {
-
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expirationMs);
+
         return Jwts.builder()
-                .setSubject(email).setIssuedAt(now)
+                .setSubject(email)
+                .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(secretKey)
                 .compact();
+    }
+    public Claims extractClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     public Claims parseToken(String token) {

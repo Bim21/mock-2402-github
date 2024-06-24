@@ -1,10 +1,12 @@
 package com.vti.JobPortal.controllers;
 
+import com.vti.JobPortal.config.MailUtils;
 import com.vti.JobPortal.database.SequenceGeneratorService;
 import com.vti.JobPortal.dto.SignInResponseDTO;
 import com.vti.JobPortal.dto.SignUpDTO;
 import com.vti.JobPortal.entity.Applicant;
 import com.vti.JobPortal.entity.Employer;
+import com.vti.JobPortal.entity.Role;
 import com.vti.JobPortal.jwt.JWTUtility;
 import com.vti.JobPortal.repositories.IApplicantRepository;
 import com.vti.JobPortal.repositories.IEmployerRepository;
@@ -27,16 +29,18 @@ public class AuthController {
     private final IApplicantRepository applicantRepository;
     private final PasswordEncoder passwordEncoder;
     private final JWTUtility jwtUtil;
+    private final MailUtils mailUtils;
 
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
 
     @Autowired
-    public AuthController(IEmployerRepository employerRepository, IApplicantRepository applicantRepository, PasswordEncoder passwordEncoder, JWTUtility jwtUtil) {
+    public AuthController(IEmployerRepository employerRepository, IApplicantRepository applicantRepository, PasswordEncoder passwordEncoder, JWTUtility jwtUtil, MailUtils mailUtils) {
         this.employerRepository = employerRepository;
         this.applicantRepository = applicantRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
+        this.mailUtils = mailUtils;
     }
 
 
@@ -52,6 +56,7 @@ public class AuthController {
         long nextId = sequenceGeneratorService.generateSequence("employer_sequence");
         Employer employer = new Employer();
         employer.setId(nextId);
+        employer.setRole(Role.EMPLOYER);
         employer.setFirstName(employerSignUpDTO.getFirstName());
         employer.setLastName(employerSignUpDTO.getLastName());
         employer.setEmail(employerSignUpDTO.getEmail());
@@ -63,7 +68,8 @@ public class AuthController {
 
         employer.setPassword(passwordEncoder.encodePassword(employer.getPassword()));
         employerRepository.save(employer);
-
+        String emailContent = "Chào" + employer.getRole() + employer.getEmail() + "\n" + "Bạn vừa dùng email này để đăng ký tài khoản cho hệ thống MockTimViec\n" + "Tài khoản của bạn là: " + employer.getEmail() + "\n" + "Mật khẩu đăng nhập là: " + employer.getPassword() + "\n\n" + "Đây là email tự động, vui lòng không reply email này.\nCảm ơn.\n\n";
+        mailUtils.sendEmail(employer.getEmail(), "Thư xác thực tài khoản", emailContent);
         return new ResponseEntity<>("Employer registered successfully.", HttpStatus.OK);
     }
 
@@ -103,6 +109,7 @@ public class AuthController {
 
         Applicant applicant = new Applicant();
         applicant.setId(nextId);
+        applicant.setRole(Role.APPLICANT);
         applicant.setFirstName(signUpDTO.getFirstName());
         applicant.setLastName(signUpDTO.getLastName());
         applicant.setEmail(signUpDTO.getEmail());
@@ -111,6 +118,8 @@ public class AuthController {
 
         applicant.setPassword(passwordEncoder.encodePassword(applicant.getPassword()));
         applicantRepository.save(applicant);
+        String emailContent = "Chào" + applicant.getRole() + applicant.getEmail() + "\n" + "Bạn vừa dùng email này để đăng ký tài khoản cho hệ thống MockTimViec\n" + "Tài khoản của bạn là: " + applicant.getEmail() + "\n" + "Mật khẩu đăng nhập là: " + applicant.getPassword() + "\n\n" + "Đây là email tự động, vui lòng không reply email này.\nCảm ơn.\n\n";
+        mailUtils.sendEmail(applicant.getEmail(), "Thư xác thực tài khoản", emailContent);
 
         return new ResponseEntity<>("Applicant registered successfully.", HttpStatus.OK);
     }
@@ -137,5 +146,7 @@ public class AuthController {
         responseDTO.setPassword(applicant.getPassword());
         responseDTO.setToken(token);
         return ResponseEntity.ok(responseDTO);
+
     }
+
 }

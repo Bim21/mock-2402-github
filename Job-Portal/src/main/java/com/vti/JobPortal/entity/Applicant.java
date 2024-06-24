@@ -25,11 +25,22 @@ public class Applicant {
     private String firstName;
     private String lastName;
     private Role role;
-    private String username;
     private String email;
     private String password;
     private String phoneNumber;
-    private ApplicantDetails details;
+    private String level;
+    private Integer yearsOfExperience;
+    private String qualifications;
+    private String title;
+    private String career;
+    private Integer salary;
+    private Date dateOfBirth;
+    private String sex;
+    private String address;
+    private String fileCV;
+    private List<WorkExperience> workExperiences;
+    private List<Education> educations;
+    private List<Language> languages;
     private StatusJob statusJob;
     @DBRef
     @JsonIgnore

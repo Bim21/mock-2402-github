@@ -1,12 +1,10 @@
 package com.vti.JobPortal.services;
 
 import com.vti.JobPortal.entity.Applicant;
-import com.vti.JobPortal.entity.ApplicantDetails;
 import com.vti.JobPortal.entity.Job;
 import com.vti.JobPortal.repositories.IApplicantRepository;
 import com.vti.JobPortal.repositories.IJobRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,15 +51,16 @@ public class ApplicantService {
         return false;
     }
 
-    public void updateApplicantDetails(Long applicantId, ApplicantDetails details) {
-        Applicant applicant = applicantRepository.findById(applicantId).orElse(null);
-        if (applicant != null) {
-            applicant.setDetails(details);
-            applicantRepository.save(applicant);
-        } else {
-            throw new IllegalArgumentException("Applicant not found.");
-        }
-    }
+//    public Applicant updateApplicantDetails(Long applicantId, ApplicantDetails details) {
+//        Applicant applicant = applicantRepository.findById(applicantId).orElse(null);
+//        if (applicant != null) {
+//            applicant.setDetails(details);
+//            applicantRepository.save(applicant);
+//        } else {
+//            throw new IllegalArgumentException("Applicant not found.");
+//        }
+//        return details;
+//    }
 
     public void applyJob(Long applicantId, Long jobId) {
         Applicant applicant = applicantRepository.findById(applicantId)

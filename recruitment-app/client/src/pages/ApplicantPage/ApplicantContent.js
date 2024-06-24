@@ -23,6 +23,7 @@ import ApplyModal from "../../component/jobComponent/JobDetail/ApplyModal";
 import { toast } from "react-toastify";
 import { Button, Flex } from "antd";
 import { LiaLinkedin } from "react-icons/lia";
+import applicantService from "../../services/applicantService";
 
 const { Header, Sider, Content } = Layout;
 
@@ -34,17 +35,17 @@ const ApplicantContent = (props) => {
   const [formData, setFormData] = useState({
     firstName: userInfo.firstName,
     lastName: userInfo.lastName,
-    gender: "",
-    title: "",
-    dob: "",
-    degree: "",
-    fieldJob: "",
-    level: "",
-    minimumYearsOfExperience: "",
-    career: "",
-    salary: "",
-    phoneNumber: "",
-    address: "",
+    email: userInfo.email,
+    sex: userInfo.sex ?? "",
+    title: userInfo.title ?? "",
+    dateOfBirth: userInfo.dateOfBirth ?? "",
+    qualifications: userInfo.qualifications ?? "",
+    level: userInfo.level ?? "",
+    yearsOfExperience: userInfo.yearsOfExperience ?? "",
+    career: userInfo.career ?? "",
+    salary: userInfo.salary ?? "",
+    phoneNumber: userInfo.phoneNumber ?? "",
+    address: userInfo.address ?? "",
   });
 
   const goToMyJob = () => {
@@ -72,10 +73,18 @@ const ApplicantContent = (props) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     try {
+      e.preventDefault();
+    const response = await applicantService.update(
+      userInfo.id,
+      formData
+    );
+    localStorage.setItem("userInfo", JSON.stringify(response));
+    console.log(response);
+    toast.success("Cập nhật thành công");
+    closeModal();
     } catch (error) {
-      toast.error("");
+      toast.error("Cập nhật thất bại");
     }
   };
 

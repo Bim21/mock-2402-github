@@ -15,9 +15,6 @@ const jobService = {
   delete(id) {
     return api.delete(`${END_POINT}/${id}`);
   },
-  getAppliedJobs(jobId, applicantId) {
-    return api.get(`${END_POINT}/${jobId}/applicants/${applicantId}}`);
-  },
   getSavedJobs() {
     return api.get(`${END_POINT}/saved-jobs}`);
   },

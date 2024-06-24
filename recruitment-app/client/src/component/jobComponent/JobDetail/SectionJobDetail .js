@@ -1,28 +1,32 @@
 import { Button } from "antd/es/radio";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import ApplyModal from "./ApplyModal";
 import { getUserInfo } from "../../../utils/funcHelpers";
+import jobService from "../../../services/jobService";
+import applicantService from "../../../services/applicantService";
 
 const SectionJobDetail = ({ jobs }) => {
   const userInfo = getUserInfo();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isApply, setIsApply] = useState(true);
+  console.log(jobs.id);
   const [formData, setFormData] = useState({
     firstName: userInfo.firstName,
     lastName: userInfo.lastName,
-    gender: "",
-    title: "",
-    dob: "",
-    degree: "",
-    fieldJob: "",
-    level: "",
-    minimumYearsOfExperience: "",
-    career: "",
-    salary: "",
-    phoneNumber: "",
-    address: "",
+    email: userInfo.email,
+    sex: userInfo.sex ?? "",
+    title: userInfo.title ?? "",
+    dateOfBirth: userInfo.dateOfBirth ?? "",
+    qualifications: userInfo.qualifications ?? "",
+    level: userInfo.level ?? "",
+    yearsOfExperience: userInfo.yearsOfExperience ?? "",
+    career: userInfo.career ?? "",
+    salary: userInfo.salary ?? "",
+    phoneNumber: userInfo.phoneNumber ?? "",
+    address: userInfo.address ?? "",
   });
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -31,13 +35,17 @@ const SectionJobDetail = ({ jobs }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    try {
     e.preventDefault();
-    console.log(formData);
+    await applicantService.getAppliedJobs(userInfo.id, jobs.id);
+    console.log('Job applied succesfully');
+    setIsApply(false); 
     closeModal();
-    setIsApply(false);
+    } catch (error) {
+      console.log('apply that bai:', error);
+    }
   };
-
   const openModal = () => {
     setIsOpenModal(true);
   };
@@ -45,7 +53,6 @@ const SectionJobDetail = ({ jobs }) => {
   const closeModal = () => {
     setIsOpenModal(false);
   };
-
   return (
     <div className="w-full p-[2rem] flex flex-col border-[1px] px-[10px] bg-gray-100 border-gray-200 rounded-[6px]">
       <div className="w-full flex flex-row mb-[10px]">

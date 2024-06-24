@@ -1,8 +1,10 @@
 package com.vti.JobPortal.services;
 
+import com.vti.JobPortal.database.SequenceGeneratorService;
 import com.vti.JobPortal.entity.WorkExperience;
 import com.vti.JobPortal.repositories.IWorkExperienceRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -11,9 +13,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class WorkExperienceService {
     private final IWorkExperienceRepository workExperienceRepository;
+    private final SequenceGeneratorService sequenceGeneratorService;
 
-    public WorkExperienceService(IWorkExperienceRepository workExperienceRepository) {
+    @Autowired
+    public WorkExperienceService(IWorkExperienceRepository workExperienceRepository, SequenceGeneratorService sequenceGeneratorService) {
         this.workExperienceRepository = workExperienceRepository;
+        this.sequenceGeneratorService = sequenceGeneratorService;
     }
 
     public Page<WorkExperience> getAllWorkExperiencesByPage(int page, int size) {
@@ -22,6 +27,8 @@ public class WorkExperienceService {
     }
 
     public WorkExperience createWorkExperience(WorkExperience workExperience) {
+        long sequence = sequenceGeneratorService.generateSequence("work_experience_sequence");
+        workExperience.setId(sequence);
         return workExperienceRepository.save(workExperience);
     }
 

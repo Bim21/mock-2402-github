@@ -1,24 +1,29 @@
 package com.vti.JobPortal.services;
 
+import com.vti.JobPortal.database.SequenceGeneratorService;
 import com.vti.JobPortal.entity.Education;
 import com.vti.JobPortal.repositories.IEducationRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class EducationService {
     private final IEducationRepository educationRepository;
+    private final SequenceGeneratorService sequenceGeneratorService;
 
-    public EducationService(IEducationRepository educationRepository) {
+    @Autowired
+    public EducationService(IEducationRepository educationRepository, SequenceGeneratorService sequenceGeneratorService) {
         this.educationRepository = educationRepository;
+        this.sequenceGeneratorService = sequenceGeneratorService;
     }
 
     public Education createEducation(Education education) {
+        long sequence = sequenceGeneratorService.generateSequence("education_sequence");
+        education.setId(sequence);
         return educationRepository.save(education);
     }
 

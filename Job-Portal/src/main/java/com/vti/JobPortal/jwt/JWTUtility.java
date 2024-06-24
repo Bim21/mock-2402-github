@@ -43,7 +43,7 @@ public class JWTUtility {
                 .setSubject(email)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, secret)
+                .signWith(secretKey)
                 .compact();
     }
     public Claims extractClaims(String token) {

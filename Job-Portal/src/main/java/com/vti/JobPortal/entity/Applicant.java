@@ -30,6 +30,7 @@ public class Applicant {
     private String password;
     private String phoneNumber;
     private ApplicantDetails details;
+    private StatusJob statusJob;
     @DBRef
     @JsonIgnore
     private List<Job> appliedJobs;
@@ -43,7 +44,7 @@ public class Applicant {
             appliedJobs.add(job);
             job.addApplicant(this); // Add the applicant to the job's applicants list
         }
+        this.setStatusJob(StatusJob.PENDING);
     }
-
 }
 

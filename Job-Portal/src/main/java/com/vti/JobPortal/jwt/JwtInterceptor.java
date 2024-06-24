@@ -64,34 +64,21 @@ public class JwtInterceptor implements HandlerInterceptor {
         return authorities != null && authorities.contains(requiredPermission);
     }
     private String getRequiredPermission(HttpServletRequest request) {
-        String method = request.getMethod(); // Get the HTTP method (e.g., GET, POST, PUT, DELETE)
-        String url = request.getRequestURI(); // Get the request URL
+        String url = request.getRequestURI();
 
-        if (url.startsWith("/api/admin")) {
-            // Require admin permission for URLs starting with "/admin"
-            return "ADMIN";
-        } else if (url.startsWith("/api/employers")) {
-            // URLs starting with "/employer" require employer-related permissions
-            if (method.equals("GET")) {
-                // Require employer permission for GET requests
-                return "EMPLOYER";
-            } else if (method.equals("POST") || method.equals("PUT") || method.equals("DELETE")) {
-                // Require admin permission for POST, PUT, and DELETE requests
-                return "ADMIN";
-            }
+        if (url.startsWith("/api/auth")) {
+            return null; // No permission required for authentication
         } else if (url.startsWith("/api/applicants")) {
-            // URLs starting with "/applicant" require applicant-related permissions
-            if (method.equals("GET")) {
-                // Require applicant permission for GET requests
-                return "APPLICANT";
-            } else if (method.equals("POST") || method.equals("PUT") || method.equals("DELETE")) {
-                // Require admin permission for POST, PUT, and DELETE requests
-                return "ADMIN";
-            }
+            return "APPLICANT"; // Applicants require "APPLICANT" permission
+        } else if (url.startsWith("/api/educations")) {
+            return null; // No permission required for educations
+        } else if (url.startsWith("/api/employers")) {
+            return "EMPLOYER"; // Employers require "EMPLOYER" permission
+        } else if (url.startsWith("/api/jobs")) {
+            return null; // No permission required for jobs
+        } else {
+            return "ADMIN"; // Default to "ADMIN" permission for other endpoints
         }
-
-        // Default permission for other URLs and methods
-        return "DEFAULT";
     }
 
     public String extractTokenFromRequest(HttpServletRequest request) {

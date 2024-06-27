@@ -17,6 +17,7 @@ import AuthUserLayout from "./layouts/AuthUserLayout ";
 import AppliedJobs from "./pages/AppliedJobs";
 import ApplicantPage from "./pages/ApplicantPage/ApplicantPage";
 import JobDetailPage from "./pages/JobDetailPage";
+import UserDetail from "./pages/EmployerPage/section/UserDetail";
 
 function App() {
   return (
@@ -65,6 +66,7 @@ function App() {
         <Route path="/job-applied/:type" element={<AppliedJobs />} />
         <Route path="/jobs/:jobId" element={<JobDetailPage />} />
         <Route path="/applicantPage" element={<ApplicantPage />} />
+        <Route path="/users" element={<UserDetail />} />
       </Routes>
       <ToastContainer theme="colored" />
     </BrowserRouter>

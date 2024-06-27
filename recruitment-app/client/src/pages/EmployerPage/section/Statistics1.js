@@ -1,5 +1,6 @@
 import React from "react";
 import { getEmployerInfo } from "../../../utils/funcHelpers";
+import UserTable from "./UserTable";
 
 const Statistics1 = () => {
   const employerInfo = getEmployerInfo();
@@ -76,8 +77,13 @@ const Statistics1 = () => {
       </div>
       <div className="w-[58%] ml-2 bg-white rounded-lg flex-col justify-center items-end shadow-[0_0_6px_-3px_rgba(0,0,0,0.3)]">
         <div className="p-[20px] w-full h-[90%]">
-          <div className="text-[18px] font-semibold">Tình trạng hiện tại</div>
-          <div>
+          <div className="text-[18px] font-semibold mb-2">
+            Tổng số lượng hồ sơ
+          </div>
+
+          <UserTable />
+
+          {/* <div>
             <div className=" w-full flex justify-center mt-[70px]">
               <img
                 src="https://employer.vietnamworks.com/v2/dashboard/static/media/icon-empty-current-status.dc7c121ad253b15972a4bb894e7084fd.svg"
@@ -87,7 +93,7 @@ const Statistics1 = () => {
             <div className="text-center mt-[10px]">
               Không có dữ liệu cho báo cáo này
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="h-[10%] bg-sky-100 text-center py-[10px] rounded-b-lg border-t-[1px]">
           <div className="text-[14px] text-blue-400 hover:cursor-pointer hover:text-slate-800">

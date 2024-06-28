@@ -1,74 +1,79 @@
-import React from "react";
-import { Space, Table, Tag } from "antd";
-const columns = [
-  {
-    title: "Họ Tên",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
+import React, { useEffect, useState } from "react";
+import { Button, Space, Table, Tag } from "antd";
+import applicantService from "../../../services/applicantService";
+import { getUserInfo } from "../../../utils/funcHelpers";
+import { Link } from "react-router-dom";
+import { CloseCircleOutlined, SendOutlined } from "@ant-design/icons";
 
-  {
-    title: "Địa chỉ",
-    dataIndex: "address",
-    key: "address",
-  },
+const UserTable = () => {
+  const [userApplyData, setUserApplyData] = useState([]);
+  const userInfo = getUserInfo();
 
-  {
-    title: "Chức vụ",
-    dataIndex: "title",
-    key: "title",
-  },
+  const getUserApply = async () => {
+    try {
+      const reponse = await applicantService.getAppliedJobs(userInfo?.id);
+      console.log("dataApply...", reponse);
+      setUserApplyData(reponse);
+    } catch (e) {
+      console.log("có lỗi");
+    }
+  };
 
-  {
-    title: "Email",
-    dataIndex: "email",
-    key: "email",
-  },
-  {
-    title: "Cấp bậc",
-    dataIndex: "level",
-    key: "level",
-  },
+  useEffect(() => {
+    getUserApply();
+  }, []);
 
-  {
-    title: "Thao tác",
-    key: "action",
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Gửi mail</a>
-        <a>Từ chối</a>
-      </Space>
-    ),
-  },
-];
-const data = [
-  {
-    key: "1",
-    name: "John Brown",
-    address: "New York No. 1 Lake Park",
-    title: "Dev",
-    email: "example1@gmail.com",
-    level: "Thực tập sinh",
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    title: "Test",
-    email: "example1@gmail.com",
-    level: "Nhân viên",
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    title: "PM",
-    email: "example1@gmail.com",
-    level: "Giám đốc",
-  },
-];
-const UserTable = () => <Table columns={columns} dataSource={data} />;
+  const columns = [
+    {
+      title: "Họ Tên",
+      dataIndex: "employer",
+      render: (value) => (
+        <Link to="/users">{value.firstName + " " + value.lastName}</Link>
+      ),
+    },
+    {
+      title: "Địa chỉ",
+      dataIndex: "jobAddress",
+      render: (value) => value.join(", "),
+    },
+    {
+      title: "Chức vụ",
+      dataIndex: "title",
+      ellipsis: true,
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+    },
+    {
+      title: "Cấp bậc",
+      dataIndex: "level",
+    },
+    {
+      title: "Thao tác",
+      dataIndex: "actions",
+      render: (value, record, index) => (
+        <Space size="small">
+          <Button type="primary" icon={<SendOutlined />}>
+            Gửi mail
+          </Button>
+          <Button type="primary" danger icon={<CloseCircleOutlined />}>
+            Từ chối
+          </Button>
+        </Space>
+      ),
+    },
+  ];
+
+  return (
+    <Table
+      columns={columns}
+      dataSource={userApplyData}
+      pagination={{
+        pageSize: 4,
+      }}
+      scroll={{ x: 800, y: 800 }}
+    />
+  );
+};
 export default UserTable;

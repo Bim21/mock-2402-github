@@ -26,7 +26,7 @@ const SectionJobDetail = ({ jobs }) => {
     phoneNumber: userInfo.phoneNumber ?? "",
     address: userInfo.address ?? "",
   });
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -37,13 +37,13 @@ const SectionJobDetail = ({ jobs }) => {
 
   const handleSubmit = async (e) => {
     try {
-    e.preventDefault();
-    await applicantService.getAppliedJobs(userInfo.id, jobs.id);
-    console.log('Job applied succesfully');
-    setIsApply(false); 
-    closeModal();
+      e.preventDefault();
+      await applicantService.apply(userInfo.id, jobs.id);
+      console.log("Job applied succesfully");
+      setIsApply(false);
+      closeModal();
     } catch (error) {
-      console.log('apply that bai:', error);
+      console.log("apply that bai:", error);
     }
   };
   const openModal = () => {

@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GrNext } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
+import { getUserInfo } from "../../../utils/funcHelpers";
+import applicantService from "../../../services/applicantService";
 
 const OverviewTab = () => {
+  const [userApplyData, setUserApplyData] = useState([]);
+
   const navigate = useNavigate();
+  const userInfo = getUserInfo();
+
+  const getUserApply = async () => {
+    try {
+      const reponse = await applicantService.getAppliedJobs(userInfo?.id);
+      console.log("dataApply...", reponse);
+      setUserApplyData(reponse);
+    } catch (e) {
+      console.log("có lỗi");
+    }
+  };
+
+  useEffect(() => {
+    getUserApply();
+  }, []);
 
   const goToJobApplied = () => {
     // Perform your submit logic here
@@ -30,7 +49,7 @@ const OverviewTab = () => {
           onClick={goToJobApplied}
           className="flex flex-row items-center gap-8"
         >
-          <div className="text-green-500 font-bold">0 </div>
+          <div className="text-green-500 font-bold">{userApplyData.length}</div>
           <div className="text-blue-500">|</div>
           <div className="font-semibold flex flex-row justify-evenly items-center gap-56">
             Việc đã ứng tuyển

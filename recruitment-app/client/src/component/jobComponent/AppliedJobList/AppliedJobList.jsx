@@ -3,11 +3,12 @@ import AppliedJobItem from "./AppliedJobItem";
 import jobList from "../../json/jobData.json";
 import jobService from "../../../services/jobService";
 import { getUserInfo } from "../../../utils/funcHelpers";
+import applicantService from "../../../services/applicantService";
 
 const objApi = {
-  apply: jobService.getAppliedJobs,
-  save: jobService.getSavedJobs,
-  view: jobService.getViewedJobs,
+  apply: applicantService.getAppliedJobs,
+  save: applicantService.getSavedJobs,
+  view: applicantService.getViewedJobs,
 };
 
 // objApi.save
@@ -18,14 +19,13 @@ const AppliedJobList = ({ type }) => {
   const userInfo = getUserInfo();
 
   const getDataList = async () => {
-    console.log("call API");
-    // try {
-    //   const res = await objApi[type](id, userInfo?.id);
-    //   console.log(res);
-    //   setDataList(res);
-    // } catch (error) {
-    //   console.error("error");
-    // }
+    try {
+      const res = await objApi[type](userInfo?.id);
+      console.log(res);
+      setDataList(res);
+    } catch (error) {
+      console.error("error");
+    }
   };
 
   useEffect(() => {

@@ -5,6 +5,7 @@ import ApplyModal from "./ApplyModal";
 import { getUserInfo } from "../../../utils/funcHelpers";
 import jobService from "../../../services/jobService";
 import applicantService from "../../../services/applicantService";
+import { toast } from "react-toastify";
 
 const SectionJobDetail = ({ jobs }) => {
   const userInfo = getUserInfo();
@@ -39,10 +40,11 @@ const SectionJobDetail = ({ jobs }) => {
     try {
       e.preventDefault();
       await applicantService.apply(userInfo.id, jobs.id);
-      console.log("Job applied succesfully");
+      toast.success("Ứng tuyển thành công");
       setIsApply(false);
       closeModal();
     } catch (error) {
+      toast.error("Ứng tuyển thất bại");
       console.log("apply that bai:", error);
     }
   };

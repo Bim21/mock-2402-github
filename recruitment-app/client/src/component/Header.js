@@ -36,6 +36,10 @@ const Header = (props) => {
     navigate("/applicant-page");
   };
 
+  const goToJobApplied = () => {
+    navigate("/job-applied/apply");
+  };
+
   const openModal = () => {
     setIsOpenModal(true);
   };
@@ -128,43 +132,12 @@ const Header = (props) => {
                     >
                       <AiFillHeart className="w-21 h-22" />
                       <div className="relative group">
-                        <button className="flex items-start justify-start hover:text-white">
+                        <button
+                          className="flex items-start justify-start hover:text-white"
+                          onClick={goToJobApplied}
+                        >
                           Việc Của Tôi
                         </button>
-                        <ul className="absolute hidden space-y-1 w-[150px] bg-white border rounded-md border-gray-200 shadow-lg group-hover:block">
-                          <li>
-                            <a
-                              className="block text-[12px] px-4 py-2 text-blue-600 hover:bg-gray-200"
-                              href="/"
-                            >
-                              Việc Đã Lưu
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="block text-[12px] px-4 py-2 text-blue-600 hover:bg-gray-200"
-                              href="/"
-                            >
-                              Việc Ứng Tuyển
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="block text-[12px] px-4 py-2 text-blue-600 hover:bg-gray-200"
-                              href="/"
-                            >
-                              Thông Báo Việc Làm
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="block text-[12px] px-4 py-2 text-blue-600 hover:bg-gray-200"
-                              href="/"
-                            >
-                              Việc Dành Cho Bạn
-                            </a>
-                          </li>
-                        </ul>
                       </div>
                     </div>
                   </li>

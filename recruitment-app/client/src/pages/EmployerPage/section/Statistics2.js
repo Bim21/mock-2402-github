@@ -91,9 +91,9 @@ const Statistics2 = () => {
       <div className="text-[18px] font-bold mb-4">Quản lý nhanh tin đăng</div>
       {data?.length > 0 ? (
         <div>
-          <table className="bg-slate-100 rounded-lg m-0 w-full">
-            <thead>
-              <tr className="">
+          <table className="bg-gray-100 rounded-lg m-0 w-full my-4">
+            <thead className="py-4 ">
+              <tr className="text-orange-500 bg-blue-100 h-10 rounded-lg">
                 <th>STT</th>
                 <th>Địa điểm</th>
                 <th>Ngành nghề</th>
@@ -106,7 +106,7 @@ const Statistics2 = () => {
             <tbody className="">
               {data.map((job, index) => {
                 return (
-                  <tr>
+                  <tr className="text-blue-600">
                     <td className="p-4 text-center">{index + 1}</td>
                     <td className="p-4 text-center">{job.jobAddress}</td>
                     <td className="p-4 text-center">{job.careerJob}</td>
@@ -117,17 +117,17 @@ const Statistics2 = () => {
                       <div>
                         <button
                           type="button"
-                          className=" bg-blue-400 rounded-md hover:bg-blue-300 p-1 text-white mr-1"
+                          className=" bg-blue-600 rounded-md hover:bg-blue-300 p-1 text-white mr-1"
                           onClick={() => handleOpenUpdateModal(job)}
                         >
-                          Update
+                          Cập nhật
                         </button>
                         <button
                           type="button"
                           className=" bg-red-600 rounded-md hover:bg-red-500 p-1 text-white ml-1"
                           onClick={() => handleOpenDeleteModal(job.id)}
                         >
-                          Delete
+                          Xóa tin
                         </button>
                         <ConfirmDeleteModal
                           isOpen={isModalDeleteOpen}

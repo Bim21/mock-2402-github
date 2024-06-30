@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AppliedJobItem from "./AppliedJobItem";
 import jobList from "../../json/jobData.json";
-import jobService from "../../../services/jobService";
+
 import { getUserInfo } from "../../../utils/funcHelpers";
 import applicantService from "../../../services/applicantService";
 
@@ -19,6 +19,7 @@ const AppliedJobList = ({ type }) => {
   const userInfo = getUserInfo();
 
   const getDataList = async () => {
+    console.log("call API");
     try {
       const res = await objApi[type](userInfo?.id);
       console.log(res);
@@ -34,7 +35,7 @@ const AppliedJobList = ({ type }) => {
 
   return (
     <div>
-      {jobList.map((item) => (
+      {dataList.map((item) => (
         <AppliedJobItem key={item.id} job={item} />
       ))}
     </div>

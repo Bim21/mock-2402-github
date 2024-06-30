@@ -72,7 +72,7 @@ const UserTable = () => {
       pagination={{
         pageSize: 4,
       }}
-      scroll={{ x: 800, y: 800 }}
+      scroll={{ x: 1000 }}
     />
   );
 };

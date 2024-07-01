@@ -81,4 +81,31 @@ public class ApplicantService {
         return applicant.getAppliedJobs();
     }
 
+    public void saveJob(Long applicantId, Long jobId) {
+        Applicant applicant = applicantRepository.findById(applicantId)
+                .orElseThrow(() -> new EntityNotFoundException("Applicant not found."));
+
+        Job job = jobRepository.findById(jobId)
+                .orElseThrow(() -> new EntityNotFoundException("Job not found."));
+
+        applicant.saveJob(job);
+        applicantRepository.save(applicant);
+    }
+
+    public void viewJob(Long applicantId, Long jobId) {
+        Applicant applicant = applicantRepository.findById(applicantId)
+                .orElseThrow(() -> new EntityNotFoundException("Applicant not found."));
+
+        Job job = jobRepository.findById(jobId)
+                .orElseThrow(() -> new EntityNotFoundException("Job not found."));
+
+        applicant.viewJob(job);
+        applicantRepository.save(applicant);
+    }
+    public List<Job> getViewedJobsForApplicant(Long applicantId) {
+        Applicant applicant = applicantRepository.findById(applicantId)
+                .orElseThrow(() -> new EntityNotFoundException("Applicant not found."));
+
+        return applicant.getViewedJobs();
+    }
 }

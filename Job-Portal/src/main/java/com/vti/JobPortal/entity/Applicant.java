@@ -45,7 +45,12 @@ public class Applicant {
     @DBRef
     @JsonIgnore
     private List<Job> appliedJobs;
-
+    @DBRef
+    @JsonIgnore
+    private List<Job> savedJobs;
+    @DBRef
+    @JsonIgnore
+    private List<Job> viewedJobs;
 
     public void applyJob(Job job) {
         if (appliedJobs == null) {
@@ -57,5 +62,23 @@ public class Applicant {
         }
         this.setStatusJob(StatusJob.PENDING);
     }
+
+    public void saveJob(Job job) {
+        if (savedJobs == null) {
+            savedJobs = new ArrayList<>();
+        }
+        if (!savedJobs.contains(job)) {
+            savedJobs.add(job);
+        }
+    }
+    public void viewJob(Job job) {
+        if (viewedJobs == null) {
+            viewedJobs = new ArrayList<>();
+        }
+        if (!viewedJobs.contains(job)) {
+            viewedJobs.add(job);
+        }
+    }
+
 }
 

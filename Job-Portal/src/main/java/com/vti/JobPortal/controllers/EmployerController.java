@@ -58,5 +58,15 @@ public class EmployerController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    @PostMapping("/jobs/{jobId}/applicants/{applicantId}/accept")
+    public void acceptJobApplication(@PathVariable Long jobId, @PathVariable Long applicantId) {
+        employerService.acceptJobApplication(jobId, applicantId);
+    }
+
+    @PostMapping("/jobs/{jobId}/applicants/{applicantId}/reject")
+    public void rejectJobApplication(@PathVariable Long jobId, @PathVariable Long applicantId) {
+        employerService.rejectJobApplication(jobId, applicantId);
+    }
 }
 

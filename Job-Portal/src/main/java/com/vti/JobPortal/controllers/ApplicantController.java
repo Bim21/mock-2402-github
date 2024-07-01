@@ -96,4 +96,33 @@ public class ApplicantController {
         }
     }
 
+    @PostMapping("/{applicantId}/jobs/{jobId}/save")
+    public ResponseEntity<String> saveJob(@PathVariable Long applicantId, @PathVariable Long jobId) {
+        try {
+            applicantService.saveJob(applicantId, jobId);
+            return ResponseEntity.ok("Job saved successfully.");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/{applicantId}/jobs/{jobId}/view")
+    public ResponseEntity<String> viewJob(@PathVariable Long applicantId, @PathVariable Long jobId) {
+        try {
+            applicantService.viewJob(applicantId, jobId);
+            return ResponseEntity.ok("Job viewed successfully.");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/{applicantId}/jobs/viewed")
+    public ResponseEntity<List<Job>> getViewedJobs(@PathVariable Long applicantId) {
+        try {
+            List<Job> viewedJobs = applicantService.getViewedJobsForApplicant(applicantId);
+            return ResponseEntity.ok(viewedJobs);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package com.vti.JobPortal.dto;
 
+import com.vti.JobPortal.entity.StatusJob;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,7 @@ public class JobDTO {
     private String workingTime;
     private String contactPerson;
     private String email;
+    private String status;
     private String companyName;
     private String companyAddress;
     private String companyInformation;

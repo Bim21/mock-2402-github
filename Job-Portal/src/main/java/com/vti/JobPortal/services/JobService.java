@@ -5,6 +5,7 @@ import com.vti.JobPortal.dto.JobDTO;
 import com.vti.JobPortal.entity.Applicant;
 import com.vti.JobPortal.entity.Employer;
 import com.vti.JobPortal.entity.Job;
+import com.vti.JobPortal.entity.StatusJob;
 import com.vti.JobPortal.repositories.IApplicantRepository;
 import com.vti.JobPortal.repositories.IEmployerRepository;
 import com.vti.JobPortal.repositories.IJobRepository;
@@ -110,9 +111,8 @@ public class JobService {
         job.setMinimumEducationalQualification("");
         job.setViews(0);
         job.setPostedDate(new Date());
-        job.setEmployer(null);
         job.setApplicants(new ArrayList<>());
-        job.setStatus("Active");
+        job.setStatusJob(StatusJob.PENDING);
         job.setRequirementJob(jobDTO.getRequirementJob());
         job.setSalary(jobDTO.getSalary());
         job.setEmail(jobDTO.getEmail());

@@ -46,7 +46,7 @@ public class Job {
     @DBRef
     @JsonIgnore
     private List<Applicant> applicants;
-    private String status;
+    private StatusJob statusJob = StatusJob.PENDING;
 
     public void addApplicant(Applicant applicant) {
         if (applicants == null) {

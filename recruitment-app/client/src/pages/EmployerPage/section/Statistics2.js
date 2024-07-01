@@ -133,6 +133,9 @@ const Statistics2 = () => {
                           isOpen={isModalDeleteOpen}
                           onClose={handleCloseDeleteModal}
                           onConfirm={handleConfirmDelete}
+                          title={"Xác nhận xóa tin"}
+                          deps={"Bạn có chắc chắn xóa tin đã đăng này?"}
+                          button={"Xóa"}
                         />
                       </div>
                     </td>

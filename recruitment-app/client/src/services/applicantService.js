@@ -13,7 +13,7 @@ const applicantService = {
     return api.put(`${END_POINT}/${id}`, body);
   },
   delete(id) {
-    return api.delete(`${END_POINT}/delete/${id}`);
+    return api.delete(`${END_POINT}/${id}`);
   },
   apply(applicantId, jobId) {
     return api.post(`${END_POINT}/${applicantId}/apply/${jobId}`);

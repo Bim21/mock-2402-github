@@ -18,6 +18,7 @@ import AppliedJobs from "./pages/AppliedJobs";
 import ApplicantPage from "./pages/ApplicantPage/ApplicantPage";
 import JobDetailPage from "./pages/JobDetailPage";
 import UserDetail from "./pages/EmployerPage/section/UserDetail";
+import NotificationPage from "./pages/EmployerPage/NotificationPage";
 
 function App() {
   return (
@@ -67,6 +68,7 @@ function App() {
         <Route path="/jobs/:jobId" element={<JobDetailPage />} />
         <Route path="/applicantPage" element={<ApplicantPage />} />
         <Route path="/users" element={<UserDetail />} />
+        <Route path="/notification" element={<NotificationPage />} />
       </Routes>
       <ToastContainer theme="colored" />
     </BrowserRouter>

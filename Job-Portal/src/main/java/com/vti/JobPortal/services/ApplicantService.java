@@ -92,6 +92,13 @@ public class ApplicantService {
         applicantRepository.save(applicant);
     }
 
+    public List<Job> getSavedJobsForApplicant(Long applicantId) {
+        Applicant applicant = applicantRepository.findById(applicantId)
+                .orElseThrow(() -> new EntityNotFoundException("Applicant not found."));
+
+        return applicant.getSavedJobs();
+    }
+
     public void viewJob(Long applicantId, Long jobId) {
         Applicant applicant = applicantRepository.findById(applicantId)
                 .orElseThrow(() -> new EntityNotFoundException("Applicant not found."));

@@ -106,6 +106,16 @@ public class ApplicantController {
         }
     }
 
+    @GetMapping("/{applicantId}/jobs/saved")
+    public ResponseEntity<List<Job>> getSavedJobs(@PathVariable Long applicantId) {
+        try {
+            List<Job> savedJobs = applicantService.getSavedJobsForApplicant(applicantId);
+            return ResponseEntity.ok(savedJobs);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping("/{applicantId}/jobs/{jobId}/view")
     public ResponseEntity<String> viewJob(@PathVariable Long applicantId, @PathVariable Long jobId) {
         try {

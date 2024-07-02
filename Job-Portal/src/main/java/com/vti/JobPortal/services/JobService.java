@@ -101,9 +101,9 @@ public class JobService {
         job.setSkills(jobDTO.getSkills());
         job.setLevel(jobDTO.getLevel());
         job.setWorkingTime(jobDTO.getWorkingTime());
-        job.setJobField(jobDTO.getFieldJob());
-        job.setJobAddress(jobDTO.getAddressJob());
-        job.setCareerJob(jobDTO.getCareerJob());
+        job.setJobField(jobDTO.getJobField());
+        job.setJobAddress(jobDTO.getJobAddress());
+        job.setCareerJob(jobDTO.getJobCareer());
         job.setMinimumYearsOfExperience(jobDTO.getMinimumYearsOfExperience());
         job.setMinimumQualifications(jobDTO.getMinimumQualifications());
         job.setNumberOfRecruitment(jobDTO.getNumberOfRecruitment());
@@ -113,7 +113,7 @@ public class JobService {
         job.setPostedDate(new Date());
         job.setApplicants(new ArrayList<>());
         job.setStatusJob(StatusJob.PENDING);
-        job.setRequirementJob(jobDTO.getRequirementJob());
+        job.setJobRequirement(jobDTO.getJobRequirement());
         job.setSalary(jobDTO.getSalary());
         job.setEmail(jobDTO.getEmail());
         job.setContactPerson(jobDTO.getContactPerson());

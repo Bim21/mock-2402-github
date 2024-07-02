@@ -50,7 +50,6 @@ public class EmployerService {
         }
         return null;
     }
-
     public boolean deleteEmployer(Long id) {
         Optional<Employer> employer = employerRepository.findById(id);
         if (employer.isPresent()) {
@@ -83,5 +82,9 @@ public class EmployerService {
         applicantRepository.save(applicant);
 
         mailUtils.sendEmail(applicant.getEmail(), "Job Application Rejected", "We regret to inform you that your application for the job '" + job.getTitle() + "' has been rejected.");
+    }
+
+    public List<Job> getJobsByEmployerId(Long employerId) {
+        return jobRepository.findByEmployerId(employerId);
     }
 }

@@ -14,11 +14,11 @@ import java.util.List;
 public class JobDTO {
     private String level;
     private String title;
-    private String fieldJob;
-    private List<String> addressJob;
+    private String jobField;
+    private List<String> jobAddress;
     private String descriptionJob;
-    private List<String> requirementJob;
-    private List<String> careerJob;
+    private List<String> jobRequirement;
+    private List<String> jobCareer;
     private List<String> skills;
     private Integer salary;
     private Integer views;

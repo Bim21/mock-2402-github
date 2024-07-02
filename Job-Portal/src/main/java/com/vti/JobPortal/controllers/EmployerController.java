@@ -1,5 +1,6 @@
 package com.vti.JobPortal.controllers;
 import com.vti.JobPortal.entity.Employer;
+import com.vti.JobPortal.entity.Job;
 import com.vti.JobPortal.services.EmployerService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,5 +80,11 @@ public class EmployerController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    @GetMapping("/{employerId}/jobs")
+    public ResponseEntity<List<Job>> getJobsByEmployerId(@PathVariable("employerId") Long employerId) {
+        List<Job> jobs = employerService.getJobsByEmployerId(employerId);
+        return ResponseEntity.ok(jobs);
+    }
+
 }
 

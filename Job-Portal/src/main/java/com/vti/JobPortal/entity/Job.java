@@ -24,7 +24,7 @@ public class Job {
     private String title;                       // nội dung công việc
     private Long employerId;
     private String description;                 // mô tả công việc
-    private List<String> requirementJob;        // Yêu cầu công việc
+    private List<String> jobRequirement;        // Yêu cầu công việc
     private List<String> skills;                      // kỹ năng
     private String level;                       // cấp độ
     private Integer salary;                     // mức lương

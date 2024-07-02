@@ -31,7 +31,7 @@ public class Job {
     private String workingTime;                 // thời gian làm việc (part,full,free-lance)
     private String jobField;              // lĩnh vực công việc
     private Integer numberOfRecruitment;       // số lượng người ứng tuyển trong công việc.
-    private List<String> careerJob;                   // Ngành nghề
+    private List<String> jobCareer;                   // Ngành nghề
     private List<String> jobAddress;            // địa chỉ job
     private Integer minimumYearsOfExperience;   // số năm kinh nghiệm tối thiểu
     private String maritalStatus;               // tình trạng hôn nhân

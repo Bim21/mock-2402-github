@@ -60,8 +60,8 @@ public class EmployerController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/accept")
-    public ResponseEntity<String> acceptJobApplication(@RequestParam("applicantId") Long applicantId) {
+    @PostMapping("/accept/{applicantId}")
+    public ResponseEntity<String> acceptJobApplication(@PathVariable("applicantId") Long applicantId) {
         try {
             employerService.acceptJobApplication(applicantId);
             return ResponseEntity.ok("Job application accepted successfully.");
@@ -69,8 +69,9 @@ public class EmployerController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    @PostMapping("/reject")
-    public ResponseEntity<String> rejectJobApplication(@RequestParam("applicantId") Long applicantId) {
+
+    @PostMapping("/reject/{applicantId}")
+    public ResponseEntity<String> rejectJobApplication(@PathVariable("applicantId") Long applicantId) {
         try {
             employerService.rejectJobApplication(applicantId);
             return ResponseEntity.ok("Job application rejected successfully.");

@@ -1,2 +1,3 @@
-package com.vti.JobPortal.config;public class CloudinaryConfig {
+package com.vti.JobPortal.config;
+public class CloudinaryConfig {
 }

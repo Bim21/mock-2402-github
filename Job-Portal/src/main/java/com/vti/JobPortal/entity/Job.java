@@ -42,6 +42,7 @@ public class Job {
     private String email;
     private Date postedDate;                    // ngày đăng
     private Date expiredDate;                   // ngày hết hạn
+    @DBRef
     private Employer employer;
     @DBRef
     @JsonIgnore

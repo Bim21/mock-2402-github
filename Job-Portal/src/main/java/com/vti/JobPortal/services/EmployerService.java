@@ -64,6 +64,8 @@ public class EmployerService {
                 .orElseThrow(() -> new EntityNotFoundException("Applicant not found"));
 
         Job job = jobRepository.findByApplicantsId(applicantId)
+                .stream()
+                .findFirst()
                 .orElseThrow(() -> new EntityNotFoundException("Job not found for the applicant"));
 
         applicant.setStatusJob(StatusJob.ACCEPT);

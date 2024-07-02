@@ -229,7 +229,7 @@ const ApplyModal = ({
                             <option value="Bán lẻ/ Tiêu dùng">
                               Bán le/ Tiêu dùng
                             </option>
-                            <option value="Bảo hiểm">Trung cấp</option>
+                            <option value="Bảo hiểm">Bảo Hiểm</option>
                           </select>
                         </div>
                         <div className="">

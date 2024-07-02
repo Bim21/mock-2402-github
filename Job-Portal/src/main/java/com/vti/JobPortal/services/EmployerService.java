@@ -87,4 +87,20 @@ public class EmployerService {
     public List<Job> getJobsByEmployerId(Long employerId) {
         return jobRepository.findByEmployerId(employerId);
     }
+
+//    public Optional<Employer> findByEmail(String email) {
+//        return employerRepository.findByEmail(email);
+//    }
+//
+//    public List<Applicant> getApplicantsByJobAndEmployer(Long jobId, Long employerId) {
+//        Employer employer = employerRepository.findById(employerId)
+//                .orElseThrow(() -> new EntityNotFoundException("Employer not found with id: " + employerId));
+//
+//        Job job = employer.getJobs().stream()
+//                .filter(j -> j.getId().equals(jobId))
+//                .findFirst()
+//                .orElseThrow(() -> new EntityNotFoundException("Job not found with id: " + jobId));
+//
+//        return job.getApplicants();
+//    }
 }

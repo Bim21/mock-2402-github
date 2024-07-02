@@ -1,13 +1,16 @@
 package com.vti.JobPortal.controllers;
+import com.vti.JobPortal.entity.Applicant;
 import com.vti.JobPortal.entity.Employer;
 import com.vti.JobPortal.entity.Job;
 import com.vti.JobPortal.services.EmployerService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +21,7 @@ import java.util.Optional;
 @RequestMapping("/api/employers")
 public class EmployerController {
     private final EmployerService employerService;
+
 
     @Autowired
     public EmployerController(EmployerService employerService) {
@@ -86,5 +90,24 @@ public class EmployerController {
         return ResponseEntity.ok(jobs);
     }
 
+//    @GetMapping("/jobs/{jobId}/applicants")
+//    public ResponseEntity<List<Applicant>> getApplicantsByJobAndEmployer(
+//            @PathVariable Long jobId,
+//            Principal principal
+//    ) {
+//        String employerEmail = principal.getName(); // Get the authenticated employer's email or identifier
+//        Optional<Employer> employer = employerService.findByEmail(employerEmail);
+//
+//        if (employer == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//        try {
+//            List<Applicant> applicants = employerService.getApplicantsByJobAndEmployer(jobId, employer.get().getId());
+//            return ResponseEntity.ok(applicants);
+//        } catch (EntityNotFoundException e) {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 }
 

@@ -117,9 +117,7 @@ public class JobService {
         job.setSalary(jobDTO.getSalary());
         job.setEmail(jobDTO.getEmail());
         job.setContactPerson(jobDTO.getContactPerson());
-
         employerRepository.save(employer);
-        job.setEmployer(employer);
         jobRepository.save(job);
     }
 
@@ -136,6 +134,12 @@ public class JobService {
 //        jobRepository.save(job);
 //    }
 
+    public List<Applicant> getApplicantsForJob(Long jobId) {
+        Job job = jobRepository.findById(jobId)
+                .orElseThrow(() -> new EntityNotFoundException("Job not found with id: " + jobId));
+
+        return job.getApplicants();
+    }
 
     public List<Job> getJobsByField(String jobField) {
         return jobRepository.findByJobFieldIn(jobField);

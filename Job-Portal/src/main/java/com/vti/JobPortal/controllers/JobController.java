@@ -1,5 +1,6 @@
 package com.vti.JobPortal.controllers;
 import com.vti.JobPortal.dto.JobDTO;
+import com.vti.JobPortal.entity.Applicant;
 import com.vti.JobPortal.entity.Job;
 import com.vti.JobPortal.services.JobService;
 import jakarta.persistence.EntityNotFoundException;
@@ -85,7 +86,15 @@ public class JobController {
 
     // API get list applyForJob
     // b tạ thêm cái này, trả ra data làjob đã apply
-
+    @GetMapping("/{jobId}/applicants")
+    public ResponseEntity<List<Applicant>> getApplicantsForJob(@PathVariable Long jobId) {
+        try {
+            List<Applicant> applicants = jobService.getApplicantsForJob(jobId);
+            return ResponseEntity.ok(applicants);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
     @GetMapping("/search")
     public List<Job> searchJobs(
             @RequestParam(value = "jobField", required = false) String jobField,

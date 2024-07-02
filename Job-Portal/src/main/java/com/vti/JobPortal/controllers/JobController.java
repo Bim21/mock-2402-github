@@ -65,7 +65,7 @@ public class JobController {
     }
 
     @PostMapping("/postJob")
-    public ResponseEntity<String> postJob(@RequestBody JobDTO jobDTO, @RequestParam("employerId") Long employerId) {
+    public ResponseEntity<String> postJob(@RequestBody JobDTO jobDTO, @RequestParam Long employerId) {
         try {
             jobService.postJob(jobDTO, employerId);
             return ResponseEntity.ok("Job posted successfully.");

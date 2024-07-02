@@ -12,6 +12,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,19 +89,19 @@ public class EmployerService {
         return jobRepository.findByEmployerId(employerId);
     }
 
-//    public Optional<Employer> findByEmail(String email) {
-//        return employerRepository.findByEmail(email);
-//    }
-//
-//    public List<Applicant> getApplicantsByJobAndEmployer(Long jobId, Long employerId) {
+//    public List<Applicant> getApplicantsWithAppliedJobs(Long employerId) {
 //        Employer employer = employerRepository.findById(employerId)
 //                .orElseThrow(() -> new EntityNotFoundException("Employer not found with id: " + employerId));
 //
-//        Job job = employer.getJobs().stream()
-//                .filter(j -> j.getId().equals(jobId))
-//                .findFirst()
-//                .orElseThrow(() -> new EntityNotFoundException("Job not found with id: " + jobId));
+//        List<Applicant> applicantsWithAppliedJobs = new ArrayList<>();
+//        for (Job job : employer.getJobs()) {
+//            for (Applicant applicant : job.getApplicants()) {
+//                if (!applicantsWithAppliedJobs.contains(applicant)) {
+//                    applicantsWithAppliedJobs.add(applicant);
+//                }
+//            }
+//        }
 //
-//        return job.getApplicants();
+//        return applicantsWithAppliedJobs;
 //    }
 }

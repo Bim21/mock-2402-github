@@ -33,5 +33,6 @@ public class Employer {
     private String companyLogoPath;
     private String companyImagePath;
     private List<Job> jobs;
+//    private List<Applicant> applicants;
 
 }

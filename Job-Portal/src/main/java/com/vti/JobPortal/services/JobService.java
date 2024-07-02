@@ -118,6 +118,8 @@ public class JobService {
         job.setEmail(jobDTO.getEmail());
         job.setContactPerson(jobDTO.getContactPerson());
         employerRepository.save(employer);
+//        employer.getJobs().add(job);
+        job.setEmployer(employer);
         jobRepository.save(job);
     }
 

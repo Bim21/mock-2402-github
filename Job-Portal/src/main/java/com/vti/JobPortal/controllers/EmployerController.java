@@ -89,7 +89,15 @@ public class EmployerController {
         List<Job> jobs = employerService.getJobsByEmployerId(employerId);
         return ResponseEntity.ok(jobs);
     }
-
+//    @GetMapping("/{employerId}/applicants")
+//    public ResponseEntity<List<Applicant>> getApplicantsWithAppliedJobs(@PathVariable Long employerId) {
+//        try {
+//            List<Applicant> applicants = employerService.getApplicantsWithAppliedJobs(employerId);
+//            return ResponseEntity.ok(applicants);
+//        } catch (EntityNotFoundException e) {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 //    @GetMapping("/jobs/{jobId}/applicants")
 //    public ResponseEntity<List<Applicant>> getApplicantsByJobAndEmployer(
 //            @PathVariable Long jobId,
@@ -109,5 +117,6 @@ public class EmployerController {
 //            return ResponseEntity.notFound().build();
 //        }
 //    }
+
 }
 

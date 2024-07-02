@@ -1,0 +1,72 @@
+[{
+  "_id": 5,
+  "firstName": "Son",
+  "lastName": "Do",
+  "phoneNumber": "0987654312",
+  "level": "Thực tập sinh",
+  "career": "Quản lí/Bán hàng",
+  "salary": 200,
+  "address": "HaNoi",
+  "statusJob": "PENDING",
+  "appliedJobs": [
+    {
+      "$ref": "jobs",
+      "$id": 5
+    }
+  ],
+  "_class": "com.vti.JobPortal.entity.Applicant"
+},
+{
+  "_id": 6,
+  "firstName": "chien",
+  "lastName": "nguyen",
+  "phoneNumber": "0987654312",
+  "level": "Thực tập sinh",
+  "yearsOfExperience": 2,
+  "qualifications": "Trung cấp",
+  "title": "Dev",
+  "career": "Quản lí/Bán hàng",
+  "salary": 2000,
+  "dateOfBirth": {
+    "$date": "1998-02-12T00:00:00.000Z"
+  },
+  "sex": "",
+  "address": "HaNoi",
+  "_class": "com.vti.JobPortal.entity.Applicant"
+},
+{
+  "_id": 7,
+  "firstName": "Nam",
+  "lastName": "Hoang",
+  "email": "chiennguyen21981@gmail.com",
+  "phoneNumber": "0987654312",
+  "level": "Nhân viên",
+  "yearsOfExperience": 2,
+  "qualifications": "Trung cấp",
+  "title": "Dev",
+  "career": "Quản lí/Bán hàng",
+  "salary": 2000,
+  "dateOfBirth": {
+    "$date": "1998-05-21T00:00:00.000Z"
+  },
+  "sex": "",
+  "address": "HaNoi",
+  "statusJob": "PENDING",
+  "appliedJobs": [
+    {
+      "$ref": "jobs",
+      "$id": 5
+    }
+  ],
+  "_class": "com.vti.JobPortal.entity.Applicant"
+},
+{
+  "_id": 8,
+  "firstName": "Son",
+  "lastName": "Do",
+  "role": "APPLICANT",
+  "email": "DoSon98@gmail.com",
+  "password": "ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b548baeae6956df346ec8c17f5ea10f35ee3cbc514797ed7ddd3145464e2a0bab413",
+  "phoneNumber": "02184012382",
+  "_class": "com.vti.JobPortal.entity.Applicant"
+}]

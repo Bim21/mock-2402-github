@@ -91,41 +91,41 @@ public class JobController {
             @RequestParam(value = "jobField", required = false) String jobField,
             @RequestParam(value = "jobAddress", required = false) List<String> jobAddress,
             @RequestParam(value = "level", required = false) String level,
-            @RequestParam(value = "career", required = false) List<String> careerJob)
+            @RequestParam(value = "career", required = false) List<String> jobCareer)
 
     {
-        if (jobField == null && jobAddress == null && level == null && careerJob == null ) {
+        if (jobField == null && jobAddress == null && level == null && jobCareer == null ) {
             // Handle case when both jobField and jobAddress are missing
             return jobService.getAllJobs();
-        } else if (jobField != null && jobAddress == null && level == null && careerJob == null ) {
+        } else if (jobField != null && jobAddress == null && level == null && jobCareer == null ) {
             // Handle case when only jobField is provided
             return jobService.getJobsByField(jobField);
-        } else if (jobField == null && jobAddress != null && level == null && careerJob == null) {
+        } else if (jobField == null && jobAddress != null && level == null && jobCareer == null) {
             // Handle case when only jobAddress is provided
             return jobService.getJobsByAddress(jobAddress);
-        } else if (jobField == null && jobAddress == null && level != null && careerJob == null) {
+        } else if (jobField == null && jobAddress == null && level != null && jobCareer == null) {
             return jobService.getJobsByLevel(level);
-        } else if (jobField == null && jobAddress == null && level == null && careerJob != null) {
-            return jobService.getJobsByCareerJob(careerJob);
-        } else if (jobField != null && jobAddress != null && level == null && careerJob == null) {
+        } else if (jobField == null && jobAddress == null && level == null && jobCareer != null) {
+            return jobService.getJobsByCareerJob(jobCareer);
+        } else if (jobField != null && jobAddress != null && level == null && jobCareer == null) {
             return jobService.getJobsByFieldAndAddress(jobField,jobAddress);
-        } else if (jobField != null && jobAddress != null && level != null && careerJob == null) {
+        } else if (jobField != null && jobAddress != null && level != null && jobCareer == null) {
             return jobService.getJobsByFieldAndAddressAndLevel(jobField,jobAddress,level);
-        } else if (jobField == null && jobAddress != null && level != null && careerJob != null) {
-            return jobService.getJobsByAddressAndLevelAndCareer(jobAddress, level, careerJob);
-        } else if (jobField != null && jobAddress == null && level != null && careerJob != null) {
-            return jobService.getJobsByFieldAndLevelAndCareer(jobField, level, careerJob);
-        } else if (jobField != null && jobAddress != null && level == null && careerJob != null) {
-            return jobService.getJobsByFieldAndAddressAndCareer(jobField, jobAddress, careerJob);
-        } else if (jobField == null && jobAddress != null && level != null && careerJob == null) {
+        } else if (jobField == null && jobAddress != null && level != null && jobCareer != null) {
+            return jobService.getJobsByAddressAndLevelAndCareer(jobAddress, level, jobCareer);
+        } else if (jobField != null && jobAddress == null && level != null && jobCareer != null) {
+            return jobService.getJobsByFieldAndLevelAndCareer(jobField, level, jobCareer);
+        } else if (jobField != null && jobAddress != null && level == null && jobCareer != null) {
+            return jobService.getJobsByFieldAndAddressAndCareer(jobField, jobAddress, jobCareer);
+        } else if (jobField == null && jobAddress != null && level != null && jobCareer == null) {
             return jobService.getJobsByAddressAndLevel(jobAddress, level);
-        } else if (jobField == null && jobAddress != null && level == null && careerJob != null) {
-            return jobService.getJobsByAddressAndCareer(jobAddress, careerJob);
-        } else if (jobField == null && jobAddress == null && level != null && careerJob != null) {
-            return jobService.getJobsByLevelAndCareer(level, careerJob);
+        } else if (jobField == null && jobAddress != null && level == null && jobCareer != null) {
+            return jobService.getJobsByAddressAndCareer(jobAddress, jobCareer);
+        } else if (jobField == null && jobAddress == null && level != null && jobCareer != null) {
+            return jobService.getJobsByLevelAndCareer(level, jobCareer);
         } else {
             // Handle case when both jobField and jobAddress are provided
-            return jobService.getJobsByFieldAndAddressAndLevelAndCareerJob(jobField,jobAddress,level,careerJob);
+            return jobService.getJobsByFieldAndAddressAndLevelAndCareerJob(jobField,jobAddress,level,jobCareer);
         }
     }
 

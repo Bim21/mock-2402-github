@@ -149,7 +149,7 @@ public class JobService {
     }
 
     public List<Job> getJobsByCareerJob(List<String> careerJob){
-        return jobRepository.findByCareerJobIn(careerJob);
+        return jobRepository.findByJobCareerIn(careerJob);
     }
 
     public List<Job> getJobsByFieldAndAddress(String jobField, List<String> jobAddress){
@@ -160,36 +160,36 @@ public class JobService {
         return jobRepository.findByJobFieldAndLevel(jobField,level);
     }
 
-    public List<Job> getJobsByFieldAndCareer(String jobField, List<String> careerJob){
-        return jobRepository.findByJobFieldAndCareerJobIn(jobField,careerJob);
+    public List<Job> getJobsByFieldAndCareer(String jobField, List<String> jobCareer){
+        return jobRepository.findByJobFieldAndJobCareerIn(jobField,jobCareer);
     }
     public List<Job> getJobsByFieldAndAddressAndLevel(String jobField, List<String> jobAddress, String level){
         return jobRepository.findByJobFieldAndJobAddressAndLevelIn(jobField,jobAddress,level);
     }
 
-    public List<Job> getJobsByFieldAndLevelAndCareer(String jobField, String level, List<String> careerJob){
-        return jobRepository.findByJobFieldAndLevelAndCareerJobIn(jobField, level, careerJob);
+    public List<Job> getJobsByFieldAndLevelAndCareer(String jobField, String level, List<String> jobCareer){
+        return jobRepository.findByJobFieldAndLevelAndJobCareerIn(jobField, level, jobCareer);
     }
-    public List<Job> getJobsByFieldAndAddressAndCareer(String jobField, List<String> jobAddress, List<String> careerJob){
-        return jobRepository.findByJobFieldAndJobAddressAndCareerJobIn(jobField, jobAddress, careerJob);
+    public List<Job> getJobsByFieldAndAddressAndCareer(String jobField, List<String> jobAddress, List<String> jobCareer){
+        return jobRepository.findByJobFieldAndJobAddressAndJobCareerIn(jobField, jobAddress, jobCareer);
     }
 
-    public List<Job> getJobsByAddressAndLevelAndCareer(List<String> jobAddress, String level, List<String> careerJob){
-        return jobRepository.findByJobAddressAndLevelAndCareerJobIn(jobAddress,level,careerJob);
+    public List<Job> getJobsByAddressAndLevelAndCareer(List<String> jobAddress, String level, List<String> jobCareer){
+        return jobRepository.findByJobAddressAndLevelAndJobCareerIn(jobAddress,level,jobCareer);
     }
 
     public List<Job> getJobsByAddressAndLevel(List<String> jobAddress, String level){
         return jobRepository.findByJobAddressAndLevelIn(jobAddress,level);
     }
 
-    public List<Job> getJobsByAddressAndCareer(List<String> jobAddress, List<String> careerJob){
-        return jobRepository.findByJobAddressAndCareerJobIn(jobAddress,careerJob);
+    public List<Job> getJobsByAddressAndCareer(List<String> jobAddress, List<String> jobCareer){
+        return jobRepository.findByJobAddressAndJobCareerIn(jobAddress,jobCareer);
     }
-    public List<Job> getJobsByLevelAndCareer(String level, List<String> careerJob){
-        return jobRepository.findByLevelAndCareerJobIn(level,careerJob);
+    public List<Job> getJobsByLevelAndCareer(String level, List<String> jobCareer){
+        return jobRepository.findByLevelAndJobCareerIn(level,jobCareer);
     }
-    public List<Job> getJobsByFieldAndAddressAndLevelAndCareerJob(String jobField, List<String> jobAddress, String level, List<String> careerJob) {
-        return jobRepository.findByJobFieldAndJobAddressAndLevelAndCareerJobIn(jobField,jobAddress,level, careerJob);
+    public List<Job> getJobsByFieldAndAddressAndLevelAndCareerJob(String jobField, List<String> jobAddress, String level, List<String> jobCareer) {
+        return jobRepository.findByJobFieldAndJobAddressAndLevelAndJobCareerIn(jobField,jobAddress,level, jobCareer);
     }
 
 }

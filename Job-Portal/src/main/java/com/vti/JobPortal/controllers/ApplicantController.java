@@ -76,7 +76,7 @@ public class ApplicantController {
 //        return applicantService.updateApplicantDetails(applicantId, details);
 //    }
 
-    @PostMapping("/{applicantId}/apply/{jobId}")
+    @PostMapping("/{jobId}/apply/{applicantId}")
     public ResponseEntity<String> applyJob(@PathVariable Long jobId,@PathVariable Long applicantId) {
         try {
             applicantService.applyJob(jobId, applicantId);

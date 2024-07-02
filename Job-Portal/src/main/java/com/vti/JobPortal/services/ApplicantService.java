@@ -62,7 +62,7 @@ public class ApplicantService {
 //        return details;
 //    }
 
-    public void applyJob(Long applicantId, Long jobId) {
+    public void applyJob(Long jobId, Long applicantId) {
         Applicant applicant = applicantRepository.findById(applicantId)
                 .orElseThrow(() -> new EntityNotFoundException("Applicant not found."));
 

@@ -148,8 +148,8 @@ public class JobService {
         return jobRepository.findByLevel(level);
     }
 
-    public List<Job> getJobsByCareerJob(List<String> careerJob){
-        return jobRepository.findByJobCareerIn(careerJob);
+    public List<Job> getJobsByCareerJob(List<String> jobCareer){
+        return jobRepository.findByJobCareerIn(jobCareer);
     }
 
     public List<Job> getJobsByFieldAndAddress(String jobField, List<String> jobAddress){

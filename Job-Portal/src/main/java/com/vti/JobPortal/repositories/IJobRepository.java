@@ -28,4 +28,5 @@ public interface IJobRepository extends MongoRepository<Job, Long> {
 
     List<Job> findByJobAddressAndLevelAndCareerJobIn(List<String> jobAddress, String level, List<String> careerJob);
 
+    Optional<Job> findByApplicantsId(Long applicantId);
 }

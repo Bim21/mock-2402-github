@@ -59,28 +59,29 @@ public class EmployerService {
         }
         return false;
     }
+    public void acceptJobApplication(Long applicantId) {
+        Applicant applicant = applicantRepository.findById(applicantId)
+                .orElseThrow(() -> new EntityNotFoundException("Applicant not found"));
 
-    public void acceptJobApplication(Long jobId, Long applicantId) {
-        Job job = jobRepository.findById(jobId).orElseThrow(() -> new EntityNotFoundException("Job not found"));
-        Applicant applicant = applicantRepository.findById(applicantId).orElseThrow(() -> new EntityNotFoundException("Applicant not found"));
+        Job job = jobRepository.findByApplicantsId(applicantId)
+                .orElseThrow(() -> new EntityNotFoundException("Job not found for the applicant"));
 
-        if (job.getApplicants().contains(applicant)) {
-            applicant.setStatusJob(StatusJob.ACCEPT);
-            applicantRepository.save(applicant);
+        applicant.setStatusJob(StatusJob.ACCEPT);
+        applicantRepository.save(applicant);
 
-            mailUtils.sendEmail(applicant.getEmail(), "Job Application Accepted", "Congratulations, your application for the job '" + job.getTitle() + "' has been accepted!");
-        }
+        mailUtils.sendEmail(applicant.getEmail(), "Job Application Accepted", "Congratulations, your application for the job '" + job.getTitle() + "' has been accepted!");
     }
 
-    public void rejectJobApplication(Long jobId, Long applicantId) {
-        Job job = jobRepository.findById(jobId).orElseThrow(() -> new EntityNotFoundException("Job not found"));
-        Applicant applicant = applicantRepository.findById(applicantId).orElseThrow(() -> new EntityNotFoundException("Applicant not found"));
+    public void rejectJobApplication(Long applicantId) {
+        Applicant applicant = applicantRepository.findById(applicantId)
+                .orElseThrow(() -> new EntityNotFoundException("Applicant not found"));
 
-        if (job.getApplicants().contains(applicant)) {
-            applicant.setStatusJob(StatusJob.REJECT);
-            applicantRepository.save(applicant);
+        Job job = jobRepository.findByApplicantsId(applicantId)
+                .orElseThrow(() -> new EntityNotFoundException("Job not found for the applicant"));
 
-            mailUtils.sendEmail(applicant.getEmail(), "Job Application Rejected", "We regret to inform you that your application for the job '" + job.getTitle() + "' has been rejected.");
-        }
+        applicant.setStatusJob(StatusJob.REJECT);
+        applicantRepository.save(applicant);
+
+        mailUtils.sendEmail(applicant.getEmail(), "Job Application Rejected", "We regret to inform you that your application for the job '" + job.getTitle() + "' has been rejected.");
     }
 }

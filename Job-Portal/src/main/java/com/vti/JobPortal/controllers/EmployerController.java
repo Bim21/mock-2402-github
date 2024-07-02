@@ -1,6 +1,7 @@
 package com.vti.JobPortal.controllers;
 import com.vti.JobPortal.entity.Employer;
 import com.vti.JobPortal.services.EmployerService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,14 +60,23 @@ public class EmployerController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/jobs/{jobId}/applicants/{applicantId}/accept")
-    public void acceptJobApplication(@PathVariable Long jobId, @PathVariable Long applicantId) {
-        employerService.acceptJobApplication(jobId, applicantId);
+    @PostMapping("/accept")
+    public ResponseEntity<String> acceptJobApplication(@RequestParam("applicantId") Long applicantId) {
+        try {
+            employerService.acceptJobApplication(applicantId);
+            return ResponseEntity.ok("Job application accepted successfully.");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
-
-    @PostMapping("/jobs/{jobId}/applicants/{applicantId}/reject")
-    public void rejectJobApplication(@PathVariable Long jobId, @PathVariable Long applicantId) {
-        employerService.rejectJobApplication(jobId, applicantId);
+    @PostMapping("/reject")
+    public ResponseEntity<String> rejectJobApplication(@RequestParam("applicantId") Long applicantId) {
+        try {
+            employerService.rejectJobApplication(applicantId);
+            return ResponseEntity.ok("Job application rejected successfully.");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }
 
